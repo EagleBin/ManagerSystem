@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="CompanyManagerSystem.View.subView.SystemManager.UserRoleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.SystemManager"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:lib="http://lan.design.com"
+             mc:Ignorable="d" 
+             DataContext="{Binding Source={StaticResource Locator}, Path=User}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="20 10 20 20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <!--// 信息提示 //-->
+        <ScrollViewer Grid.RowSpan="2" VerticalScrollBarVisibility="Hidden" MaxHeight="165" VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="1">
+            <StackPanel VerticalAlignment="Top" Margin="5"> 
+                <StackPanel hc:Growl.Token="AssignUserRoleSuccessMsg" Margin="5"/>
+                <StackPanel hc:Growl.Token="AssignUserRoleWarningMsg" Margin="5"/>
+                <StackPanel hc:Growl.Token="AssignUserRoleErrorMsg" Margin="5"/>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!--// 顶部导航 //-->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="White">
+            <TextBlock Text="首页" FontSize="14" Foreground="#97A8BE" FontWeight="Bold" Margin="0 0 10 0" VerticalAlignment="Center"/>
+            <TextBlock FontSize="14" Foreground="#c0c4cc" Text="&#xe65f;" FontFamily="/Themes/Style/#iconfont"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Text="用户管理" FontSize="14" Foreground="#97A8BE" FontWeight="Bold" Margin="10 0 0 0" VerticalAlignment="Center"/>
+            <TextBlock FontSize="14" Foreground="#c0c4cc" Text="&#xe65f;" FontFamily="/Themes/Style/#iconfont"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Text="分配角色" FontSize="14" Foreground="Black" FontWeight="Bold" Margin="10 0 0 0" VerticalAlignment="Center"/>
+        </StackPanel>
+        
+        <!--// 基本信息 //-->
+        <StackPanel Grid.Row="1" Margin="20">
+            <Border BorderThickness="0 0 0 1" BorderBrush="#DDDDDD" Margin="10 8 10 25">
+                <TextBlock Text="基本信息" FontSize="15" Foreground="#6379BB" Margin="0 0 0 5"/>
+            </Border>
+
+            <!--// 用户信息 //-->
+            <StackPanel Orientation="Horizontal" Height="52" VerticalAlignment="Center">
+                <hc:TextBox Text="{Binding SelectedUser.User.UserName}" FontWeight="Bold" IsEnabled="False" Background="#F5F7FA"
+                            Width="340" Height="36" hc:InfoElement.Title="用户名称" lib:Assists.UseDisabledDesign="True"/>
+                <hc:TextBox Text="{Binding SelectedUser.User.Account}" FontWeight="Bold" IsEnabled="False" Background="#F5F7FA"
+                            Width="340" Height="36" hc:InfoElement.Title="用户账号" lib:Assists.UseDisabledDesign="True"/>
+            </StackPanel>
+
+            <!--// 权限列表 //-->
+            <Border BorderBrush="#DDDDDD" BorderThickness="0 0 0 1" Margin="10 8 10 25">
+                <TextBlock Text="用户权限列表" FontSize="15" Foreground="#6379BB" Margin="0 0 0 5"/>
+            </Border>
+
+            <Grid Margin="10 0 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <DataGrid ColumnHeaderHeight="40" MaxHeight="235" HeadersVisibility="All" RowHeaderWidth="0"
+                          AutoGenerateColumns="False" ItemsSource="{Binding RoleList}"
+                          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          CellStyle="{StaticResource DataGridTextCenterColumnStyle}"
+                          HorizontalAlignment="Left" SelectionUnit="FullRow" CanUserAddRows="False">
+                    <DataGrid.RowHeaderTemplate>
+                        <DataTemplate>
+                            <!--// 选择标志 绑定DataGridRow行//-->
+                            <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+                        </DataTemplate>
+                    </DataGrid.RowHeaderTemplate>
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="选择">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                              VerticalAlignment="Center" HorizontalAlignment="Center" Cursor="Hand"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--// 权限 //-->
+                        <DataGridTextColumn Header="用户权限" Binding="{Binding Role.RoleName}" IsReadOnly="True" Width="200"/>
+                        <!--// 创建时间 //-->
+                        <DataGridTextColumn Header="创建时间" IsReadOnly="True" Width="*"
+                                            Binding="{Binding Role.insertTime,StringFormat=yyyy-MM-dd HH:mm:ss,ConverterCulture=zh-CN}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!--// 分页 //-->
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10">
+                        <TextBlock Text="共" FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding UserRoleTotalCount}" FontSize="14" VerticalAlignment="Center" Margin="5 0"/>
+                        <TextBlock Text="条" FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                        <TextBlock Text="每页" FontSize="14" VerticalAlignment="Center"/>
+
+                        <!--// 每页容量 //-->
+                        <ComboBox x:Name="userRoleComboBox" ItemsSource="{Binding UserRolePerPageCountList}" SelectedValue="{Binding UserRolePerPageCount}"
+                                  VerticalAlignment="Center" Margin="5 0" SelectedItem="0" Cursor="Hand">
+                            <!--// 触发器：选择项改变  //-->
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding UserRolePerPageCountChangedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                        <TextBlock Text="条" FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0"/>
+
+                        <!--// 页面跳转 //-->
+                        <hc:Pagination MaxPageCount="{Binding UserRoleTotalPageCount}" PageIndex="{Binding UserRoleCurrentPage, Mode=TwoWay}"
+                                       DataCountPerPage="{Binding PerPageCount}" IsJumpEnabled="True" Cursor="Hand">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PageUpdated">
+                                    <i:InvokeCommandAction Command="{Binding UserRolePageUpdatedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </hc:Pagination>
+                    </StackPanel>
+
+
+                </Grid>
+            </Grid>
+            <!--// 按钮：确认与取消 //-->
+            <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Content="确 认" Command="{Binding SubmitUserRoleCommand}" Style="{StaticResource ButtonPrimary}"
+                        Width="74" Height="36" FontSize="14" Cursor="Hand"/>
+                <Button Content="返 回" DataContext="{Binding Navigation, Source={StaticResource Locator}}"
+                        Command="{Binding UserCommand}" Style="{StaticResource ButtonDefault}" 
+                        Width="74" Height="36" Margin="10 0 0 0" FontSize="14" Cursor="Hand"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

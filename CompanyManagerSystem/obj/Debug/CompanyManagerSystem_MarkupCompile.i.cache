@@ -1,0 +1,20 @@
+﻿CompanyManagerSystem
+
+
+winexe
+C#
+.cs
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\
+CompanyManagerSystem
+none
+false
+DEBUG;TRACE
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\App.xaml
+39301765311
+
+44-816252518
+130-266710569
+Themes\Basic\Converter.xaml;Themes\Basic\Style.xaml;Themes\Controls\TreeComboBox.xaml;Themes\Style\Button.xaml;Themes\Style\CheckComboBox.xaml;Themes\Style\ComboBox.xaml;Themes\Style\DataGrid.xaml;Themes\Style\DatePicker.xaml;Themes\Style\Expander.xaml;Themes\Style\ListBox.xaml;Themes\Style\ListView.xaml;Themes\Style\PasswordBox.xaml;Themes\Style\RadioButton.xaml;Themes\Style\TextBlock.xaml;Themes\Style\TextBox.xaml;Themes\Style\ToggleButton.xaml;Themes\Style\TreeView.xaml;View\LoginWindow.xaml;View\MainWindow.xaml;View\subView\Dialog\DepartmentInfoDialog.xaml;View\subView\Dialog\MenuInfoDialog.xaml;View\subView\Dialog\PostInfoDialog.xaml;View\subView\Dialog\ResetPasswordDialog.xaml;View\subView\Dialog\RoleInfoDialog.xaml;View\subView\Dialog\UserInfoDialog.xaml;View\subView\HomeView.xaml;View\subView\InformationManager\ClassView.xaml;View\subView\InformationManager\CourseView.xaml;View\subView\InformationManager\GradeView.xaml;View\subView\InformationManager\StudentView.xaml;View\subView\PersonView.xaml;View\subView\SystemManager\DepartmentView.xaml;View\subView\SystemManager\LogView.xaml;View\subView\SystemManager\MenuView.xaml;View\subView\SystemManager\NoticeView.xaml;View\subView\SystemManager\PostView.xaml;View\subView\SystemManager\RoleView.xaml;View\subView\SystemManager\UserRoleView.xaml;View\subView\SystemManager\UserView.xaml;
+
+True
+

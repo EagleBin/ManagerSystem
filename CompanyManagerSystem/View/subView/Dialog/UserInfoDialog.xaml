@@ -1,0 +1,168 @@
+﻿<UserControl x:Class="CompanyManagerSystem.View.subView.Dialog.UserInfoDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:helper="clr-namespace:ManagerSystem.Utils.Helper;assembly=ManagerSystem.Utils"
+             xmlns:controls="clr-namespace:CompanyManagerSystem.Themes.Controls"
+             xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.Dialog"
+             mc:Ignorable="d" 
+             DataContext="{Binding Source={StaticResource Locator}, Path=User}"
+             d:DesignHeight="490" d:DesignWidth="600" Background="Transparent" Loaded="UserControl_Loaded">
+    <!--// 关闭窗体触发器 //-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UserInfoDialogUnloadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border Width="600" CornerRadius="3" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="54"/>
+                <RowDefinition Height="430"/>
+                <RowDefinition Height="66"/>
+            </Grid.RowDefinitions>
+
+            <!--// 信息提示 //-->
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0 0 0 -25">
+                <StackPanel>
+                    <StackPanel hc:Growl.Token="UserInfoSuccessMsg" Panel.ZIndex="1" Margin="0 0 0 5"/>
+                    <StackPanel hc:Growl.Token="UserInfoWarningMsg" Panel.ZIndex="1" Margin="0 0 0 5"/>
+                    <StackPanel hc:Growl.Token="UserInfoErrorMsg" Panel.ZIndex="1" Margin="0 0 0 5"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--// 标题和关闭按钮 //-->
+            <Grid Margin="20 20 20 10">
+                <TextBlock Text="{Binding DialogTitle}" FontSize="18" Foreground="#303133" VerticalAlignment="Center"/>
+                <Button Style="{StaticResource closeDialogStyle}" Command="hc:ControlCommands.Close" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock Text="&#xeb6a;" FontFamily="/Themes/Style/#iconfont" FontSize="16"/>
+                </Button>
+            </Grid>
+
+            <!--// 内容 //-->
+            <ScrollViewer Grid.Row="1" Margin="20 30">
+                <StackPanel>
+                    <UniformGrid Rows="1">
+                        <!--// 用户昵称 //-->
+                        <StackPanel>
+                            <hc:TextBox x:Name="usernameText" Text="{Binding DialogUser.User.UserName}"
+                                        hc:InfoElement.Title="用户昵称" hc:InfoElement.Placeholder="请输入用户昵称"
+                                        GotFocus="UserNameGotFocus" LostFocus="UserNameLostFocus"/>
+                            <TextBlock Name="usernameInfo" Text="用户昵称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        </StackPanel>
+
+                        <!--// 部门 //-->
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <TextBlock Text="归属部门" FontSize="13" Foreground="#606266" VerticalAlignment="Center" Margin="32 0 6 0"/>
+                            <controls:TreeComboBox ItemsSource="{Binding DialogDepartmentList}" SelectedItem="{Binding DialogUser.Department,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                        DisplayPath="Department.DepName" Width="180" Height="36">
+                                <controls:TreeComboBox.TreeItemItemTemplate>
+                                    <HierarchicalDataTemplate ItemsSource="{Binding ChildDepartmentList}">
+                                        <TextBlock Text="{Binding Department.DepName}"/>
+                                    </HierarchicalDataTemplate>
+                                </controls:TreeComboBox.TreeItemItemTemplate>
+                            </controls:TreeComboBox>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <!--// 手机号码与邮箱 //-->
+                    <UniformGrid Rows="1" Height="58">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+
+                            <!--// 手机号码 //-->
+                            <hc:TextBox Text="{Binding DialogUser.User.PhoneNum}" hc:InfoElement.Title="手机号码" hc:InfoElement.Placeholder="请输入手机号码" Width="260"/>
+
+                            <!--// 邮箱 //-->
+                            <hc:TextBox Text="{Binding DialogUser.User.Mail}" hc:InfoElement.Title="邮箱" hc:InfoElement.Placeholder="请输入邮箱" Width="260"/>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <UniformGrid Rows="1" Visibility="{Binding DialogAccountAndPasswordVisibility}" Height="58">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+
+                            <!--// 用户名称 //-->
+                            <StackPanel Width="280">
+                                <hc:TextBox Name="accountText" Text="{Binding DialogUser.User.Account}" 
+                                            hc:InfoElement.Title="用户名称" hc:InfoElement.Placeholder="请输入用户名称" 
+                                            GotFocus="AccountGotFocus" LostFocus="AccountLostFocus"/>
+                                <TextBlock Name="accountInfo" Text="用户名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                            </StackPanel>
+                            
+                            <!--// 密码 //-->
+                            <StackPanel Width="280">
+                                <PasswordBox x:Name="passwordText" helper:PasswordBoxHelper.Attach="True" PasswordChar="*"
+                                             helper:PasswordBoxHelper.Password="{Binding DialogUser.User.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                             hc:InfoElement.Title="用户密码" hc:InfoElement.Placeholder="请输入用户密码" 
+                                             GotFocus="PasswordGotFocus" LostFocus="PasswordLostFocus"/>
+                                <TextBlock Name="passwordInfo" Text="用户密码不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <UniformGrid Rows="1" Height="58">
+                        <StackPanel>
+                            <hc:ComboBox ItemsSource="{Binding GenderList}" SelectedValue="{Binding DialogUser.User.Gender}"
+                                         hc:InfoElement.Title="用户性别" hc:InfoElement.Placeholder="请选择性别"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="58 15">
+                                <TextBlock Text="状态" Margin="0 0 6 0" VerticalAlignment="Center" FontSize="13"/>
+                                <RadioButton Content="正常" Margin="0 0 15 0" IsChecked="{Binding DialogUser.User.Status}"/>
+                                <RadioButton Content="停用" Margin="15 0 0 0" IsChecked="{Binding DialogUser.User.Status,Converter={StaticResource Boolean2BooleanReConverter}}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <UniformGrid Rows="1">
+                        <StackPanel>
+
+                            <!--// 岗位 //-->
+                            <hc:CheckComboBox x:Name="postCheckComboBox" Style="{StaticResource CheckComboBoxStyle}"
+                                              ItemsSource="{Binding DialogPostList}" DisplayMemberPath="Post.PostName"
+                                               helper:CheckComboBoxHelper.SelectedItems="{Binding DialogUser.Post,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                              hc:InfoElement.Title="岗位 " hc:InfoElement.Placeholder="请选择岗位">
+                                <hc:CheckComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type hc:CheckComboBoxItem}" BasedOn="{StaticResource CheckComboBoxItemBaseStyle}">
+                                        <Setter Property="IsSelected" Value="{Binding IsChecked}"/>
+                                    </Style>
+                                </hc:CheckComboBox.ItemContainerStyle>
+
+                            </hc:CheckComboBox>
+                        </StackPanel>
+
+                        <!--// 角色权限 //-->
+                        <StackPanel>
+                            <hc:CheckComboBox x:Name="roleCheckComboBox" ItemsSource="{Binding DialogRoleList}" Style="{StaticResource CheckComboBoxStyle}" DisplayMemberPath="Role.RoleName"
+                                              helper:CheckComboBoxHelper.SelectedItems="{Binding DialogUser.Role,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"                                              
+                                              hc:InfoElement.Title="角色权限" hc:InfoElement.Placeholder="请选择角色" hc:InfoElement.Necessary="False">
+                                <hc:CheckComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type hc:CheckComboBoxItem}" BasedOn="{StaticResource CheckComboBoxItemBaseStyle}">
+                                        <Setter Property="IsSelected" Value="{Binding IsChecked}"/>
+                                    </Style>
+                                </hc:CheckComboBox.ItemContainerStyle>
+                            </hc:CheckComboBox>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <StackPanel Margin="0 20 0 0">
+                        <hc:TextBox Text="{Binding DialogUser.User.Description}"  MinHeight="54" Padding="10 5" TextWrapping="Wrap"
+                                   hc:InfoElement.Title="备注" hc:InfoElement.Placeholder="请输入内容"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--// 确认与取消 //-->
+            <Grid Grid.Row="2" Margin="20 10 20 20">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Button Content="确认" Command="{Binding SubmitUserInfoCommand}" Style="{StaticResource ButtonPrimary}" 
+                            Click="Button_Click" Width="74" Height="36" FontSize="14" Cursor="Hand"/>
+                    <Button Content="取 消" Command="hc:ControlCommands.Close" Style="{StaticResource ButtonDefault}"
+                            Width="74" Height="36" Margin="10 0 0 0" FontSize="14" Cursor="Hand"></Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

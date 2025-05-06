@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="CompanyManagerSystem.View.subView.Dialog.PostInfoDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.Dialog"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             DataContext="{Binding Source={StaticResource Locator},Path=Post}"
+            d:DesignHeight="350" d:DesignWidth="600" Background="Transparent">
+    <!--// 加载命令 //-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding PostInfoDialogUnloadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border Width="600" CornerRadius="3" Background="White">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="54"/>
+                <RowDefinition Height="230"/>
+                <RowDefinition Height="66"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" MaxHeight="165" Panel.ZIndex="1">
+                <StackPanel hc:Growl.Token="MenuInfoWarningMsg" Margin="0 5 0 0"/>
+            </StackPanel>
+            
+            <!--// 信息弹窗 //-->
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2" MaxHeight="165"
+                          VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="1">
+                <StackPanel VerticalAlignment="Top" Margin="5">
+                    <StackPanel hc:Growl.Token="PostInfoSuccessMsg" Margin="5"></StackPanel>
+                    <StackPanel hc:Growl.Token="PostInfoWarningMsg" Margin="5"></StackPanel>
+                    <StackPanel hc:Growl.Token="PostInfoErrorMsg" Margin="5"></StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--// 标题和关闭 //-->
+            <Grid Margin="20 20 20 10">
+                <!--// 标题(添加/修改) //-->
+                <TextBlock Text="{Binding DialogTitle}" Foreground="#303133" FontSize="18" VerticalAlignment="Center"/>
+                <!--// 关闭按钮 //-->
+                <Button Style="{StaticResource closeDialogStyle}" Command="hc:ControlCommands.Close" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock Text="&#xeb6a;" FontFamily="/Themes/Style/#iconfont" FontSize="16"/>
+                </Button>
+            </Grid>
+            
+            <!--// 内容 //-->
+            <Grid Grid.Row="1" Margin="20 30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="58"/>
+                    <RowDefinition Height="58"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--// 岗位名称 //-->
+                <StackPanel>
+                    <hc:TextBox x:Name="postnameText" Text="{Binding DialogPost.Post.PostName}" hc:InfoElement.Placeholder="请输入岗位名称"
+                                hc:InfoElement.Title="岗位名称" hc:InfoElement.TitlePlacement="Left"
+                                 GotFocus="PostNameGotFocus" LostFocus="PostNameLostFocus"/>
+                    <TextBlock Name="postnameInfo" Text="岗位名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                </StackPanel>
+                
+                <!--// 状态 //-->
+                <StackPanel Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" Margin="58 0" Height="36">
+                        <TextBlock Text="状态" FontSize="13" Margin="0 0 6 0" VerticalAlignment="Center"/>
+                        <RadioButton Content="正常" IsChecked="{Binding DialogPost.Post.Status}" Margin="0 0 15 0"/>
+                        <RadioButton Content="停用" IsChecked="{Binding DialogPost.Post.Status,Converter={StaticResource Boolean2BooleanReConverter}}" Margin="15 0 0 0"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                <!--// 备注 //-->
+                <StackPanel Grid.Row="2">
+                    <hc:TextBox Text="{Binding DialogPost.Post.Description}" VerticalAlignment="Center" Padding="10 5"
+                                hc:InfoElement.Title="备注" MinHeight="54" hc:InfoElement.Placeholder="请输入内容" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="20 10 20 20">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Button Command="{Binding SubmitPostInfoCommand}" Content="确 认" Style="{StaticResource ButtonPrimary}"
+                            Height="36" Width="74" FontSize="14" Cursor="Hand" Click="Button_Click"/>
+                    <Button Command="hc:ControlCommands.Close" Content="取 消" Style="{StaticResource ButtonDefault}"
+                            Height="36" Width="74" FontSize="14" Cursor="Hand" Margin="10 0 0 0"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

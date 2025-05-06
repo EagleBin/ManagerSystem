@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="CompanyManagerSystem.View.subView.Dialog.RoleInfoDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.Dialog"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             DataContext="{Binding Source={StaticResource Locator},Path=Role}"
+             d:DesignHeight="680" d:DesignWidth="500" Background="Transparent">
+
+    <i:Interaction.Triggers>
+        <!--// 窗体关闭 //-->
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding RoleInfoDialogUnloadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Border Width="500" CornerRadius="3" Background="White" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="54"/>
+                <RowDefinition Height="560"/>
+                <RowDefinition Height="66"/>
+            </Grid.RowDefinitions>
+
+            <!--// 信息提示 //-->
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0 0 0 -25">
+                <StackPanel>
+                    <StackPanel hc:Growl.Token="RoleInfoSuccessMsg" Panel.ZIndex="1" VerticalAlignment="Center" Margin="0 0 0 5"/>
+                    <StackPanel hc:Growl.Token="RoleInfoWarningMsg" Panel.ZIndex="1" VerticalAlignment="Center" Margin="0 0 0 5"/>
+                    <StackPanel hc:Growl.Token="RoleInfoErrorMsg" Panel.ZIndex="1" VerticalAlignment="Center" Margin="0 0 0 5"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--// 标题和关闭 //-->
+            <Grid Margin="20 20 20 10">
+                <TextBlock Text="{Binding DialogTitle}" FontSize="18" Foreground="#303133" VerticalAlignment="Center"/>
+                <Button Command="hc:ControlCommands.Close" Style="{StaticResource closeDialogStyle}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock Text="&#xeb6a;" FontFamily="/Themes/Style/#iconfont" FontSize="16"></TextBlock>
+                </Button>
+            </Grid>
+
+            <!--// 内容 //-->
+            <Grid Grid.Row="1" Margin="20 30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="58"/>
+                    <RowDefinition Height="58"/>
+                    <RowDefinition Height="58"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--// 权限名称 //-->
+                <StackPanel Orientation="Horizontal" >
+                    <hc:TextBox x:Name="rolenameText" Text="{Binding DialogRole.Role.RoleName}" 
+                                hc:InfoElement.Title="权限名称" hc:InfoElement.Placeholder="请输入权限名称"
+                                LostFocus="RoleNameLostFocus"/>
+                    <TextBlock Name="rolenameInfo" Text="角色名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                </StackPanel>
+
+                <!--// 状态 //-->
+                <StackPanel Grid.Row="1">
+                    <StackPanel Orientation="Horizontal"  Margin="58 0" Height="36">
+                        <TextBlock Text="状态" FontSize="13" VerticalAlignment="Center" Margin="0 0 0 6"/>
+                        <RadioButton Content="正常" IsChecked="{Binding DialogRole.Role.Status}" Margin="0 0 15 0"/>
+                        <RadioButton Content="停用" IsChecked="{Binding DialogRole.Role.Status,Converter={StaticResource Boolean2BooleanReConverter}}" Margin="15 0 0 0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!--// 备注 //-->
+                <StackPanel Grid.Row="2">
+                    <hc:TextBox Text="{Binding DialogRole.Role.Description}" MaxHeight="56" 
+                                hc:InfoElement.Title="备注" hc:InfoElement.Placeholder="请输入备注"
+                                VerticalContentAlignment="Top" Padding="10 0" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <Grid Grid.Row="3" Margin="20 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="36" Margin="12 0">
+                            <TextBlock Text="数据权限" FontSize="13" VerticalAlignment="Center" Margin="0 0 6 0"/>
+
+                            <!--// 展开/折叠 //-->
+                            <CheckBox Content="展开/折叠" Margin="0 0 35 0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Checked">
+                                        <i:InvokeCommandAction Command="{Binding ExpandAllNodeCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="Unchecked">
+                                        <i:InvokeCommandAction Command="{Binding FoldAllNodeCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </CheckBox>
+
+                            <!--// 全选/全不选 //-->
+                            <CheckBox Content="全选/全不选" Margin="0 0 35 0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Checked">
+                                        <i:InvokeCommandAction Command="{Binding SelectAllNodeCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="Unchecked">
+                                        <i:InvokeCommandAction Command="{Binding UnSelectAllNodeCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </CheckBox>
+
+                            <!--<CheckBox Content="父子联动" Margin="0 0 35 0" IsChecked="{Binding Interaction}"></CheckBox>-->
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--// 树状图 //-->
+                    <ScrollViewer Grid.Row="1" Margin="72 10 -10 0">
+                        <StackPanel >
+                            <TreeView ItemsSource="{Binding DialogMenuList}">
+
+                                <!--// 样式绑定 //-->
+                                <TreeView.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource TreeViewItemBaseStyle}" TargetType="{x:Type TreeViewItem}">
+                                        <Setter Property="IsExpanded" Value="{Binding IsExpanded,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Style>
+                                </TreeView.ItemContainerStyle>
+
+                                <!--// 数据样式 //-->
+                                <TreeView.ItemTemplate >
+                                    <HierarchicalDataTemplate ItemsSource="{Binding ChildMenuBarModel}">
+                                        <StackPanel Orientation="Horizontal" >
+                                            <CheckBox IsChecked="{Binding IsChecked,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" Margin="5 0">
+                                                <i:Interaction.Triggers >
+                                                    <i:EventTrigger EventName="Check">
+                                                        <!--// 数据源是ChildMenuBarModel //-->
+                                                        <i:InvokeCommandAction Command="{Binding SelectNodeCommand}"/>
+                                                    </i:EventTrigger>
+                                                    <i:EventTrigger EventName="UnCheck">
+                                                        <i:InvokeCommandAction Command="{Binding UnSelectNodeCommand}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </CheckBox>
+                                            <TextBlock Text="{Binding Menu.Title}"/>
+                                        </StackPanel>
+                                    </HierarchicalDataTemplate>
+                                </TreeView.ItemTemplate>
+                            </TreeView>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+
+            <!--// 确认与取消 //-->
+            <Grid Grid.Row="2" Margin="20 10 20 20">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                    <Button Content="确 认" Command="{Binding SubmitRoleInfoCommand}" Style="{StaticResource ButtonPrimary}"
+                             Width="74" Height="36" FontSize="14" Cursor="Hand" Click="Button_Click"/>
+                    <Button Content="取 消" Command="hc:ControlCommands.Close" Style="{StaticResource ButtonDefault}" 
+                            Width="74" Height="36" Margin="10 0 0 0" FontSize="14" Cursor="Hand"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

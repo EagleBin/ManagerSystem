@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="CompanyManagerSystem.View.subView.Dialog.DepartmentInfoDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.Dialog"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:controls="clr-namespace:CompanyManagerSystem.Themes.Controls"
+             mc:Ignorable="d" 
+             DataContext="{Binding Source={StaticResource Locator}, Path=Department}"
+             d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
+    <Border Width="600" Background="White" CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="54"/>
+                <RowDefinition Height="354"/>
+                <RowDefinition Height="66"/>
+            </Grid.RowDefinitions>
+            
+            <!--// 信息提示 //-->
+            <ScrollViewer Grid.RowSpan="2" MaxHeight="165" VerticalScrollBarVisibility="Hidden"
+                          HorizontalAlignment="Center" VerticalAlignment="Top" Panel.ZIndex="1">
+                <StackPanel VerticalAlignment="Top" Margin="5">
+                    <StackPanel Margin="5" hc:Growl.Token="DepartmentInfoSuccessMsg"/>
+                    <StackPanel Margin="5" hc:Growl.Token="DepartmentInfoWarningMsg"/>
+                    <StackPanel Margin="5" hc:Growl.Token="DepartmentInfoErrorMsg"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--// 窗体类型和关闭按钮 //-->
+            <Grid Margin="20 20 20 10">
+                <TextBlock Text="{Binding DialogTitle}" FontSize="18" Foreground="#303133" VerticalAlignment="Center"/>
+                <Button Style="{StaticResource closeDialogStyle}" VerticalAlignment="Center" HorizontalAlignment="Right"
+                        Command="hc:ControlCommands.Close">
+                    <TextBlock Text="&#xeb6a;" FontFamily="/Themes/Style/#iconfont" FontSize="16"/>
+                </Button>
+            </Grid>
+            
+            <!--// 内容 //-->
+            <StackPanel Grid.Row="1" Margin="20 30">
+                <!--// 上级菜单 //-->
+                <UniformGrid Visibility="{Binding DialogParentDepartmentVisibility}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="上级菜单" Foreground="#606266" FontSize="13" VerticalAlignment="Center" Margin="32 0 6 0"/>
+                            <controls:TreeComboBox x:Name="parentDepartmentText" Width="460" hc:InfoElement.Title="上级部门"
+                                    ItemsSource="{Binding DialogParentDepartmentList}"
+                                    SelectedItem="{Binding DialogParentDepartment,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    DisplayPath="Department.DepName" GotFocus="ParentDepartmentGotFocus" LostFocus="ParentDepartmentLostFocus">
+                                <controls:TreeComboBox.TreeItemItemTemplate>
+                                    <HierarchicalDataTemplate ItemsSource="{Binding ChildDepartmentList}">
+                                        <TextBlock Text="{Binding Department.DepName}" />
+                                    </HierarchicalDataTemplate>
+                                </controls:TreeComboBox.TreeItemItemTemplate>
+                            </controls:TreeComboBox>
+                        </StackPanel>
+                        <TextBlock Text="上级部门不能为空" x:Name="parentDepartmentInfo" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                    </StackPanel>
+                </UniformGrid>
+                <!--// 部门与负责人 //-->
+                <UniformGrid Rows="1" Columns="2"> 
+                    <!--// 部门名称 //-->
+                    <StackPanel>
+                        <hc:TextBox x:Name="depNameText" Text="{Binding DialogDepartment.Department.DepName}" 
+                                    hc:InfoElement.Title="部门名称" hc:InfoElement.Placeholder="请输入部门名称"
+                                    GotFocus="DepNameGotFocus" LostFocus="DepNameLostFocus"/>
+                        <TextBlock x:Name="depNameInfo" Text="部门名称不能为空" Foreground="#f56c6c" 
+                                   Margin="90 2 0 5" Visibility="Hidden"/>
+                    </StackPanel>
+                    
+                    <!--// 负责人 //-->
+                    <StackPanel>
+                        <hc:TextBox Text="{Binding DialogDepartment.Department.DepHead}" hc:InfoElement.Title="负责人" hc:InfoElement.Placeholder="请输入负责人"/>
+                        <TextBlock Text="负责人不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                    </StackPanel>
+                </UniformGrid>
+
+                <!--// 联系电话与邮箱 //-->
+                <UniformGrid Rows="1" Columns="2">
+                    <StackPanel>
+                        <hc:TextBox Text="{Binding DialogDepartment.Department.DepPhoneNum}" hc:InfoElement.Title="联系电话" hc:InfoElement.Placeholder="请输入联系电话"/>
+                        <TextBlock Text="" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="1">
+                        <hc:TextBox Text="{Binding DialogDepartment.Department.DepMail}" hc:InfoElement.Title="邮箱" hc:InfoElement.Placeholder="请输入邮箱"></hc:TextBox>
+                        <TextBlock Text="" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                    </StackPanel>
+                </UniformGrid>
+
+                <!--// 状态 //-->
+                <UniformGrid Rows="1">
+                    <StackPanel Orientation="Horizontal" Margin="58 0" Height="36">
+                        <TextBlock Margin="0 0 6 0" VerticalAlignment="Center" FontSize="13" Text="状态"/>
+                        <RadioButton Content="正常" Margin="0 0 15 0" IsChecked="{Binding DialogDepartment.Department.Status, Converter={StaticResource Boolean2BooleanReConverter}}"/>
+                        <RadioButton Content="停用" Margin="15 0 0 0" IsChecked="{Binding DialogDepartment.Department.Status, Converter={StaticResource Boolean2BooleanReConverter}}"/>
+                    </StackPanel>
+                    <TextBlock Text="" Foreground="#f56c6c" Margin="90 2 0 5"/>
+                </UniformGrid>
+                
+                <!--// 备注 //-->
+                <UniformGrid Rows="1">
+                    <StackPanel>
+                        <hc:TextBox Text="{Binding DialogDepartment.Department.Description}" hc:InfoElement.Title="备注"
+                                   MinHeight="54" hc:InfoElement.Placeholder="请输入内容" VerticalContentAlignment="Top"
+                                   Padding="10 5" TextWrapping="Wrap"></hc:TextBox>
+                    </StackPanel>
+                </UniformGrid>
+            </StackPanel>
+            
+            <!--// 确认与取消 //-->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20 10 30 20">
+                <Button Content="确 认" Command="{Binding SubmitDepartmentInfoCommand}" Style="{StaticResource ButtonPrimary}"
+                        Width="74" Height="36" FontSize="14" Cursor="Hand" Click="Button_Click"/>
+                <Button Content="取消" Command="hc:ControlCommands.Close" Style="{StaticResource ButtonDefault}" 
+                        Width="74" Height="36" Margin="10 0 0 0" FontSize="14" Cursor="Hand"></Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

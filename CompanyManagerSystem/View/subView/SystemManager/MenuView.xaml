@@ -1,0 +1,200 @@
+﻿<UserControl x:Class="CompanyManagerSystem.View.subView.SystemManager.MenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.SystemManager"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:lib="http://lan.design.com"
+             mc:Ignorable="d" 
+             DataContext="{Binding Source={StaticResource Locator},Path=Menu}"
+             d:DesignHeight="450" d:DesignWidth="1000">
+    <Grid Margin="20 10 20 20">
+        <Grid.RowDefinitions >
+            <RowDefinition Height="20"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <!--// 信息提示 //-->
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2" MaxHeight="165" VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="1">
+            <StackPanel >
+                <StackPanel hc:Growl.Token="MenuSuccessMsg" VerticalAlignment="Center" Margin="0 0 0 5"/>
+                <StackPanel hc:Growl.Token="MenuWarningMsg" VerticalAlignment="Center" Margin="0 0 0 5"/>
+                <StackPanel hc:Growl.Token="MenuErrorMsg" VerticalAlignment="Center" Margin="0 0 0 5"/>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!--// 顶部导航 //-->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="White">
+            <TextBlock Text="首页" FontSize="14" Foreground="#97A8BE" FontWeight="Bold" VerticalAlignment="Center" Margin="0 0 10 0"/>
+            <TextBlock FontSize="14" Foreground="#c0c4cc" Text="&#xe65f;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="菜单中心" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 0 0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0 20">
+            <DockPanel Margin="0 5">
+                <WrapPanel Visibility="{Binding SearchPanelVis}" Orientation="Horizontal" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="0 0 0 10">
+
+                    <!--// 菜单名称 //-->
+                    <hc:TextBox Text="{Binding SearchTitle}" FontWeight="Bold" Width="240" Height="32"
+                                hc:InfoElement.Title="菜单名称" hc:InfoElement.Placeholder="请输入菜单名称"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <!--// 菜单状态 //-->
+                    <hc:ComboBox ItemsSource="{Binding SearchStatus}" Margin="20 0 0 0" Width="240" Height="32"
+                              hc:InfoElement.Title="菜单状态" hc:InfoElement.Placeholder="请输入状态" FontWeight="Bold" 
+                              VerticalAlignment="Center" HorizontalAlignment="Center" >
+                        <ComboBoxItem Content="启用"/>
+                        <ComboBoxItem Content="禁用"/>
+                    </hc:ComboBox>
+
+                    <!--// 搜索 //-->
+                    <Button Command="{Binding ConditionalSearchMenuCommand}" Style="{StaticResource ButtonPrimary}"
+                            Content="搜 索" Width="73" Height="28" Margin="50 0 0 0" Cursor="Hand" 
+                            hc:IconElement.Geometry="{StaticResource SearchGeometry}"/>
+
+                    <!--// 重置 //-->
+                    <Button Command="{Binding ResetConditionalSearchMenuCommand}" Content="重置" Width="73" Height="28"
+                            Cursor="Hand" hc:IconElement.Geometry="{StaticResource RotateRightGeometry}" Margin="10 0 0 0"/>
+
+                </WrapPanel>
+
+                <!--// 内容 //-->
+                <Grid VerticalAlignment="Top" Margin="0 5 0 0">
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="36"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid >
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
+                            
+                            <!--// 添加 //-->
+                            <Button Command="{Binding AddMenuInfoCommand}" Style="{StaticResource AddButtonStyle}"
+                                    Height="28" Width="73" Cursor="Hand">
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Margin="-5 0 5 0" FontSize="14" Text="&#xe622;" FontFamily="/Themes/Style/#iconfont"
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="新增" VerticalAlignment="Center"></TextBlock>
+                                </StackPanel>
+                            </Button>
+
+                            <!--// 展开折叠 //-->
+                            <ToggleButton IsChecked="{Binding FoldToggleButtonChecked}" Style="{StaticResource FoldToggleButtonStyle}"
+                                          Content="展开/折叠" Margin="10,0,0,0" Width="100" Height="28" Cursor="Hand">
+                                <i:Interaction.Triggers >
+                                    <i:EventTrigger EventName="Check">
+                                        <i:InvokeCommandAction Command="{Binding FoldMenuInfoCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="UnCheck">
+                                        <i:InvokeCommandAction Command="{Binding UnFoldMenuInfoCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ToggleButton>
+                        </StackPanel>
+                        
+                        <!--// 隐藏搜索 //-->
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                            <Button Command="{Binding ChangeSearchPanelVisCommand}" Style="{StaticResource CornerRadiusButtonStyle}"
+                                        Cursor="Hand" hc:Poptip.HitMode="Hover" hc:Poptip.Placement="Top" hc:Poptip.Content="隐藏搜索">
+                                <TextBlock Text="&#xe651;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button>
+
+                            <Button Style="{StaticResource CornerRadiusButtonStyle}" Cursor="Hand" Margin="10 0 0 0"
+                                    hc:Poptip.Content="刷新" hc:Poptip.Placement="Top" hc:Poptip.HitMode="Hover">
+                                <TextBlock Text="&#xe6a7;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+                        
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="10 0 0 0">
+                        <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column" RowHeaderWidth="60"
+                                  ItemsSource="{Binding MenuList}" SelectedItem="{Binding SelectedMenu}"
+                                  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}" RowStyle="{StaticResource DataGridRowStyle}"
+                                  CellStyle="{StaticResource DataGridTextCenterColumnStyle}" HorizontalAlignment="Left" 
+                                  IsReadOnly="True" SelectionUnit="FullRow">
+                            <DataGrid.Columns >
+                                <!--// 菜单名称 //-->
+                                <DataGridTemplateColumn Header="菜单名称" Width="160">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="-40 0 0 0">
+                                                <Border Width="{Binding MarginLeft}"/>
+                                                <ToggleButton IsChecked="{Binding IsChecked,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                  Style="{StaticResource MenuToggleButtonStyle}" Visibility="{Binding IsVisibility}">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Checked">
+                                                            <i:InvokeCommandAction Command="{Binding MenuCheckChangedCommand}"/>
+                                                        </i:EventTrigger>
+                                                        <i:EventTrigger EventName="Unchecked">
+                                                            <i:InvokeCommandAction Command="{Binding MenuCheckChangedCommand}"/>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </ToggleButton>
+                                                <TextBlock Text="{Binding Menu.Title}" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTextColumn Header="图标" FontSize="18" Binding="{Binding Menu.Icon}" FontFamily="/Themes/Style/#iconfont" 
+                                                    IsReadOnly="True"  Width="80"/>
+                                <DataGridTextColumn Header="路径" Binding="{Binding Menu.NameSpace}" IsReadOnly="True" Width="250"/>
+                                
+                                <!--// 状态 //-->
+                                <DataGridTemplateColumn Header="状态" IsReadOnly="True" Width="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <hc:Tag Content="{Binding Menu.Status, Converter={StaticResource Boolean2StringConverter},ConverterParameter=停用;正常}"
+                                                    ShowCloseButton="False" IsSelected="{Binding Menu.Status}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                
+                                <!--// 时间 //-->
+                                <DataGridTextColumn Binding="{Binding Menu.insertTime, StringFormat=yy-MM-dd HH:mm:ss,ConverterCulture=zh-CN}"
+                                                    Header="创建时间" Width="200"/>
+                                <DataGridTemplateColumn Header="操作" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid DataContext="{Binding Menu, Source={StaticResource Locator}}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+
+                                                <!--// 修改 //-->
+                                                <Button Command="{Binding EditMenuInfoCommand}" Style="{StaticResource OperateButtonStyle}"
+                                                        Margin="5 0" Width="39" Height="28" Cursor="Hand">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Margin="-5 0 2 0" FontSize="12" Text="&#xe8cf;" FontFamily="/Themes/Style/#iconfont"
+                                                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="修改" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                
+                                                <!--// 删除 //-->
+                                                <Button Grid.Column="1" Command="{Binding DeleteMenuInfoCommand}" Style="{StaticResource OperateButtonStyle}"
+                                                        Margin="5 0" Width="39" Height="28" Cursor="Hand">
+                                                    <StackPanel Orientation="Horizontal" >
+                                                        <TextBlock Margin="-5 0 2 0" FontSize="12" Text="&#xe62d;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="删除" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+    
+
+
+        </Grid>
+    </Grid>
+</UserControl>
