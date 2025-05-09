@@ -3,6 +3,9 @@ using ManagerSystem.Utils.Helper;
 
 namespace ManagerSystem.Services.Posts
 {
+    /// <summary>
+    /// 岗位数据操作接口类
+    /// </summary>
     public interface IPostService
     {
         /// <summary>

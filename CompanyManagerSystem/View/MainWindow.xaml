@@ -57,6 +57,7 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <!--// 最小化 //-->
                     <Button x:Name="MinBtn" Style="{StaticResource minStyle}" Cursor="Hand">
+                        <!--// ath 元素主要用于在按钮上绘制图形 //-->
                         <Path Width="13" Height="13" Data="{StaticResource WindowMinGeometry}" Fill="#494949" Stretch="Uniform" ToolTip="最小化"/>
                     </Button>
                     <!--// 最大化 //-->
@@ -69,6 +70,7 @@
                     </Button>
                 </StackPanel>
             </Grid>
+            
             <!--// 左侧导航 //-->
             <Border x:Name="border" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"
                         Width="200" Background="#334157" HorizontalAlignment="Right">
@@ -91,15 +93,16 @@
                         <!--// 数据样式控件 //-->
                         <ItemsControl ItemsSource="{Binding MenuBarList}">
                             <ItemsControl.ItemTemplate>
+                                <!--// 定义数据模板 //-->
                                 <DataTemplate>
                                     <Expander Style="{DynamicResource ExpanderStyle}" IsExpanded="{Binding IsExpanded}"
                                               Background="#334157" Foreground="#BFCBD9" BorderThickness="0">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Expanded">
-                                                <i:InvokeCommandAction Command="{Binding MenuExpanderExpandedCommand}"></i:InvokeCommandAction>
+                                                <i:InvokeCommandAction Command="{Binding MenuExpanderExpandedCommand}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
-                                        <!--// 折叠头部标题 //-->
+                                        <!--// 主菜单（可以展开的菜单） 头部标题 //-->
                                         <Expander.Header>
                                             <Grid Height="50" Margin="0">
                                                 <Grid.ColumnDefinitions>
@@ -111,7 +114,7 @@
                                                 <TextBlock Grid.Column="1" Text="{Binding Menu.Title}" FontSize="14" Margin="5 0 0 0" VerticalAlignment="Center"/>
                                             </Grid>
                                         </Expander.Header>
-                                        <!--// 折叠内容 //-->
+                                        <!--// 子菜单（不可以展开的菜单） 内容 //-->
                                         <Expander.Content>
                                             <ItemsControl ItemsSource="{Binding ChildMenuBarModel}">
                                                 <ItemsControl.ItemTemplate>
@@ -131,6 +134,7 @@
                 </Grid>
             </Border>
 
+            <!--// 设置 //--> 
             <DockPanel Grid.Row="1" Grid.Column="1" Background="#334157" LastChildFill="False" Margin="0 0 -10 0">
                 <Border BorderBrush="Black" DockPanel.Dock="Left" BorderThickness="1"/>
                 <!--// 收缩按钮 //--> 
@@ -157,7 +161,7 @@
                
             </DockPanel>
             
-            <!--// 内容 //-->
+            <!--// 中间内容 //-->
             <Grid Grid.Column="1" Grid.Row="2" Background="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="33*"/>
@@ -167,7 +171,6 @@
                 <ContentControl x:Name="Pages" DataContext="{Binding Navigation, Source={StaticResource Locator}}"
                                 Content="{Binding CurrentView}" Grid.RowSpan="2"/>
             </Grid>
-
 
             <hc:Drawer x:Name="DrawerRight" MaskCanClose="True">
                 <Border Grid.Row="1" Background="{DynamicResource RegionBrush}" Width="300" 

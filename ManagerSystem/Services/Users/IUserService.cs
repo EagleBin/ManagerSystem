@@ -3,6 +3,9 @@ using ManagerSystem.Utils.Helper;
 
 namespace ManagerSystem.Services.Users
 {
+    /// <summary>
+    /// 用户数据操作接口类
+    /// </summary>
     public interface IUserService
     {
         /// <summary>
@@ -69,21 +72,21 @@ namespace ManagerSystem.Services.Users
         public PageRequest<User> GetUsers(string? account, string? phoneNum, string? status, string? startDate, string? endDate, int pageNum, int pageSize, int depId);
 
         /// <summary>
-        /// 查询用户角色
+        /// 查询用户权限
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         PageRequest<Role> GetUserRole(int id);
 
         /// <summary>
-        /// 添加用户角色
+        /// 添加用户权限
         /// </summary>
         /// <param name="userRole"></param>
         /// <returns></returns>
         public int AddUserRole(UserRole userRole);
 
         /// <summary>
-        /// 删除用户角色
+        /// 删除用户权限
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="role_id"></param>
@@ -91,7 +94,7 @@ namespace ManagerSystem.Services.Users
         public int DeleteUserRole(int user_id, int role_id);
 
         /// <summary>
-        /// 查询用户角色
+        /// 查询用户岗位
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

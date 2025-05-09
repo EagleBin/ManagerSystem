@@ -2,6 +2,9 @@
 
 namespace ManagerSystem.Entity.SystemManager
 {
+    /// <summary>
+    /// 用户权限
+    /// </summary>
     [SugarTable("user_role")]
     public class UserRole:ModelBase
     {

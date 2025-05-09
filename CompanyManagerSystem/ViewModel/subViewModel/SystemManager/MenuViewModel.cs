@@ -3,22 +3,15 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HandyControl.Controls;
-using HandyControl.Tools.Extension;
 using ManagerSystem.Entity.Dto;
-using ManagerSystem.Entity.SystemManager;
 using ManagerSystem.Utils.Helper;
 using ManagerSystem.Utils.Http.SystemManager;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media.Media3D;
 using Menu = ManagerSystem.Entity.SystemManager.Menu;
 
 namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
@@ -28,6 +21,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
 
         public MenuViewModel()
         {
+            // 注册信息，往后一旦接受到“MenuCheckChanged”类型信息，就会触发MenuCheckChangedMethod命令
             Messenger.Default.Register<MenuBarModel>(this, "MenuCheckChanged", MenuCheckChangedMethod);
 
             MenuList = TreeListHelper.RefreshMenulist(MenuHttpUtil.GetAllMenu().items);
@@ -72,7 +66,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
 
         private bool _FoldToggleButtonChecked;
         /// <summary>
-        /// 展开
+        /// 展开与折叠
         /// </summary>
         public bool FoldToggleButtonChecked
         {
@@ -308,6 +302,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                         List<MenuBarModel> tempMenuBarModels = new List<MenuBarModel>();
                         foreach (var item in MenuList)
                         {
+                            // 根节点 或者是 没有父节点的子节点
                             if (item.Menu.parent_Id == 0 || !MenuList.ToList().Exists(t => t.Menu.Id == item.Menu.parent_Id))
                             {
                                 tempMenuBarModels.Add(item);
@@ -315,13 +310,13 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                         }
                         foreach (var item in tempMenuBarModels)
                         {
-                            item.IsChecked = false; // 取消勾选
+                            item.IsChecked = false; // 折叠
                         }
 
                         MenuList.Clear(); // 清空
                         foreach (var item in tempMenuBarModels)
                         {
-                            MenuList.Add(item); // // 将 未勾选的菜单 添加到 菜单列表中
+                            MenuList.Add(item); // // 将 折叠的菜单 添加到 菜单列表中
                         }
                     }));
             }
@@ -441,7 +436,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                                 // 菜单标题为空
                                 if (string.IsNullOrWhiteSpace(DialogMenu.Menu.Title))
                                 {
-                                    HandyControl.Controls.Growl.Warning($"菜单修改成功！", "MenuInfoWarningMsg");
+                                    HandyControl.Controls.Growl.Warning($"菜单标题不为空！", "MenuInfoWarningMsg");
                                     return;
                                 }
 
@@ -556,10 +551,10 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                 {
                     if (MenuList.ToList().Exists(t => t.Menu.Title == child.Menu.Title))
                     {
-                        continue; // 当查到自己时，跳过
+                        continue; // 避免重复添加
                     }
-                    child.MarginLeft = barModel.MarginLeft + 50;
-                    MenuList.Insert(index++, child);
+                    child.MarginLeft = barModel.MarginLeft + 50; // 增加左边距
+                    MenuList.Insert(index++, child); // 插入
                 }
             }
             else
@@ -579,9 +574,15 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
             }
         }
 
+        /// <summary>
+        /// 收集指定菜单的所有子菜单（用于 一键展开菜单列表）
+        /// </summary>
+        /// <param name="menu"></param>
+        /// <param name="tempList"></param>
+        /// <returns></returns>
         private List<MenuBarModel> GetChildMenuBarModels(MenuBarModel menu, List<MenuBarModel> tempList)
         {
-            if (menu.ChildMenuBarModel != null || menu.ChildMenuBarModel.Count > 0 || menu.IsChecked == false)
+            if (menu.ChildMenuBarModel != null && menu.ChildMenuBarModel.Count > 0 && menu.IsChecked == false)
             {
                 foreach (var child in menu.ChildMenuBarModel)
                 {

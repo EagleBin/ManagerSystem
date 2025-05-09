@@ -23,7 +23,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
         public RoleViewModel()
         {
             //Register(应用对象， 信息名称，回调方法)
-            // 从信息中心获取指令和参数，应用的对象类是this（RoleViewModel），根据信息名称（CheckedRoleStatus），调用this里面的方法
+            //注册： 从信息中心获取指令和参数，应用的对象类是this（RoleViewModel），根据信息名称（CheckedRoleStatus），调用this里面的方法
             Messenger.Default.Register<string>(this, "CheckedRoleStatus", CheckedRoleStatusMethod);
             Messenger.Default.Register<string>(this, "UnCheckedRoleStatus", UnCheckedRoleStatusMethod);
 
@@ -208,7 +208,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
 
         private ObservableCollection<MenuBarModel> _DialogMenuList = new ObservableCollection<MenuBarModel>();
         /// <summary>
-        /// 弹窗中的菜单列表(不同权限的用户 所拥有的菜单 不一致)
+        /// 弹窗中的菜单列表
         /// </summary>
         public ObservableCollection<MenuBarModel> DialogMenuList
         {
@@ -358,10 +358,12 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                                         // 刷新列表
                                         var roleList = RoleHttpUtil.GetRoles(SearchRoleName, SearchStatus, StartDate, EndDate, CurrentPage, PerPageCount);
                                         RefreshRoleList(roleList.items, roleList.TotalCount);
+                                        return;
                                     }
                                     else
                                     {
                                         HandyControl.Controls.Growl.Success("删除失败，请刷新列表后重试！", "RoleWarningMsg");
+                                        return;
                                     }
                                 }
                             }
@@ -382,7 +384,6 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                                         if (resultDelete == false)
                                         {
                                             HandyControl.Controls.Growl.Success($"删除{roleDto.Role.RoleName}失败，请刷新列表后重试！", "RoleWarningMsg");
-                                            Thread.Sleep(1000);
                                             errorCount++;
                                         }
                                         else
@@ -592,12 +593,10 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                     (_EditRoleInfoCommand = new RelayCommand(() =>
                     {
                         DialogTitle = "修改权限";
+                        // 使用直接赋值，会指向同一个对象实例
+                        // 使用使用Clone()创建副本，形成两个独立的对象，修改对话框中的数据不会影响原始数据。
                         DialogRole.Role = (Role)SelectedRole.Role.Clone();
                         // 遍历获取 选择的权限 所拥有的菜单
-                        //foreach (var menuBarModel in SelectedRole.Menu)
-                        //{
-                        //    DialogRole.Menu.Add(new MenuBarModel() { Menu = (Menu)menuBarModel.Menu.Clone() });
-                        //}
                         SelectedRole.Menu.ForEach(t => DialogRole.Menu.Add(new MenuBarModel() { Menu = (Menu)t.Menu.Clone() }));
 
                         DialogMenuList.Clear();
@@ -670,6 +669,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                                     return;
                                 }
                             }
+                            // 修改权限
                             else if (DialogTitle == "修改权限")
                             {
                                 var resultEdit = RoleHttpUtil.UpdateRole(DialogRole.Role);
@@ -813,10 +813,12 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
             if (result)
             {
                 HandyControl.Controls.Growl.Success($"{SelectedRole.Role.RoleName}权限状态修改成功！", "RoleSuccessMsg");
+                return;
             }
             else
             {
                 HandyControl.Controls.Growl.Warning("修改失败！", "RoleWarningMsg");
+                return;
             }
         }
 
@@ -831,10 +833,12 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
             if (result)
             {
                 HandyControl.Controls.Growl.Success($"{SelectedRole.Role.RoleName}权限状态修改成功！", "RoleSuccessMsg");
+                return;
             }
             else
             {
                 HandyControl.Controls.Growl.Warning("修改失败！", "RoleWarningMsg");
+                return;
             }
         }
 
@@ -930,7 +934,6 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                         {
                             item.IsChecked = DialogRole.Menu.Exists(r => r.Menu.Id == item.Menu.Id);
                             RecursionMenuList(item.ChildMenuBarModel, v1);
-
                         }
                     }
                     break;

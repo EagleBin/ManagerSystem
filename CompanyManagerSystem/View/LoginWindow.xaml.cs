@@ -109,7 +109,11 @@ namespace CompanyManagerSystem.View
                 accountText.Text = "";
             }
         }
-
+        /// <summary>
+        /// 账号输入框失去焦点
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AccountLostFocus(object sender, RoutedEventArgs e)
         {
             if (accountText.Text == "")

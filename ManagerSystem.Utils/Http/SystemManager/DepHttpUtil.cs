@@ -11,6 +11,9 @@ using System.Windows.Markup;
 
 namespace ManagerSystem.Utils.Http.SystemManager
 {
+    /// <summary>
+    /// 部门相关的 HTTP 请求方法类
+    /// </summary>
     public class DepHttpUtil : HttpUtil
     {
         /// <summary>
@@ -58,7 +61,7 @@ namespace ManagerSystem.Utils.Http.SystemManager
             Dictionary<string, object> data = new Dictionary<string, object>();
             data["id"] = id.ToString();
             var result_str = Get(UrlConfig.DEP_GETDEP, data);
-            var result_dep = StrToObject<Department>(result_str);
+            var result_dep = StrToObject<Department>(result_str); // 反序列化
             return result_dep;
         }
 

@@ -28,10 +28,10 @@
         
         <!--// 顶部导航 //-->
         <StackPanel Orientation="Horizontal" Background="White" VerticalAlignment="Top">
-            <TextBlock Text="首页" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="0 0 10 0"/>
+            <TextBlock Text="首页" FontSize="14" FontWeight="Bold" Foreground="#97A8BE" VerticalAlignment="Center" Margin="0 0 10 0"/>
             <TextBlock Foreground="#c0c4cc" Text="&#xe65f;" FontFamily="/Themes/Style/#iconfont" FontSize="14" 
                        VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock Text="岗位管理" FontSize="14" FontWeight="Bold" Foreground="#97A8BE" VerticalAlignment="Center" Margin="10 0 0 0"/>
+            <TextBlock Text="岗位管理" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 0 0"/>
         </StackPanel>
         
         <!--// 内容 //-->
@@ -157,7 +157,7 @@
                                 <DataGridTemplateColumn Header="状态" Width="120" IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <hc:Tag ShowCloseButton="True" Content="{Binding Post.Status, Converter={StaticResource Boolean2StringConverter},ConverterParameter=停用;正常}" IsSelected="{Binding Post.Status}"/>
+                                            <hc:Tag ShowCloseButton="False" Content="{Binding Post.Status, Converter={StaticResource Boolean2StringConverter},ConverterParameter=停用;正常}" IsSelected="{Binding Post.Status}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -210,6 +210,7 @@
                                 <TextBlock Text="条" VerticalAlignment="Center" Margin="0 0 10 0"/>
                                 <!--// 页数 //-->
                                 <TextBlock Text="每页" VerticalAlignment="Center"/>
+                                <!--// 每页容量 //-->
                                 <ComboBox ItemsSource="{Binding PerPageCountList}" SelectedValue="{Binding PerPageCount}" SelectedItem="0"
                                           Cursor="Hand" VerticalAlignment="Center" Margin="5 0">
                                     <i:Interaction.Triggers>

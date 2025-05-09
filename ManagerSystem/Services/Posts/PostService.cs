@@ -5,6 +5,9 @@ using System.Net.Http.Headers;
 
 namespace ManagerSystem.Services.Posts
 {
+    /// <summary>
+    /// 岗位数据操作类
+    /// </summary>
     public class PostService : IPostService
     {
         public int AddPost(Post post)

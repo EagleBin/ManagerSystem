@@ -30,7 +30,9 @@ namespace ManagerSystem.Entity.Dto
 
 
         private List<MenuBarModel> _Menu = new List<MenuBarModel>();
-
+        /// <summary>
+        /// 该权限所拥有的菜单列表
+        /// </summary>
         public List<MenuBarModel> Menu
         {
             get { return _Menu; }
@@ -43,7 +45,7 @@ namespace ManagerSystem.Entity.Dto
 
         private bool _IsChecked = false;
         /// <summary>
-        /// 是否拥有该权限
+        /// 权限是否被勾选
         /// </summary>
         public bool IsChecked
         {

@@ -16,6 +16,9 @@ using System.Windows.Media;
 
 namespace CompanyManagerSystem.ViewModel
 {
+    /// <summary>
+    /// 登录视图模型
+    /// </summary>
     public class LoginViewModel : ViewModelBase
     {
         private static Timer _loginTimer = new Timer();
@@ -27,7 +30,7 @@ namespace CompanyManagerSystem.ViewModel
             CodeImage = GetImage(200, 60);
             Code_Login = CodeImage;
 
-            _loginTimer.Elapsed += new ElapsedEventHandler(LoginSystem);
+            _loginTimer.Elapsed += new ElapsedEventHandler(LoginSystem); // 达到间隔时间后发生的事情（登录）
             _loginTimer.AutoReset = false;
         }
 
@@ -226,7 +229,7 @@ namespace CompanyManagerSystem.ViewModel
         #region 方法
 
         /// <summary>
-        /// 延迟登录
+        /// 延时
         /// </summary>
         /// <param name="loginWindow"></param>
         private void DelayLogin(LoginWindow loginWindow)
@@ -240,69 +243,82 @@ namespace CompanyManagerSystem.ViewModel
             _loginTimer.Start();
         }
 
+        /// <summary>
+        /// 登录系统
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginSystem(object sender, ElapsedEventArgs e)
         {
-            // Dispatcher负责管理线程的消息队列
-            Application.Current.Dispatcher.Invoke((Action)delegate
+            try
             {
-                LoginButtonVisibility = Visibility.Hidden;
-                _LoadingButtonVisibility = Visibility.Visible; // 显示登录中
-
-                User loginUser = UserHttpUtil.GetLoginUser(Account_Login, Password_Login); // 获取当前登录对象
-
-                Code_Login = "";
-                CodeImage = GetImage(200, 60);
-
-                if (loginUser != null)
+                // Dispatcher负责管理线程的消息队列
+                Application.Current.Dispatcher.Invoke((Action)delegate
                 {
-                    UserInfo.Instance.CurrentUser = loginUser; // 获取当前登录用户
-                    UserInfo.Instance.CurrentUser.Password = ""; // 密码清空
-                    UserInfo.Instance.CurrentRoles = UserHttpUtil.GetUserRole(loginUser.Id).items;
-                    //根据用户的角色获取菜单列表
-                    Dictionary<string, Menu> menuDic = new Dictionary<string, Menu>();
-                    if (UserInfo.Instance.CurrentRoles != null && UserInfo.Instance.CurrentRoles.Count > 0)
+                    LoginButtonVisibility = Visibility.Hidden;
+                    LoadingButtonVisibility = Visibility.Visible; // 显示登录中
+
+                    //根据从前端获取的账号和密码 获取当前登录对象
+                    User loginUser = UserHttpUtil.GetLoginUser(Account_Login, Password_Login);
+
+                    Code_Login = "";
+                    CodeImage = GetImage(200, 60);
+
+                    if (loginUser != null)
                     {
-                        foreach (var role in UserInfo.Instance.CurrentRoles)
+                        UserInfo.Instance.CurrentUser = loginUser; // 获取当前登录用户
+                        UserInfo.Instance.CurrentUser.Password = ""; // 密码清空
+                        UserInfo.Instance.CurrentRoles = UserHttpUtil.GetUserRole(loginUser.Id).items; // 获取用户权限列表
+                        
+                        Dictionary<string, Menu> menuDic = new Dictionary<string, Menu>();
+                        if (UserInfo.Instance.CurrentRoles != null && UserInfo.Instance.CurrentRoles.Count > 0)
                         {
-                            List<Menu> menuList = RoleHttpUtil.GetRoleMenu(role.Id).items;
-                            foreach (var menu in menuList)
+                            //根据 用户的权限 获取 菜单列表
+                            foreach (var role in UserInfo.Instance.CurrentRoles)
                             {
-                                try
+                                List<Menu> menuList = RoleHttpUtil.GetRoleMenu(role.Id).items;
+                                foreach (var menu in menuList)
                                 {
                                     menuDic.Add(menu.Title, menu);
                                 }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex.Message);
-                                }
+
                             }
-                            
-                        }
-                        foreach (var item in menuDic)
-                        {
-                            UserInfo.Instance.CurrentMenus.Add(item.Value);
-                        }
+                            // 添加用户所拥有的菜单
+                            foreach (var item in menuDic)
+                            {
+                                UserInfo.Instance.CurrentMenus.Add(item.Value); 
+                            }
 
+                        }
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show(); // 打开主窗体
+                        _loginWindow.Close(); // 关闭登录窗体
                     }
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show(); // 打开主窗体
-                    _loginWindow.Close(); // 关闭登录窗体
-                }
-                else
-                {
-                    LoginButtonVisibility = Visibility.Visible;// 显示按钮 
-                    LoadingButtonVisibility = Visibility.Hidden;  // 隐藏按钮
-                    HandyControl.Controls.Growl.Warning("用户名或密码错误", "LoginWarningMsg");
-                    return;
-                }
+                    else
+                    {
+                        LoginButtonVisibility = Visibility.Visible;// 显示按钮 
+                        LoadingButtonVisibility = Visibility.Hidden;  // 隐藏按钮
+                        HandyControl.Controls.Growl.Warning("用户名或密码错误", "LoginWarningMsg");
+                        return;
+                    }
 
-                Account_Login = ""; // 清空输入信息
-                Password_Login = "";
-
-
-            });
+                    Account_Login = ""; // 清空输入信息
+                    Password_Login = "";
+                });
+            }
+            catch (Exception ex)
+            {
+                HandyControl.Controls.Growl.Error($"发生异常，详情：{ex.Message}", "LoginErrorMsg");
+                return;
+            }
         }
 
+        /// <summary>
+        /// 获取验证码图片
+        /// </summary>
+        /// <param name="width">宽</param>
+        /// <param name="height">高</param>
+        /// <returns></returns>
         private string GetImage(int width, int height)
         {
             string code = "";

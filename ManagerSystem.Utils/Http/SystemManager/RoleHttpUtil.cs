@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace ManagerSystem.Utils.Http.SystemManager
 {
+    /// <summary>
+    /// 权限 Http 请求方法类
+    /// </summary>
     public class RoleHttpUtil : HttpUtil
     {
         /// <summary>
@@ -48,7 +51,7 @@ namespace ManagerSystem.Utils.Http.SystemManager
         }
 
         /// <summary>
-        /// 判断是否存在该角色名称
+        /// 判断是否存在该权限名称
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
@@ -106,21 +109,21 @@ namespace ManagerSystem.Utils.Http.SystemManager
         }
 
         /// <summary>
-        /// 根据角色的id获取到角色的菜单
+        /// 根据权限的id获取到权限的菜单
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static PageRequest<Menu> GetRoleMenu(int id)
+        public static PageRequest<Menu> GetRoleMenu(int roleId)
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
-            data["id"] = id;
+            data["id"] = roleId;
             var result_str = Get(UrlConfig.ROLE_GETROLEMENU, data);
             var result_data = StrToObject<PageRequest<Menu>>(result_str);
             return result_data;
         }
 
         /// <summary>
-        /// 新增角色菜单
+        /// 新增权限菜单
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ManagerSystem.Utils.Global
 {
+    /// <summary>
+    /// 全局API接口地址
+    /// </summary>
     public class UrlConfig
     {
         //用户
@@ -35,7 +33,7 @@ namespace ManagerSystem.Utils.Global
 
         public static string USER_GETUSER = "api/User/GetUser";
 
-        //角色
+        //权限
         public static string ROLE_GETAllROLE = "api/Role/GetAllRole";
 
         public static string ROLE_GETROLES = "api/Role/GetRoles";

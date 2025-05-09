@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace ManagerSystem.Utils.Helper
@@ -28,13 +23,18 @@ namespace ManagerSystem.Utils.Helper
         public static readonly DependencyProperty PasswordProperty =
             DependencyProperty.RegisterAttached("Password", typeof(string), typeof(PasswordBoxHelper), new PropertyMetadata(string.Empty, OnPasswordPropertyChanged));
 
+        /// <summary>
+        /// 附加属性值改变，就会触发
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
         private static void OnPasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PasswordBox passwordBox = d as PasswordBox;
             if (passwordBox != null)
             {
-                passwordBox.PasswordChanged -= PasswordChanged;
-                if (!(bool)GetIsUpdating(passwordBox))
+                passwordBox.PasswordChanged -= PasswordChanged; // 移除PasswordChanged事件，防止在设置密码值时触发事件
+                if (!(bool)GetIsUpdating(passwordBox)) // 判断是否正在更新密码
                 {
                     passwordBox.Password = (string)e.NewValue;
                 }
@@ -104,12 +104,13 @@ namespace ManagerSystem.Utils.Helper
 
         #endregion
 
+        //在 PasswordBox 中输入或删除字符，会执行 PasswordChanged 方法。
         private static void PasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox passwordBox = sender as PasswordBox;
-            SetIsUpdating(passwordBox, true);
-            SetPassword(passwordBox, passwordBox.Password);
-            SetIsUpdating(passwordBox, false);
+            SetIsUpdating(passwordBox, true); // 密码正在更新，避免循环调用
+            SetPassword(passwordBox, passwordBox.Password); // 将Password控件的密码设置到passwordBox.Password附加属性中，附加属性值改变，进而触发其他事件
+            SetIsUpdating(passwordBox, false); // 密码更新完成
         }
     }
 }

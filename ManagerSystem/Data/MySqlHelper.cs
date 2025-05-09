@@ -1,5 +1,4 @@
 ﻿using SqlSugar;
-using System.ComponentModel.DataAnnotations;
 
 namespace ManagerSystem.Data
 {
@@ -68,9 +67,5 @@ namespace ManagerSystem.Data
                 Db.Dispose();
             }
         }
-
-
-
-
     }
 }

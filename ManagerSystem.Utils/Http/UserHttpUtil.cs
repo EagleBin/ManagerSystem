@@ -10,6 +10,9 @@ using System.Windows;
 
 namespace ManagerSystem.Utils.Http
 {
+    /// <summary>
+    /// 角色Http请求相关类
+    /// </summary>
     public class UserHttpUtil : HttpUtil
     {
 
@@ -151,7 +154,7 @@ namespace ManagerSystem.Utils.Http
         }
 
         /// <summary>
-        /// 新增用户角色
+        /// 新增用户权限
         /// </summary>
         /// <param name="userRole"></param>
         /// <returns></returns>
@@ -188,10 +191,10 @@ namespace ManagerSystem.Utils.Http
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static PageRequest<Post> GetUserPost(int id)
+        public static PageRequest<Post> GetUserPost(int userId)
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
-            data["id"] = id;
+            data["id"] = userId;
             var str = Get(UrlConfig.USER_GETUSERPOST, data);
             var posts = StrToObject<PageRequest<Post>>(str);
             return posts;

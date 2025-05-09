@@ -1,14 +1,14 @@
 ﻿using ManagerSystem.Entity.SystemManager;
 using ManagerSystem.Utils.Global;
 using ManagerSystem.Utils.Helper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ManagerSystem.Utils.Http.SystemManager
 {
+    /// <summary>
+    /// 菜单相关的 Http 请求方法类
+    /// </summary>
     public class MenuHttpUtil : HttpUtil
     {
         /// <summary>

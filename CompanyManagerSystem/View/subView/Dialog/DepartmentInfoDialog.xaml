@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.Dialog"
+             xmlns:controls="clr-namespace:CompanyManagerSystem.Themes.Controls"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:controls="clr-namespace:CompanyManagerSystem.Themes.Controls"
              mc:Ignorable="d" 
              DataContext="{Binding Source={StaticResource Locator}, Path=Department}"
              d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
@@ -39,11 +39,11 @@
             
             <!--// 内容 //-->
             <StackPanel Grid.Row="1" Margin="20 30">
-                <!--// 上级菜单 //-->
+                <!--// 上级部门 //-->
                 <UniformGrid Visibility="{Binding DialogParentDepartmentVisibility}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="上级菜单" Foreground="#606266" FontSize="13" VerticalAlignment="Center" Margin="32 0 6 0"/>
+                            <TextBlock Text="上级部门" Foreground="#606266" FontSize="13" VerticalAlignment="Center" Margin="32 0 6 0"/>
                             <controls:TreeComboBox x:Name="parentDepartmentText" Width="460" hc:InfoElement.Title="上级部门"
                                     ItemsSource="{Binding DialogParentDepartmentList}"
                                     SelectedItem="{Binding DialogParentDepartment,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

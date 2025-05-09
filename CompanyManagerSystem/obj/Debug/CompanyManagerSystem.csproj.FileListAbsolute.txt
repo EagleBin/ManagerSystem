@@ -100,3 +100,7 @@ D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSys
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\SystemManager\MenuView.baml
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\Dialog\MenuInfoDialog.g.cs
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\Dialog\MenuInfoDialog.baml
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\SystemManager\LogView.g.cs
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\SystemManager\NoticeView.g.cs
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\SystemManager\LogView.baml
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\SystemManager\NoticeView.baml

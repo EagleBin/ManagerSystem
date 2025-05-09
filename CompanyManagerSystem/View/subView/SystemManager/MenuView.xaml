@@ -34,6 +34,8 @@
 
         <Grid Grid.Row="1" Margin="0 20">
             <DockPanel Margin="0 5">
+                
+                <!--// 搜索栏 //-->
                 <WrapPanel Visibility="{Binding SearchPanelVis}" Orientation="Horizontal" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="0 0 0 10">
 
                     <!--// 菜单名称 //-->
@@ -126,6 +128,7 @@
                                                                   Style="{StaticResource MenuToggleButtonStyle}" Visibility="{Binding IsVisibility}">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Checked">
+                                                            <!--// 每个菜单项的DataContext类型是 MenuBarMod,命令绑定会从该数据类型实例中获取，而不是MenuViewModel //-->
                                                             <i:InvokeCommandAction Command="{Binding MenuCheckChangedCommand}"/>
                                                         </i:EventTrigger>
                                                         <i:EventTrigger EventName="Unchecked">
@@ -156,6 +159,8 @@
                                 <!--// 时间 //-->
                                 <DataGridTextColumn Binding="{Binding Menu.insertTime, StringFormat=yy-MM-dd HH:mm:ss,ConverterCulture=zh-CN}"
                                                     Header="创建时间" Width="200"/>
+                                
+                                <!--// 操作 //-->
                                 <DataGridTemplateColumn Header="操作" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -166,6 +171,7 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <!--// 修改 //-->
+                                                <!--// 尽管单元格的 DataContext 被设置为 Menu 对象，但 WPF 的绑定系统会自动向上查找包含EditMenuInfoCommand 的 MenuViewModel //-->
                                                 <Button Command="{Binding EditMenuInfoCommand}" Style="{StaticResource OperateButtonStyle}"
                                                         Margin="5 0" Width="39" Height="28" Cursor="Hand">
                                                     <StackPanel Orientation="Horizontal">

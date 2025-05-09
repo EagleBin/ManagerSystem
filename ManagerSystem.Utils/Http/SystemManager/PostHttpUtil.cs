@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace ManagerSystem.Utils.Http.SystemManager
 {
+    /// <summary>
+    /// 岗位 Http 请求方法类
+    /// </summary>
     public class PostHttpUtil : HttpUtil
     {
         /// <summary>

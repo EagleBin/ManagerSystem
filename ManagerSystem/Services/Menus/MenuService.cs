@@ -4,6 +4,9 @@ using ManagerSystem.Utils.Helper;
 
 namespace ManagerSystem.Services.Menus
 {
+    /// <summary>
+    /// 菜单操作方法类
+    /// </summary>
     public class MenuService : IMenuService
     {
         public int AddMenu(Menu menu)

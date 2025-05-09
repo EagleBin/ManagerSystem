@@ -35,7 +35,7 @@ namespace CompanyManagerSystem.View.subView.SystemManager
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var a = sender as DataGrid;
-
+            // 发送选中的项列表
             Messenger.Default.Send<List<PostDto>>(a.SelectedItems.Cast<PostDto>().ToList(), "SelectedPosts");
         }
     }

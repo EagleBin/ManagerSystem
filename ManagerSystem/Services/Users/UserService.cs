@@ -5,6 +5,9 @@ using MySqlConnector;
 
 namespace ManagerSystem.Services.Users
 {
+    /// <summary>
+    /// 用户数据操作方法类
+    /// </summary>
     public class UserService : IUserService
     {
         public int AddUser(User user)
@@ -57,7 +60,11 @@ namespace ManagerSystem.Services.Users
 
         public PageRequest<Post> GetUserPost(int id)
         {
-            List<Post> posts = MySqlHelper<User>.GetInstance().Db.Queryable<UserPost>().LeftJoin<Post>((up, p) => up.post_Id == p.Id).Where(up => up.user_Id == id).Select((up, p) => p).ToList();
+            List<Post> posts = MySqlHelper<User>.GetInstance().Db.Queryable<UserPost>()
+                .LeftJoin<Post>((up, p) => up.post_Id == p.Id) // 左连接Post表，选取同id的
+                .Where(up => up.user_Id == id)
+                .Select((up, p) => p)
+                .ToList();
             return new PageRequest<Post>() { TotalCount = posts.Count, items = posts };
         }
 

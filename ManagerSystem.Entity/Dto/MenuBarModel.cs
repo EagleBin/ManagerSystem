@@ -8,12 +8,17 @@ using System.Windows.Input;
 
 namespace ManagerSystem.Entity.Dto
 {
+    /// <summary>
+    /// 菜单数据传输类
+    /// </summary>
     public class MenuBarModel : ViewModelBase
     {
 
 
         private Menu _Menu = new Menu();
-
+        /// <summary>
+        /// 菜单类
+        /// </summary>
         public Menu Menu
         {
             get { return _Menu; }
@@ -26,7 +31,9 @@ namespace ManagerSystem.Entity.Dto
 
 
         private bool _IsExpanded =false;
-
+        /// <summary>
+        /// 菜单是否被展开
+        /// </summary>
         public bool IsExpanded
         {
             get { return _IsExpanded; }
@@ -37,7 +44,9 @@ namespace ManagerSystem.Entity.Dto
 
 
         private bool _IsChecked =false;
-
+        /// <summary>
+        /// 菜单被是否被选择
+        /// </summary>
         public bool IsChecked
         {
             get { return _IsChecked; }
@@ -47,7 +56,9 @@ namespace ManagerSystem.Entity.Dto
         }
 
         private float _MarginLeft = 0;
-
+        /// <summary>
+        /// 左边距
+        /// </summary>
         public float MarginLeft
         {
             get { return _MarginLeft; }
@@ -57,7 +68,9 @@ namespace ManagerSystem.Entity.Dto
         }
 
         private Visibility _IsVisibility = Visibility.Collapsed;
-
+        /// <summary>
+        /// 菜单是否可用
+        /// </summary>
         public Visibility IsVisibility
         {
             get { return _IsVisibility; }
@@ -68,7 +81,9 @@ namespace ManagerSystem.Entity.Dto
 
 
         private List<MenuBarModel> _ChildMenuBarModel;
-
+        /// <summary>
+        /// 子菜单列表
+        /// </summary>
         public List<MenuBarModel> ChildMenuBarModel
         {
             get { return _ChildMenuBarModel; }
@@ -78,7 +93,9 @@ namespace ManagerSystem.Entity.Dto
         }
 
         private ICommand _NavigateCommand;
-
+        /// <summary>
+        /// 导航命令（导航到指定菜单页面）
+        /// </summary>
         public ICommand NavigateCommand
         {
             get
@@ -94,7 +111,9 @@ namespace ManagerSystem.Entity.Dto
         }
 
         private ICommand _MenuExpanderExpandedCommand;
-
+        /// <summary>
+        /// 菜单展开命令
+        /// </summary>
         public ICommand MenuExpanderExpandedCommand
         {
             get
@@ -108,11 +127,11 @@ namespace ManagerSystem.Entity.Dto
         }
 
 
+        
+        private ICommand _MenuCheckChangedCommand;
         /// <summary>
         /// 单个节点选择改变的命令
         /// </summary>
-        private ICommand _MenuCheckChangedCommand;
-
         public ICommand MenuCheckChangedCommand
         {
             get
@@ -125,11 +144,11 @@ namespace ManagerSystem.Entity.Dto
                     }));
             }
         }
-        /// <summary>
-        /// 选中节点的命令
-        /// </summary>
+        
         private ICommand _SelectNodeCommand;
-
+        /// <summary>
+        /// 选中节点的命令，将 选择中的子节点 作为 参数 发送到信息中心
+        /// </summary>
         public ICommand SelectNodeCommand
         {
             get
@@ -142,11 +161,11 @@ namespace ManagerSystem.Entity.Dto
                     }));
             }
         }
-        /// <summary>
-        /// 不选中节点的命令
-        /// </summary>
-        private ICommand _UnSelectNodeCommand;
 
+        private ICommand _UnSelectNodeCommand;
+        /// <summary>
+        /// 不选中节点的命令，将不选中的子节点 作为 参数 发送到信息中心
+        /// </summary>
         public ICommand UnSelectNodeCommand
         {
             get

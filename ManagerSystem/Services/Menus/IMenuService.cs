@@ -3,6 +3,9 @@ using ManagerSystem.Utils.Helper;
 
 namespace ManagerSystem.Services.Menus
 {
+    /// <summary>
+    /// 菜单数据操作接口
+    /// </summary>
     public interface IMenuService
     {
         /// <summary>

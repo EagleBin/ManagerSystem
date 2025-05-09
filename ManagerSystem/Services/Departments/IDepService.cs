@@ -1,9 +1,11 @@
-﻿using ManagerSystem.Data;
-using ManagerSystem.Entity.SystemManager;
+﻿using ManagerSystem.Entity.SystemManager;
 using ManagerSystem.Utils.Helper;
 
 namespace ManagerSystem.Services.Departments
 {
+    /// <summary>
+    /// 部门数据操作接口
+    /// </summary>
     public interface IDepService
     {
         /// <summary>

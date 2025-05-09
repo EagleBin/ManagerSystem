@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace ManagerSystem.Entity.SystemManager
 {
-    [SugarTable("department")]
+    /// <summary>
+    /// 部门
+    /// </summary>
+    [SugarTable("department")] // C# 类和数据库表进行映射, department代表数据库里对应的表名
     public class Department : ModelBase
     {
 
@@ -36,7 +39,9 @@ namespace ManagerSystem.Entity.SystemManager
         /// 描述
         /// </summary>
         public string Description { get; set; }
-
+        /// <summary>
+        /// 父部门ID
+        /// </summary>
         public int parent_id { get; set; }
 
     }

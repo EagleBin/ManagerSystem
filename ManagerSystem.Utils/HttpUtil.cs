@@ -30,7 +30,7 @@ namespace ManagerSystem.Utils
             {
                 // 将参数拼接成查询字符串 p
                 string p = string.Empty;
-                if (parameters!=null && parameters.Count>0)
+                if (parameters != null && parameters.Count > 0)
                 {
                     foreach (var item in parameters)
                     {
@@ -48,7 +48,7 @@ namespace ManagerSystem.Utils
                 }
                 var httpClient = new HttpClient();
                 // 使用 GetAsync 方法发送 GET 请求，并等待响应。
-                var response = httpClient.GetAsync($"{absoluteUrl}{url}?{p}",HttpCompletionOption.ResponseContentRead).Result;
+                var response = httpClient.GetAsync($"{absoluteUrl}{url}?{p}", HttpCompletionOption.ResponseContentRead).Result;
                 string strJson = response.Content.ReadAsStringAsync().Result;
                 return strJson;
             }
@@ -72,12 +72,12 @@ namespace ManagerSystem.Utils
         {
             try
             {
-                string p = string.Empty ;
-                if (parameters!= null && parameters.Count > 0)
+                string p = string.Empty;
+                if (parameters != null && parameters.Count > 0)
                 {
                     foreach (var item in parameters)
                     {
-                        if (item.Value!=null)
+                        if (item.Value != null)
                         {
                             p += $"{item.Key}={item.Value}&";
                         }
@@ -89,7 +89,7 @@ namespace ManagerSystem.Utils
                     p = p.TrimEnd('&');
                 }
 
-                var httpClient = new HttpClient ();
+                var httpClient = new HttpClient();
                 var response = httpClient.DeleteAsync($"{absoluteUrl}{url}?{p}").Result;
                 var strJson = response.Content.ReadAsStringAsync().Result;
                 return strJson;
@@ -117,8 +117,8 @@ namespace ManagerSystem.Utils
             {
                 // 序列化
                 var content = JsonConvert.SerializeObject(t);
-
                 var httpContent = new StringContent(content, Encoding.UTF8, "application/Json");
+
                 var httpClient = new HttpClient();
                 var response = httpClient.PutAsync($"{absoluteUrl}{url}", httpContent).Result;
                 var strJson = response.Content.ReadAsStringAsync().Result;
@@ -144,8 +144,9 @@ namespace ManagerSystem.Utils
             {
                 string content = JsonConvert.SerializeObject(t);
                 var httpContent = new StringContent(content, Encoding.UTF8, "application/Json");
+
                 var httpClient = new HttpClient();
-                var response = httpClient.PostAsync($"{absoluteUrl}{url}",httpContent).Result;
+                var response = httpClient.PostAsync($"{absoluteUrl}{url}", httpContent).Result;
                 var strJson = response.Content.ReadAsStringAsync().Result;
                 return strJson;
             }
@@ -167,7 +168,6 @@ namespace ManagerSystem.Utils
         /// <returns></returns>
         public static T StrToObject<T>(string str)
         {
-
             var t = JsonConvert.DeserializeObject<T>(str);
             return t;
 

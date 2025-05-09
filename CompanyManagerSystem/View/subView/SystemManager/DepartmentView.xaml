@@ -28,9 +28,9 @@
 
         <!--// 顶部导航 //-->
         <StackPanel VerticalAlignment="Center" Background="White" Orientation="Horizontal">
-            <TextBlock VerticalAlignment="Center" Margin="0 0 10 0" FontWeight="Bold" FontSize="14">首页</TextBlock>
-            <TextBlock Grid.Column="0" FontSize="14" Foreground="#c0c4cc" Text="&#xe65f;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            <TextBlock VerticalAlignment="Center" Margin="10 0 0 0" FontSize="14" Foreground="#97A8BE">部门管理</TextBlock>
+            <TextBlock Text="首页" FontWeight="Bold" Foreground="#97A8BE" FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0"/>
+            <TextBlock Grid.Column="0" FontSize="14" Foreground="#c0c4cc" Text="&#xe65f;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="部门管理" FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 0 0" FontSize="14"/>
         </StackPanel>
         <Grid Grid.Row="1" Margin="0 20">
             <DockPanel Grid.Column="1" Grid.RowSpan="2" Margin="0 5">
@@ -45,7 +45,7 @@
                     <Button Command="{Binding ResetConditionalSearchDepartmentCommand}" Content="重置" Margin="10,5,0,0" Width="73" Height="28" hc:IconElement.Geometry="{StaticResource RotateRightGeometry}" Cursor="Hand"/>
                 </WrapPanel>
 
-                <!--// 部门列表 //-->
+                <!--// 部门表格 //-->
                 <Grid Margin="0 5 0 0" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="36"/>
@@ -54,12 +54,15 @@
                     <!--// 操作按钮 //-->
                     <Grid>
                         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
+                            
+                            <!--// 添加没有父节点的部门 //-->
                             <Button Style="{StaticResource AddButtonStyle}" Command="{Binding AddDepartmentInfoCommand}" CommandParameter="NoParentDepartment" Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Margin="-5 0 5 0" FontSize="14" Text="&#xe622;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                                    <TextBlock VerticalAlignment="Center">新增</TextBlock>
+                                    <TextBlock Text="新增" VerticalAlignment="Center"></TextBlock>
                                 </StackPanel>
                             </Button>
+                            
                             <!--// 展开 //-->
                             <ToggleButton Style="{StaticResource FoldToggleButtonStyle}" IsChecked="{Binding FoldToggleButtonChecked}" Content="展开/折叠" Margin="10,0,0,0" Width="100" Height="28" Cursor="Hand">
                                 <i:Interaction.Triggers>
@@ -72,6 +75,8 @@
                                 </i:Interaction.Triggers>
                             </ToggleButton>
                         </StackPanel>
+                        
+                        <!--// 隐藏搜索 和 刷新 //-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                             <Button Command="{Binding ChangeSearchPanelVisCommand}" Style="{StaticResource CornerRadiusButtonStyle}" Margin="10,0,0,0" Cursor="Hand" hc:Poptip.Content="隐藏搜索" hc:Poptip.HitMode="Hover" hc:Poptip.Placement="Top">
                                 <TextBlock Text="&#xe651;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
@@ -103,6 +108,7 @@
                                 <DataGridTemplateColumn IsReadOnly="True" Width="120" Header="状态">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
+                                            <!--// 将bool转换成字符串：false 时显示 “停用”，为 true 时显示 “正常” //--> 
                                             <hc:Tag ShowCloseButton="False" Content="{Binding Department.Status,Converter={StaticResource Boolean2StringConverter}, ConverterParameter=停用;正常}" IsSelected="{Binding Department.Status}"></hc:Tag>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -129,14 +135,16 @@
                                                         <TextBlock VerticalAlignment="Center">修改</TextBlock>
                                                     </StackPanel>
                                                 </Button>
-                                                <!--// 新增 //-->
+                                                
+                                                <!--// 新增：以当前行 作为 父节点 进行新增 //-->
                                                 <Button Grid.Column="1" Style="{StaticResource OperateButtonStyle}" Command="{Binding AddDepartmentInfoCommand}" CommandParameter="HasParentDepartment" Margin="5 0" Width="39" Height="28" Cursor="Hand">
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Margin="-5 0 2 0" FontSize="12" Text="&#xe622;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                                                         <TextBlock VerticalAlignment="Center">新增</TextBlock>
                                                     </StackPanel>
                                                 </Button>
-                                                <!--// 删除 //-->
+                                                
+                                                <!--// 删除：删除单个部门 //-->
                                                 <Button Grid.Column="2" Style="{StaticResource OperateButtonStyle}" Command="{Binding DeleteDepartmentInfoCommand}" CommandParameter="DeleteOnlyOneDepartment" Margin="5 0" Width="39" Height="28" Cursor="Hand">
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Margin="-5 0 2 0" FontSize="12" Text="&#xe62d;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>

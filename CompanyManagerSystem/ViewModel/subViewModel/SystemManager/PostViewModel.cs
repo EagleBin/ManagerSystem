@@ -9,24 +9,17 @@ using ManagerSystem.Utils.Http.SystemManager;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
 {
-
-
-
     public class PostViewModel : ViewModelBase
     {
 
         public PostViewModel()
         {
+            // 注册消息
             Messenger.Default.Register<List<PostDto>>(this, "SelectedPosts", (o) => { SelectedPosts = o; });
 
             PerPageCountList = new List<int> { 20, 50, 100, 200, 500 }; // 每页最大条数列表 初始化
@@ -227,7 +220,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
 
         private List<int> _PerPageCountList;
         /// <summary>
-        /// 页码列表
+        /// 每页容量列表
         /// </summary>
         public List<int> PerPageCountList
         {
@@ -241,7 +234,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
 
         private int _PerPageCount = 20;
         /// <summary>
-        /// 每页的数据量
+        /// 每页容量
         /// </summary>
         public int PerPageCount
         {
@@ -259,7 +252,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
 
         private Visibility _SearchPanelVis = Visibility.Visible;
         /// <summary>
-        /// 隐藏搜索按钮
+        /// 隐藏搜索栏
         /// </summary>
         public Visibility SearchPanelVis
         {
@@ -289,7 +282,8 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
         {
             get
             {
-                return _DeletePostInfoCommand ?? (_DeletePostInfoCommand = new RelayCommand<string>((str) =>
+                return _DeletePostInfoCommand ?? 
+                    (_DeletePostInfoCommand = new RelayCommand<string>((str) =>
                 {
                     try
                     {
@@ -398,7 +392,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                             }
                             else
                             {
-                                HandyControl.Controls.Growl.Warning("出现异常，请刷新。", "PostErrorMsg");
+                                HandyControl.Controls.Growl.Warning("出现异常，请刷新。", "PostWarningMsg");
                                 return;
                             }
                         }
@@ -475,7 +469,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                                     // 关闭“修改”窗体
                                     postInfoDialog.Close();
                                     HandyControl.Controls.Growl.Success($"岗位修改成功！", "PostSuccessMsg");
-
+                                    return;
                                 }
                                 else
                                 {
@@ -485,7 +479,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                             }
                             catch (Exception ex)
                             {
-                                HandyControl.Controls.Growl.Warning($"出现异常，请刷新。详情：{ex.Message}。", "PostErrorMsg");
+                                HandyControl.Controls.Growl.Error($"出现异常，请刷新。详情：{ex.Message}。", "PostErrorMsg");
                                 return;
                             }
                         }
@@ -595,7 +589,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
 
         private ICommand _PerPageCountChangedCommand;
         /// <summary>
-        /// 每页最大条数变化时，所执行
+        /// 每页容量变化时，所执行
         /// </summary>
         public ICommand PerPageCountChangedCommand
         {
@@ -623,7 +617,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                 return _PageUpdatedCommand ??
                     (_PageUpdatedCommand = new RelayCommand(() =>
                     {
-                        //例如 CurrentPage 为5时，获取第五页的数据。PerPageCount为每页最大条数
+                        //例如 CurrentPage 为5时，获取第五页的数据。PerPageCount为每页容量
                         var posts = PostHttpUtil.GetPosts(SearchPostName, SearchStatus, StartDate, EndDate, CurrentPage, PerPageCount);
                         RefreshPostlist(posts.items, posts.TotalCount);
                     }));

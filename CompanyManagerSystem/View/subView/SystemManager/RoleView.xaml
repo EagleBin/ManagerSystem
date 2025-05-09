@@ -32,16 +32,18 @@
             <TextBlock Text="权限管理" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 0 0"/>
         </StackPanel>
 
-        <!--// 搜索 //-->
+        
         <Grid Grid.Row="1" Margin="0 20">
             <DockPanel Margin="0 5">
+                
+                <!--// 搜索栏 //-->
                 <WrapPanel Orientation="Horizontal" Visibility="{Binding SearchPanelVis}" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="0 0 0 10">
                     <hc:TextBox Text="{Binding SearchRoleName}" FontWeight="Bold" Margin="0 5 0 0" Width="240" Height="32"
                                 hc:TitleElement.Title="权限名称" hc:InfoElement.Placeholder="请输入角色名称"/>
 
                     <!--// 权限状态 //-->
                     <hc:ComboBox SelectedValue="{Binding SearchStatus}" FontWeight="Bold" Width="240" Height="32" Margin="0 0 5 0"
-                                 hc:TitleElement.Title="角色状态"  hc:InfoElement.Placeholder="角色状态">
+                                 hc:TitleElement.Title="权限状态"  hc:InfoElement.Placeholder="权限状态">
                         <ComboBoxItem Content="启用"/>
                         <ComboBoxItem Content="禁用"/>
                     </hc:ComboBox>
@@ -68,6 +70,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
+                    <!--// 操作栏 //-->
                     <Grid>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
 
@@ -86,8 +89,8 @@
                                     IsEnabled="{Binding SelectedRoles, Converter={StaticResource ObjectToBoolConverter},ConverterParameter=EditBtnEnabled}">
                                 <StackPanel Orientation="Horizontal" >
                                     <TextBlock Margin="-5 0 5 0" FontSize="14" Text="&#xe8cf;" FontFamily="/Themes/Style/#iconfont"
-                                               VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="修改" VerticalAlignment="Center"></TextBlock>
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="修改" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
                             
@@ -97,8 +100,8 @@
                                     IsEnabled="{Binding SelectedRole, Converter={StaticResource Object2BooleanConverter}}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Margin="-5 0 5 0" FontSize="14" Text="&#xe62d;" FontFamily="/Themes/Style/#iconfont"
-                                               VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="删除" VerticalAlignment="Center"></TextBlock>
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="删除" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
                             
@@ -116,13 +119,13 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
                             <!--// 隐藏搜索 //-->
                             <Button Command="{Binding ChangeSearchPanelVisCommand}" Style="{StaticResource CornerRadiusButtonStyle}"
-                                    Margin="10,0,0,0" Cursor="Hand" hc:Poptip.Content="隐藏搜索" hc:Poptip.HitMode="Hover" hc:Poptip.Placement="Top">
+                                    Margin="10,0,0,0" Cursor="Hand" hc:Poptip.Content="隐藏搜索栏" hc:Poptip.HitMode="Hover" hc:Poptip.Placement="Top">
                                 <TextBlock Text="&#xe651;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Button>
 
                             <!--// 刷新 //-->
                             <Button Style="{StaticResource CornerRadiusButtonStyle}" Margin="10,0,0,0" Cursor="Hand" hc:Poptip.Content="刷新" hc:Poptip.HitMode="Hover" hc:Poptip.Placement="Top">
-                                <TextBlock Text="&#xe6a7;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock Text="&#xe6a7;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Button>
                         </StackPanel>
                     </Grid>

@@ -5,6 +5,9 @@ using MySqlConnector;
 
 namespace ManagerSystem.Services.Departments
 {
+    /// <summary>
+    /// 部门数据操作方法类
+    /// </summary>
     public class DepService : IDepService
     {
         public int AddDepartment(Department department)
