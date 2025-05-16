@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using ManagerSystem.Entity.Dto;
+using ManagerSystem.Entity.SystemManager;
+using ManagerSystem.Utils.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +27,13 @@ namespace CompanyManagerSystem.View.subView.SystemManager
         public NoticeView()
         {
             InitializeComponent();
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+            // 将选到的多个行，发送到信息中心
+            Messenger.Default.Send<List<NoticeDto>>(dataGrid.SelectedItems.Cast<NoticeDto>().ToList(), "SeletedNotices");
         }
     }
 }

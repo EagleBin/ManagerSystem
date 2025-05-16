@@ -15,8 +15,10 @@ namespace ManagerSystem.Utils
     public class HttpUtil
     {
         // 请求的基础 URL
-        //private static string absoluteUrl = "http://localhost:44304/";
-        private static string absoluteUrl = "http://localhost:35779/";
+        //private static string absoluteUrl = "http://localhost:35779/";
+        private static readonly string absoluteUrl = "http://localhost:57999/";
+
+
 
         /// <summary>
         /// 查询
@@ -41,6 +43,7 @@ namespace ManagerSystem.Utils
                     }
 
                 }
+
                 // 去除末尾的 & 符号
                 if (!string.IsNullOrEmpty(p))
                 {

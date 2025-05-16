@@ -124,5 +124,18 @@ namespace ManagerSystem.Controllers
         {
             return _roleService.GetRoles(roleName, status, startDate, endDate, pageNum, pageSize);
         }
+
+        /// <summary>
+        /// 根据角色的id获取角色的角色
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public PageRequest<Menu> GetRoleMenu(int id)
+        {
+            return _roleService.GetRoleMenu(id);
+        }
+
+
     }
 }

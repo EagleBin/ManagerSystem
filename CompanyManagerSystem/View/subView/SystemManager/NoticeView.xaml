@@ -5,14 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.SystemManager"
              xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              DataContext="{Binding Source={StaticResource Locator},Path=Notice}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1000">
     <Grid Margin="20 10 20 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
+        <!--// 信息通知 //-->
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" MaxHeight="165" Grid.RowSpan="2"
+                      VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="1">
+            <StackPanel VerticalAlignment="Top" Margin="5">
+                <StackPanel hc:Growl.Token="NoticeSuccessMsg" Margin="0 5" VerticalAlignment="Center"/>
+                <StackPanel hc:Growl.Token="NoticeWarningMsg" Margin="0 5" VerticalAlignment="Center"/>
+                <StackPanel hc:Growl.Token="NoticeErrorMsg" Margin="0 5" VerticalAlignment="Center"/>
+            </StackPanel>
+        </ScrollViewer>
 
         <!--// 顶部导航 //-->
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="White">
@@ -21,5 +32,201 @@
                        VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBlock Text="公告管理" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 0 0"/>
         </StackPanel>
+
+
+        <Grid Grid.Row="1" Margin="0 20">
+            <DockPanel>
+                <WrapPanel Orientation="Horizontal" Visibility="{Binding SearchPanelVis}"
+                           DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0 0 0 10">
+                    <hc:TextBox hc:InfoElement.Title="公告标题" hc:InfoElement.Placeholder="请输入公告标题"
+                                Text="{Binding SearchTitle}" FontWeight="Bold" Width="240" Height="32" Margin="0 5 0 0"/>
+
+                    <!--// 公告状态 //-->
+                    <hc:ComboBox hc:InfoElement.Title="公告状态" hc:InfoElement.Placeholder="选择公告状态" FontWeight="Bold"
+                                 Width="240" Height="32" Margin="20 5 0 0" SelectedValue="{Binding SearchStatus}">
+                        <ComboBoxItem Content="正常"/>
+                        <ComboBoxItem Content="停用"/>
+                    </hc:ComboBox>
+
+                    <!--// 时间 //-->
+                    <StackPanel Orientation="Horizontal">
+                        <hc:DatePicker hc:InfoElement.Title="起始时间" hc:InfoElement.Placeholder="选择起始时间" FontWeight="Bold"
+                                   Margin="20 5 5 0" Width="200" Height="32" SelectedDate="{Binding StartDate}" ShowClearButton="True"/>
+                        <hc:Divider LineStrokeThickness="1" LineStroke="Black" Width="10" VerticalAlignment="Center" Margin="0 5 0 0"/>
+                        <hc:DatePicker hc:InfoElement.Placeholder="选择终止时间" SelectedDate="{Binding EndDate}" ShowClearButton="False"
+                                       Margin="5 5 0 0" Width="200" Height="32" FontWeight="Bold"/>
+                    </StackPanel>
+                    
+                    <!--// 按钮 //-->
+                    <Button Command="{Binding SearchNoticeCommand}" Style="{StaticResource ButtonPrimary}" Width="72" Height="28"
+                            Margin="70 5 0 0" Content="搜索" hc:IconElement.Geometry="{StaticResource SearchGeometry}" Cursor="Hand"/>
+                    <Button Command="{Binding SearchResetCommand}" Width="72" Height="28" Cursor="Hand" Margin="10 5 0 0"
+                            hc:IconElement.Geometry="{StaticResource RotateRightGeometry}" Content="重置"/>
+                    
+                </WrapPanel>
+
+                <!--// 表格 //-->
+                <Grid VerticalAlignment="Top" DockPanel.Dock="Top" Margin="0 5 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--// 操作 //-->
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <!--// 新增 //-->
+                            <Button Command="{Binding AddNoticeCommand}" Style="{StaticResource AddButtonStyle}"
+                                    Height="28" Width="72" Margin="20 0 0 0" Cursor="Hand">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="&#xe622;" FontFamily="/Themes/Style/#iconfont" FontSize="14" 
+                                               Margin="-5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="新增"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!--// 修改 //-->
+                            <Button Command="{Binding UpdateNoticeCommand}" Style="{StaticResource EditButtonStyle}"
+                                    Width="72" Height="28" Margin="10 0 0 0" Cursor="Hand">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontWeight="Bold" Text="&#xe8cf;" FontFamily="/Themes/Style/#iconfont" Margin="-5 0 5 0" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="修改" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!--// 删除 //-->
+                            <Button Command="{Binding DeleteNoticeCommand}" Style="{StaticResource DelButtonStyle}"
+                                    CommandParameter="NotDeleteOnlyOneNotice"
+                                    Width="72" Height="28" Margin="10 0 0 0" Cursor="Hand">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="&#xe62d;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-5 0 5 0"/>
+                                    <TextBlock Text="删除" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!--// 导出(未实现) //-->
+                            <Button Style="{StaticResource ExportButtonStyle}" Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="-5 0 5 0" FontSize="12" Text="&#xe666;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock VerticalAlignment="Center">导出</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        
+                        <!--// 右侧隐藏栏 //-->
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                            <Button Command="{Binding SearchPanelVisCommand}" Style="{StaticResource CornerRadiusButtonStyle}"
+                                    hc:Poptip.Content="隐藏搜索栏" hc:Poptip.HitMode="Hover" hc:Poptip.Placement="Top">
+                                <TextBlock Text="&#xe651;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button>
+
+                            <Button Command="{Binding RefreshCommand}" Style="{StaticResource CornerRadiusButtonStyle}"
+                                    hc:Poptip.Content="刷新列表" hc:Poptip.HitMode="Hover" hc:Poptip.Placement="Top" Margin="10 0 5 0">
+                                <TextBlock Text="&#xe6a7;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <!--// 表格 //-->
+                    <Grid Grid.Row="1" Margin="10 5 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="9*"/>
+                            <RowDefinition Height="1.5*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!--// 表格 //-->
+                        <DataGrid ItemsSource="{Binding NoticeList}" SelectedItem="{Binding SelectedNotice}" SelectionUnit="FullRow"
+                                  AutoGenerateColumns="False" HeadersVisibility="All" IsReadOnly="True" RowHeaderWidth="60"
+                                  VerticalScrollBarVisibility="Hidden" SelectionChanged="DataGrid_SelectionChanged"
+                                  RowStyle="{StaticResource DataGridRowStyle}" CellStyle="{StaticResource DataGridTextCenterColumnStyle}"
+                                  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"  HorizontalAlignment="Left" Grid.Row="0">
+                            <DataGrid.RowHeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+                                </DataTemplate>
+                            </DataGrid.RowHeaderTemplate>
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="序号" Binding="{Binding Notice.Id}" Width="100"/>
+
+                                <DataGridTextColumn Header="标题" Binding="{Binding Notice.NoticeTitle}" Width="150"/>
+
+                                <DataGridTemplateColumn Header="状态" Width="150" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <hc:Tag ShowCloseButton="False" IsSelected="{Binding Notice.NoticeStatus}"
+                                                    Content="{Binding Notice.NoticeStatus,Converter={StaticResource Boolean2StringConverter},ConverterParameter=停用;正常}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTextColumn Header="创建时间" Width="200" IsReadOnly="True" Binding="{Binding Notice.insertTime,StringFormat=yy-MM-dd HH:mm:ss,ConverterCulture=zh-CN}"/>
+
+                                <DataGridTemplateColumn Header="操作" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid DataContext="{Binding Notice, Source={StaticResource Locator}}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button Command="{Binding UpdateNoticeCommand}" Style="{StaticResource OperateButtonStyle}" 
+                                                        Width="39" Height="28" Margin="5 0" Cursor="Hand">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock FontSize="14" Text="&#xe8cf;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-5 0 2 0"/>
+                                                        <TextBlock Text="修改" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+
+                                                <Button Grid.Column="1" Command="{Binding DeleteNoticeCommand}" CommandParameter="DeleteOnlyOneNotice" 
+                                                        Style="{StaticResource OperateButtonStyle}" Width="39" Height="28" Margin="5 0" Cursor="Hand">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock FontSize="14" Text="&#xe62d;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-5 0 2 0"/>
+                                                        <TextBlock Text="删除" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+
+                        <!--// 分页 //-->
+                        <Grid Grid.Row="1">
+                            <StackPanel Orientation="Horizontal" Margin="0 5" HorizontalAlignment="Right">
+                                <TextBlock Text="共" FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                                <TextBlock Text="{Binding TotalCount}" VerticalAlignment="Center" FontSize="14" Margin="0 0 10 0"/>
+                                <TextBlock Text="条" FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                                <TextBlock Text="每页" FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                                <ComboBox ItemsSource="{Binding PerPageCountList}" SelectedValue="{Binding PerPageCount}"
+                                          SelectedItem="0" Margin="0 0 10 0" Cursor="Hand">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding PerPageCountChangedCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
+                                <TextBlock Text="条" VerticalAlignment="Center" FontSize="14" Margin="0 0 10 0"/>
+                                <hc:Pagination MaxPageCount="{Binding TotalPageCount}" PageIndex="{Binding CurrentPage,Mode=TwoWay}" DataCountPerPage="{Binding PerPageCount}"
+                                               IsJumpEnabled="True" Cursor="Hand">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PageUpdated">
+                                            <i:InvokeCommandAction Command="{Binding PageUpdatedCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </hc:Pagination>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </Grid>
+        
+        
     </Grid>
 </UserControl>

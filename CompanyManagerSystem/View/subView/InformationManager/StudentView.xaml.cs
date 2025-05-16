@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using ManagerSystem.Entity.InformationManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,13 @@ namespace CompanyManagerSystem.View.subView.InformationManager
         public StudentView()
         {
             InitializeComponent();
+        }
+
+        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            DataGrid dataGrid = sender as DataGrid;
+
+            Messenger.Default.Send(dataGrid.SelectedItems.Cast<Classes>().ToList(), "SelectedList");
         }
     }
 }

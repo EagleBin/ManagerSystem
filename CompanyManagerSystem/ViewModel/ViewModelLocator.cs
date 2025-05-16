@@ -62,13 +62,32 @@ namespace CompanyManagerSystem.ViewModel
             SimpleIoc.Default.Register<RoleViewModel>();
             SimpleIoc.Default.Register<MenuViewModel>();
             SimpleIoc.Default.Register<NoticeViewModel>();
+            SimpleIoc.Default.Register<StudentViewModel>();
+            SimpleIoc.Default.Register<GradeViewModel>();
         }
+
+        public GradeViewModel Grade
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GradeViewModel>();
+            }
+        }
+
+        public StudentViewModel Student
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<StudentViewModel>();
+            }
+        }
+
 
         public NoticeViewModel Notice
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<NoticeViewModel>();   
+                return ServiceLocator.Current.GetInstance<NoticeViewModel>();
             }
         }
 
@@ -76,7 +95,7 @@ namespace CompanyManagerSystem.ViewModel
         {
             get
             {
-               return ServiceLocator.Current.GetInstance<MenuViewModel>();
+                return ServiceLocator.Current.GetInstance<MenuViewModel>();
             }
         }
 
@@ -87,7 +106,7 @@ namespace CompanyManagerSystem.ViewModel
                 return ServiceLocator.Current.GetInstance<RoleViewModel>();
             }
         }
-        
+
         public UserViewModel User
         {
             get
@@ -103,27 +122,12 @@ namespace CompanyManagerSystem.ViewModel
                 return ServiceLocator.Current.GetInstance<PostViewModel>();
             }
         }
-        
+
         public DepartmentViewModel Department
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<DepartmentViewModel>();
-            }
-        }
-                public StudentViewModel Student
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<StudentViewModel>();
-            }
-        }
-
-        public GradeViewModel Grade
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<GradeViewModel>();
             }
         }
 

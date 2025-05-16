@@ -920,11 +920,11 @@
           }
         }
       },
-      "HandyControl/3.5.1.0": {
+      "HandyControl/3.4.0.0": {
         "runtime": {
           "HandyControl.dll": {
-            "assemblyVersion": "3.5.1.0",
-            "fileVersion": "3.5.1.0"
+            "assemblyVersion": "3.4.0.0",
+            "fileVersion": "3.4.0.0"
           }
         }
       }
@@ -1476,7 +1476,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "HandyControl/3.5.1.0": {
+    "HandyControl/3.4.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

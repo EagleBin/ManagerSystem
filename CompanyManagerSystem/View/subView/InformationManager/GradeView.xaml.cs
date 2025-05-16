@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using ManagerSystem.Entity.Dto;
+using ManagerSystem.Entity.InformationManager;
+using ManagerSystem.Utils.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +27,13 @@ namespace CompanyManagerSystem.View.subView.InformationManager
         public GradeView()
         {
             InitializeComponent();
+        }
+
+        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+
+            Messenger.Default.Send(dataGrid.SelectedItems.Cast<GradeDto>().ToList(), "SelectedGrades");
         }
     }
 }

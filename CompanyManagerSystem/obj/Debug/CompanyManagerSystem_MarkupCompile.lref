@@ -5,6 +5,7 @@ FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSy
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\MainWindow.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\Dialog\DepartmentInfoDialog.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\Dialog\MenuInfoDialog.xaml;;
+FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\Dialog\NoticeInfoDialog.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\Dialog\PostInfoDialog.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\Dialog\ResetPasswordDialog.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\Dialog\RoleInfoDialog.xaml;;
@@ -12,7 +13,10 @@ FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSy
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\HomeView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\ClassView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\CourseView.xaml;;
+FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\Dialog\GradeInfoDialog.xaml;;
+FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\Dialog\StudentInfoDialog.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\GradeView.xaml;;
+FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\ScoreView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\StudentView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\PersonView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\SystemManager\DepartmentView.xaml;;

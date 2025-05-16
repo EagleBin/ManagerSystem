@@ -652,7 +652,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                                     // 向中间表添加参数
                                     DialogRole.Menu.ForEach(m =>
                                     {
-                                        RoleHttpUtil.AddRoleMenu(new RoleMenu() { memu_Id = m.Menu.Id, role_Id = id });
+                                        RoleHttpUtil.AddRoleMenu(new RoleMenu() { menu_Id = m.Menu.Id, role_Id = id });
                                     });
 
                                     // 关闭窗体
@@ -957,7 +957,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.SystemManager
                     if (!menus.Exists(t => t.Id == item.Menu.Id))
                     {
                         // 新增加的角色，需要在中间表中新增
-                        RoleHttpUtil.AddRoleMenu(new RoleMenu() { role_Id = SelectedRole.Role.Id, memu_Id = item.Menu.Id });
+                        RoleHttpUtil.AddRoleMenu(new RoleMenu() { role_Id = SelectedRole.Role.Id, menu_Id = item.Menu.Id });
                     }
                 }
                 else

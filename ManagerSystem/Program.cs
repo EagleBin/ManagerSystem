@@ -1,6 +1,8 @@
 
 using ManagerSystem.Services.Departments;
+using ManagerSystem.Services.InformationManage.Grades;
 using ManagerSystem.Services.Menus;
+using ManagerSystem.Services.Notices;
 using ManagerSystem.Services.Posts;
 using ManagerSystem.Services.Roles;
 using ManagerSystem.Services.Users;
@@ -29,6 +31,9 @@ namespace ManagerSystem
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IPostService,  PostService>();   
+            builder.Services.AddScoped<INoticeService,  NoticeService>();   
+            builder.Services.AddScoped<IGradeService, GradeService>();
+
 
 
         var app = builder.Build();

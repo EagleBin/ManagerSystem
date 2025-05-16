@@ -3,28 +3,24 @@
   "WorkspaceRootPath": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\services\\informationmanage\\grades\\gradeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:services\\informationmanage\\grades\\gradeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\viewmodel\\navigationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\controllers\\gradecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:controllers\\gradecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\services\\users\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:services\\users\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\viewmodel\\subviewmodel\\systemmanager\\userviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\controllers\\noticecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:controllers\\noticecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\viewmodel\\subviewmodel\\systemmanager\\roleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\view\\subview\\systemmanager\\roleview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\view\\subview\\dialog\\roleinfodialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89571738-C689-4E73-8A5E-25671680FE2A}|..\\ManagerSystem.Entity\\ManagerSystem.Entity.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem.entity\\modelbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,115 +29,78 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 698,
-          "SelectedChildIndex": 1,
+          "DockedHeight": 764,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "App.xaml",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\App.xaml",
-              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\App.xaml",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\App.xaml",
-              "RelativeToolTip": "..\\CompanyManagerSystem\\App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-24T13:30:06.295Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\View\\MainWindow.xaml",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\MainWindow.xaml",
-              "RelativeToolTip": "..\\CompanyManagerSystem\\View\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-25T11:41:43.302Z",
-              "IsPinned": true,
+              "DocumentIndex": 3,
+              "Title": "NoticeController.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Controllers\\NoticeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\NoticeController.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Controllers\\NoticeController.cs",
+              "RelativeToolTip": "Controllers\\NoticeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T09:15:55.463Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "NavigationViewModel.cs",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\NavigationViewModel.cs",
-              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\ViewModel\\NavigationViewModel.cs",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\NavigationViewModel.cs",
-              "RelativeToolTip": "..\\CompanyManagerSystem\\ViewModel\\NavigationViewModel.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAA0wBsAAAA5AAAAAAAAAA==",
+              "Title": "GradeController.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Controllers\\GradeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GradeController.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Controllers\\GradeController.cs",
+              "RelativeToolTip": "Controllers\\GradeController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAABCwEEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T12:29:17.323Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserViewModel.cs",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\subViewModel\\SystemManager\\UserViewModel.cs",
-              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\ViewModel\\subViewModel\\SystemManager\\UserViewModel.cs",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\subViewModel\\SystemManager\\UserViewModel.cs",
-              "RelativeToolTip": "..\\CompanyManagerSystem\\ViewModel\\subViewModel\\SystemManager\\UserViewModel.cs",
-              "ViewState": "AgIAANMCAAAAAAAAAAAYwLMCAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T10:36:16.481Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ModelBase.cs",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem.Entity\\ModelBase.cs",
-              "RelativeDocumentMoniker": "..\\ManagerSystem.Entity\\ModelBase.cs",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem.Entity\\ModelBase.cs",
-              "RelativeToolTip": "..\\ManagerSystem.Entity\\ModelBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T09:43:44.877Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "RoleInfoDialog.xaml",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\subView\\Dialog\\RoleInfoDialog.xaml",
-              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\View\\subView\\Dialog\\RoleInfoDialog.xaml",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\subView\\Dialog\\RoleInfoDialog.xaml",
-              "RelativeToolTip": "..\\CompanyManagerSystem\\View\\subView\\Dialog\\RoleInfoDialog.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-09T09:09:49.901Z",
+              "WhenOpened": "2025-05-16T08:26:19.164Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "RoleViewModel.cs",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\subViewModel\\SystemManager\\RoleViewModel.cs",
-              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\ViewModel\\subViewModel\\SystemManager\\RoleViewModel.cs",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\subViewModel\\SystemManager\\RoleViewModel.cs",
-              "RelativeToolTip": "..\\CompanyManagerSystem\\ViewModel\\subViewModel\\SystemManager\\RoleViewModel.cs",
-              "ViewState": "AgIAALIDAAAAAAAAAAAswMsDAABBAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAiwCAAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T08:48:01.07Z",
+              "WhenOpened": "2025-05-16T08:36:58.335Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "RoleView.xaml",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\subView\\SystemManager\\RoleView.xaml",
-              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\View\\subView\\SystemManager\\RoleView.xaml",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\subView\\SystemManager\\RoleView.xaml",
-              "RelativeToolTip": "..\\CompanyManagerSystem\\View\\subView\\SystemManager\\RoleView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-09T08:40:27.049Z",
+              "DocumentIndex": 2,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Services\\Users\\UserService.cs",
+              "RelativeDocumentMoniker": "Services\\Users\\UserService.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Services\\Users\\UserService.cs",
+              "RelativeToolTip": "Services\\Users\\UserService.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAA1wCoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T08:24:00.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GradeService.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Services\\InformationManage\\Grades\\GradeService.cs",
+              "RelativeDocumentMoniker": "Services\\InformationManage\\Grades\\GradeService.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Services\\InformationManage\\Grades\\GradeService.cs",
+              "RelativeToolTip": "Services\\InformationManage\\Grades\\GradeService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowDIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T08:18:34.873Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedHeight": 208,
+          "DockedHeight": 142,
           "SelectedChildIndex": -1,
           "Children": [
             {

@@ -48,9 +48,9 @@ namespace ManagerSystem.Services.Users
             return new PageRequest<User> { items = users, TotalCount = users.Count };
         }
 
-        public int GetLoginUser(string Account, string Password)
+        public User GetLoginUser(string Account, string Password)
         {
-            return MySqlHelper<User>.GetInstance().CurrentDb.GetSingleAsync(t => t.Account == Account && t.Password == Password).Result != null ? 1 : 0;
+            return MySqlHelper<User>.GetInstance().CurrentDb.GetSingleAsync(t => t.Account == Account && t.Password == Password).Result;
         }
 
         public User GetUser(int id)

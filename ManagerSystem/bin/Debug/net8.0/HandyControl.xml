@@ -971,9 +971,9 @@
                 在图片上鼠标移动时的即时位置
             </summary>
         </member>
-        <member name="F:HandyControl.Controls.ImageViewer._imgIsMouseDown">
+        <member name="F:HandyControl.Controls.ImageViewer._imgIsMouseLeftButtonDown">
             <summary>
-                鼠标是否在图片上按下
+                鼠标是否在图片上按下左键
             </summary>
         </member>
         <member name="F:HandyControl.Controls.ImageViewer._imgMouseDownMargin">
@@ -991,9 +991,9 @@
                 在小图片上鼠标移动时的即时位置
             </summary>
         </member>
-        <member name="F:HandyControl.Controls.ImageViewer._imgSmallIsMouseDown">
+        <member name="F:HandyControl.Controls.ImageViewer._imgSmallIsMouseLeftButtonDown">
             <summary>
-                鼠标是否在小图片上按下
+                鼠标是否在小图片上按下左键
             </summary>
         </member>
         <member name="F:HandyControl.Controls.ImageViewer._imgSmallMouseDownMargin">
@@ -1042,6 +1042,16 @@
                 带一个图片路径的构造函数
             </summary>
             <param name="path"></param>
+        </member>
+        <member name="F:HandyControl.Controls.ImageViewer.ShowFullScreenButtonProperty">
+            <summary>
+                是否显示全屏按钮
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.ImageViewer.ShowCloseButtonProperty">
+            <summary>
+                关闭按钮是否显示中
+            </summary>
         </member>
         <member name="P:HandyControl.Controls.ImageViewer.ShowFullScreenButton">
             <summary>
@@ -1110,9 +1120,59 @@
                 移动小图片
             </summary>
         </member>
+        <member name="P:HandyControl.Controls.ComboBox.VerifyFunc">
+            <summary>
+                数据验证委托
+            </summary>
+        </member>
         <member name="P:HandyControl.Controls.ComboBox.SearchFunc">
             <summary>
                 数据搜索委托
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.ComboBox.IsErrorProperty">
+            <summary>
+                数据是否错误
+            </summary>
+        </member>
+        <member name="P:HandyControl.Controls.ComboBox.IsError">
+            <summary>
+                数据是否错误
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.ComboBox.ErrorStrProperty">
+            <summary>
+                错误提示
+            </summary>
+        </member>
+        <member name="P:HandyControl.Controls.ComboBox.ErrorStr">
+            <summary>
+                错误提示
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.ComboBox.TextTypePropertyKey">
+            <summary>
+                文本类型
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.ComboBox.TextTypeProperty">
+            <summary>
+                文本类型
+            </summary>
+        </member>
+        <member name="P:HandyControl.Controls.ComboBox.TextType">
+            <summary>
+                文本类型
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.ComboBox.ShowClearButtonProperty">
+            <summary>
+                是否显示清除按钮
+            </summary>
+        </member>
+        <member name="P:HandyControl.Controls.ComboBox.ShowClearButton">
+            <summary>
+                是否显示清除按钮
             </summary>
         </member>
         <member name="F:HandyControl.Controls.ComboBox.AutoCompleteProperty">
@@ -1135,6 +1195,12 @@
                 搜索文本
             </summary>
         </member>
+        <member name="M:HandyControl.Controls.ComboBox.VerifyData">
+            <summary>
+                验证数据
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:HandyControl.Controls.ComboBox.UpdateSearchItems(System.String)">
             <summary>
                 更新搜索的项目
@@ -1151,6 +1217,42 @@
             Sets the local Text property without breaking bindings
             </summary>
             <param name="value"></param>
+        </member>
+        <member name="T:HandyControl.Controls.IDataInput">
+            <summary>
+                表示可以成为一个数据输入控件
+            </summary>
+        </member>
+        <member name="M:HandyControl.Controls.IDataInput.VerifyData">
+            <summary>
+                验证数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:HandyControl.Controls.IDataInput.VerifyFunc">
+            <summary>
+                数据验证委托
+            </summary>
+        </member>
+        <member name="P:HandyControl.Controls.IDataInput.IsError">
+            <summary>
+                数据是否错误
+            </summary>
+        </member>
+        <member name="P:HandyControl.Controls.IDataInput.ErrorStr">
+            <summary>
+                错误提示
+            </summary>
+        </member>
+        <member name="P:HandyControl.Controls.IDataInput.TextType">
+            <summary>
+                文本类型
+            </summary>
+        </member>
+        <member name="P:HandyControl.Controls.IDataInput.ShowClearButton">
+            <summary>
+                是否显示清除按钮
+            </summary>
         </member>
         <member name="T:HandyControl.Controls.NumericUpDown">
             <summary>
@@ -1250,6 +1352,26 @@
         <member name="F:HandyControl.Controls.PasswordBox.PasswordCharProperty">
             <summary>
                 掩码字符
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.PasswordBox.IsErrorProperty">
+            <summary>
+                数据是否错误
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.PasswordBox.ErrorStrProperty">
+            <summary>
+                错误提示
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.PasswordBox.TextTypeProperty">
+            <summary>
+                文本类型
+            </summary>
+        </member>
+        <member name="F:HandyControl.Controls.PasswordBox.ShowClearButtonProperty">
+            <summary>
+                是否显示清除按钮
             </summary>
         </member>
         <member name="F:HandyControl.Controls.SearchBar.IsRealTimeProperty">
@@ -3378,36 +3500,6 @@
             </summary>
             <param name="propertyName"></param>
             <returns></returns>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
-            </summary>
         </member>
     </members>
 </doc>

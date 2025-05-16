@@ -7,7 +7,7 @@ namespace ManagerSystem.Entity.SystemManager
     {
         public int role_Id { get; set; }
 
-        public int memu_Id { get; set; }
+        public int menu_Id { get; set; }
 
     }
 }

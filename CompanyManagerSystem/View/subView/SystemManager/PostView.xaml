@@ -9,7 +9,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              DataContext="{Binding Source={StaticResource Locator},Path=Post}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1000">
     <Grid Margin="20 10 20 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -38,7 +38,7 @@
         <Grid Grid.Row="1" Margin="0 20">
             <DockPanel Margin="0 5">
                 
-                <!--// 岗位搜索 //-->
+                <!--// 搜索栏 //-->
                 <WrapPanel Orientation="Horizontal" Visibility="{Binding SearchPanelVis}" VerticalAlignment="Top"
                            DockPanel.Dock="Top" Margin="0 0 0 10">
                     
@@ -58,7 +58,7 @@
                         <hc:DatePicker ShowClearButton="True" Margin="20 5 5 0" hc:InfoElement.Title="创建时间" FontWeight="Bold" Width="200" Height="32"
                                        SelectedDate="{Binding StartDate}" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Placeholder="开始时间"/>
                         <hc:Divider LineStroke="Black" LineStrokeThickness="1" Width="10" VerticalAlignment="Center" Margin="0 5 0 0"/>
-                        <hc:DatePicker ShowClearButton="True" Margin="20 5 5 0" FontWeight="Bold" Width="200" Height="32"
+                        <hc:DatePicker ShowClearButton="True" Margin="5 5 5 0" FontWeight="Bold" Width="200" Height="32"
                                        SelectedDate="{Binding EndDate}" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Placeholder="结束时间"/>
                     </StackPanel>
                     

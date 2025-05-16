@@ -31,12 +31,6 @@ D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\obj
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\obj\Debug\net8.0\ManagerSystem.pdb
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\obj\Debug\net8.0\ManagerSystem.genruntimeconfig.cache
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\obj\Debug\net8.0\ref\ManagerSystem.dll
-D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\packages\HandyControl.3.5.1\lib\net5.0\HandyControl.deps.json
-D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\packages\HandyControl.3.5.1\lib\net6.0\HandyControl.deps.json
-D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\packages\HandyControl.3.5.1\lib\net7.0\HandyControl.deps.json
-D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\packages\HandyControl.3.5.1\lib\net8.0\HandyControl.deps.json
-D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\packages\HandyControl.3.5.1\lib\netcoreapp3.0\HandyControl.deps.json
-D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\packages\HandyControl.3.5.1\lib\netcoreapp3.1\HandyControl.deps.json
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\Azure.Core.dll
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\Azure.Identity.dll
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -136,3 +130,4 @@ D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\packages\HandyControl.3.4.0\lib\net7.0\HandyControl.deps.json
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\packages\HandyControl.3.4.0\lib\netcoreapp3.0\HandyControl.deps.json
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\bin\Debug\net8.0\packages\HandyControl.3.4.0\lib\netcoreapp3.1\HandyControl.deps.json
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\ManagerSystem\obj\Debug\net8.0\ManagerSystem.sourcelink.json

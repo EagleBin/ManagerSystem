@@ -66,6 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\IntToStringConverter.cs" />
     <Compile Include="Converter\ObjectToBoolConverter.cs" />
     <Compile Include="Global\GlobalDic.cs" />
     <Compile Include="Global\UrlConfig.cs" />
@@ -77,8 +78,15 @@
     <Compile Include="Helper\TreeListHelper.cs" />
     <Compile Include="Helper\VerifyCodeHelper.cs" />
     <Compile Include="HttpUtil.cs" />
+    <Compile Include="Http\InformationManager\ClassHttpUtil.cs" />
+    <Compile Include="Http\InformationManager\CourseHttpUtil.cs" />
+    <Compile Include="Http\InformationManager\GradeHttpUtil.cs" />
+    <Compile Include="Http\InformationManager\ScoreHttpUtil.cs" />
+    <Compile Include="Http\InformationManager\StudentHttpUtil.cs" />
+    <Compile Include="Http\InformationManager\TeacherHttpUtil.cs" />
     <Compile Include="Http\SystemManager\DepHttpUtil.cs" />
     <Compile Include="Http\SystemManager\MenuHttpUtil.cs" />
+    <Compile Include="Http\SystemManager\NoticeHttpUtil.cs" />
     <Compile Include="Http\SystemManager\PostHttpUtil.cs" />
     <Compile Include="Http\SystemManager\RoleHttpUtil.cs" />
     <Compile Include="Http\UserHttpUtil.cs" />

@@ -42,7 +42,7 @@ namespace ManagerSystem.Services.Users
         /// <param name="Account"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
-        public int GetLoginUser(string Account, string Password);
+        public User GetLoginUser(string Account, string Password);
 
         /// <summary>
         /// 查询

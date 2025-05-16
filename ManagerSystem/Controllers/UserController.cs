@@ -66,7 +66,7 @@ namespace ManagerSystem.Controllers
         /// <param name="Password"></param>
         /// <returns></returns>
         [HttpGet]
-        public int GetLoginUser(string Account, string Password)
+        public User GetLoginUser(string Account, string Password)
         {
             return _userService.GetLoginUser(Account, Password);
         }

@@ -119,6 +119,9 @@
     <Compile Include="View\subView\Dialog\MenuInfoDialog.xaml.cs">
       <DependentUpon>MenuInfoDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\subView\Dialog\NoticeInfoDialog.xaml.cs">
+      <DependentUpon>NoticeInfoDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\subView\Dialog\PostInfoDialog.xaml.cs">
       <DependentUpon>PostInfoDialog.xaml</DependentUpon>
     </Compile>
@@ -140,8 +143,17 @@
     <Compile Include="View\subView\InformationManager\CourseView.xaml.cs">
       <DependentUpon>CourseView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\subView\InformationManager\Dialog\GradeInfoDialog.xaml.cs">
+      <DependentUpon>GradeInfoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\subView\InformationManager\Dialog\StudentInfoDialog.xaml.cs">
+      <DependentUpon>StudentInfoDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\subView\InformationManager\GradeView.xaml.cs">
       <DependentUpon>GradeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\subView\InformationManager\ScoreView.xaml.cs">
+      <DependentUpon>ScoreView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\subView\InformationManager\StudentView.xaml.cs">
       <DependentUpon>StudentView.xaml</DependentUpon>
@@ -257,6 +269,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\subView\Dialog\NoticeInfoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\subView\Dialog\PostInfoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,7 +301,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\subView\InformationManager\Dialog\GradeInfoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\subView\InformationManager\Dialog\StudentInfoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\subView\InformationManager\GradeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\subView\InformationManager\ScoreView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

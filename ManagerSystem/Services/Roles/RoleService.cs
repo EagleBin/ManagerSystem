@@ -24,7 +24,7 @@ namespace ManagerSystem.Services.Roles
         public int DeleteRoleMenu(int role_id, int menu_id)
         {
             // ExecuteCommand() 方法用于执行前面构建的删除操作，并返回受影响的记录行数。
-            return MySqlHelper<RoleMenu>.GetInstance().Db.Deleteable<RoleMenu>().Where(t => t.role_Id == role_id && t.memu_Id == menu_id).ExecuteCommand();
+            return MySqlHelper<RoleMenu>.GetInstance().Db.Deleteable<RoleMenu>().Where(t => t.role_Id == role_id && t.menu_Id == menu_id).ExecuteCommand();
         }
 
         public int ExistRoleName(string roleName)
@@ -43,12 +43,20 @@ namespace ManagerSystem.Services.Roles
             return MySqlHelper<Role>.GetInstance().CurrentDb.GetById(id);
         }
 
+        //public PageRequest<Menu> GetRoleMenu(int id)
+        //{
+        //    List<Menu> roleMenuList = MySqlHelper<Menu>.GetInstance().Db.Queryable<RoleMenu>().
+        //        LeftJoin<Menu>((rm, m) => rm.memu_Id == m.Id).
+        //        Where(rm => rm.role_Id == id).Select((rm, m) => m).ToList();
+        //    return new PageRequest<Menu> { items = roleMenuList, TotalCount = roleMenuList.Count };
+        //}
+
         public PageRequest<Menu> GetRoleMenu(int id)
         {
-            List<Menu> roleMenuList = MySqlHelper<Menu>.GetInstance().Db.Queryable<RoleMenu>().
-                LeftJoin<Menu>((rm, m) => rm.memu_Id == m.Id).
-                Where(rm => rm.role_Id == id).Select((rm, m) => m).ToList();
-            return new PageRequest<Menu> { items = roleMenuList, TotalCount = roleMenuList.Count };
+            List<Menu> menus = MySqlHelper<Menu>.GetInstance().Db.Queryable<RoleMenu>()
+                .LeftJoin<Menu>((rm, m) => rm.menu_Id == m.Id)
+                .Where(rm => rm.role_Id == id).Select((rm, m) => m).ToList();
+            return new PageRequest<Menu>() { TotalCount = menus.Count, items = menus };
         }
 
         public PageRequest<Role> GetRoles(string? roleName, string? status, string? startDate, string? endDate, int pageNum, int pageSize)
