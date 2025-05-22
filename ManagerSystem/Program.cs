@@ -1,6 +1,11 @@
 
+using ManagerSystem.Services;
 using ManagerSystem.Services.Departments;
+using ManagerSystem.Services.InformationManage.Classes;
+using ManagerSystem.Services.InformationManage.Courses;
 using ManagerSystem.Services.InformationManage.Grades;
+using ManagerSystem.Services.InformationManage.Students;
+using ManagerSystem.Services.InformationManage.Teachers;
 using ManagerSystem.Services.Menus;
 using ManagerSystem.Services.Notices;
 using ManagerSystem.Services.Posts;
@@ -33,6 +38,10 @@ namespace ManagerSystem
             builder.Services.AddScoped<IPostService,  PostService>();   
             builder.Services.AddScoped<INoticeService,  NoticeService>();   
             builder.Services.AddScoped<IGradeService, GradeService>();
+            builder.Services.AddScoped<IClassService, ClassService>();
+            builder.Services.AddScoped<ITeacherService, TeacherService>();
+            builder.Services.AddScoped<IStudentService, StudentService>();
+            builder.Services.AddScoped<ICourseService, CourseService>();
 
 
 

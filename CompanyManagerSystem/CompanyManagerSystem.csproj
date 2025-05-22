@@ -95,6 +95,7 @@
     <Compile Include="ViewModel\subViewModel\InformationManager\CourseViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\InformationManager\GradeViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\InformationManager\StudentViewModel.cs" />
+    <Compile Include="ViewModel\subViewModel\InformationManager\TeacherViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\PersonalViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\SystemManager\DepartmentViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\SystemManager\MenuViewModel.cs" />
@@ -143,11 +144,20 @@
     <Compile Include="View\subView\InformationManager\CourseView.xaml.cs">
       <DependentUpon>CourseView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\subView\InformationManager\Dialog\ClassesInfoDialog.xaml.cs">
+      <DependentUpon>ClassesInfoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\subView\InformationManager\Dialog\CourseInfoDialog.xaml.cs">
+      <DependentUpon>CourseInfoDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\subView\InformationManager\Dialog\GradeInfoDialog.xaml.cs">
       <DependentUpon>GradeInfoDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\subView\InformationManager\Dialog\StudentInfoDialog.xaml.cs">
       <DependentUpon>StudentInfoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\subView\InformationManager\Dialog\TeacherInfoDialog.xaml.cs">
+      <DependentUpon>TeacherInfoDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\subView\InformationManager\GradeView.xaml.cs">
       <DependentUpon>GradeView.xaml</DependentUpon>
@@ -157,6 +167,9 @@
     </Compile>
     <Compile Include="View\subView\InformationManager\StudentView.xaml.cs">
       <DependentUpon>StudentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\subView\InformationManager\TeacherView.xaml.cs">
+      <DependentUpon>TeacherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\subView\PersonView.xaml.cs">
       <DependentUpon>PersonView.xaml</DependentUpon>
@@ -301,11 +314,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\subView\InformationManager\Dialog\ClassesInfoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\subView\InformationManager\Dialog\CourseInfoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\subView\InformationManager\Dialog\GradeInfoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\subView\InformationManager\Dialog\StudentInfoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\subView\InformationManager\Dialog\TeacherInfoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,6 +343,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\subView\InformationManager\StudentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\subView\InformationManager\TeacherView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

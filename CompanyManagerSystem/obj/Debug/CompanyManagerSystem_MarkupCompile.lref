@@ -1,4 +1,4 @@
-﻿D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\App.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\Themes\Controls\TreeComboBox.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\LoginWindow.xaml;;
@@ -13,11 +13,15 @@ FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSy
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\HomeView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\ClassView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\CourseView.xaml;;
+FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\Dialog\ClassesInfoDialog.xaml;;
+FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\Dialog\CourseInfoDialog.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\Dialog\GradeInfoDialog.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\Dialog\StudentInfoDialog.xaml;;
+FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\Dialog\TeacherInfoDialog.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\GradeView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\ScoreView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\StudentView.xaml;;
+FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\InformationManager\TeacherView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\PersonView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\SystemManager\DepartmentView.xaml;;
 FD:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\View\subView\SystemManager\LogView.xaml;;

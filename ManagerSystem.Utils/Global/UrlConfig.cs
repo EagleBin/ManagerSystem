@@ -151,6 +151,8 @@ namespace ManagerSystem.Utils.Global
 
         public static string STU_GETSTU = "api/Student/GetStudent";
 
+        public static string STU_GETSTUBYNAME = "api/Student/GetStudentByName";
+
 
         #endregion
 
@@ -169,6 +171,8 @@ namespace ManagerSystem.Utils.Global
 
         public static string TEA_GETTEA = "api/Teacher/GetTeacher";
 
+        public static string TEA_GETTEABYNAME = "api/Teacher/GetTeacherByName";
+
         #endregion
 
         // 班级
@@ -176,17 +180,21 @@ namespace ManagerSystem.Utils.Global
 
         public static string CLA_GETAllCLA = "api/Class/GetAllClass";
                              
-        public static string CLA_GETCLAS = "api/Class/GetClasss";
+        public static string CLA_GETCLAS = "api/Class/GetClasses";
                              
         public static string CLA_ADDCLA = "api/Class/AddClass";
 
         public static string CLA_ADDTEACLA = "api/Class/AddTeachers_Classes";
+
+        public static string CLA_DELTEACLA = "api/Class/DeleteTeachers_Classes";
                              
         public static string CLA_UPDATECLA = "api/Class/UpdateClass";
                              
         public static string CLA_DELETECLA = "api/Class/DeleteClass";
                              
         public static string CLA_GETCLA = "api/Class/GetClass";
+
+        public static string CLA_GETCLABYNAME = "api/Class/GetClassByName";
 
 
 
@@ -211,6 +219,8 @@ namespace ManagerSystem.Utils.Global
 
         public static string GRA_ExistName = "api/Grade/ExistName";
 
+        public static string GRA_GETGRABYNAME = "api/Grade/GetGradeByName";
+
         #endregion
 
         // 课程
@@ -229,6 +239,9 @@ namespace ManagerSystem.Utils.Global
         public static string COURSE_DELETECOURSE = "api/Course/DeleteCourse";
 
         public static string COURSE_GETCOURSE = "api/Course/GetCourse";
+
+        public static string COURSE_GETCOURSEBYNAME = "api/Course/GetCourseByName";
+
 
         #endregion
 

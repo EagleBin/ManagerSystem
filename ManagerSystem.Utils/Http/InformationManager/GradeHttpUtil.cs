@@ -104,5 +104,18 @@ namespace ManagerSystem.Utils.Http.InformationManager
 
         }
 
+        /// <summary>
+        /// 根据名称查找
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public static Grades GetGradeByName(string Name)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["Name"] = Name;
+            var result = Get(UrlConfig.GRA_GETGRABYNAME, data);
+            return HttpUtil.StrToObject<Grades>(result);
+        }
+
     }
 }

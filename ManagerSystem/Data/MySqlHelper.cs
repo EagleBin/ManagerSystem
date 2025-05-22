@@ -41,7 +41,7 @@ namespace ManagerSystem.Data
                 //IsAutoCloseConnection = true,
                 //InitKeyType = InitKeyType.Attribute
 
-                ConnectionString = "database=managersystem;Data Source=127.0.0.1;User Id=root;pwd=123456;charset=utf8;pooling=true",
+                ConnectionString = "database='educationsysytem';Data Source=127.0.0.1;User Id=root;pwd=123456;charset=utf8;pooling=true",
                 DbType = SqlSugar.DbType.MySql,
                 IsAutoCloseConnection = true,
                 InitKeyType = InitKeyType.Attribute
@@ -54,7 +54,6 @@ namespace ManagerSystem.Data
                     Db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
                 Console.WriteLine();
             };
-
         }
 
         /// <summary>

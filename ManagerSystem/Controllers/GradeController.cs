@@ -42,9 +42,9 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpGet]
-        public Grades GetGrade(int gradeId)
+        public Grades GetGrade(int id)
         {
-            return _gradeService.GetGrade(gradeId);
+            return _gradeService.GetGrade(id);
         }
 
         [HttpGet]
@@ -63,6 +63,12 @@ namespace ManagerSystem.Controllers
         public bool ExistName(string Name)
         {
             return _gradeService.ExistName(Name);
+        }
+
+        [HttpGet]
+        public Entity.InformationManager.Grades GetGradeByName(string Name)
+        {
+            return _gradeService.GetGradeByName(Name);
         }
     }
 }

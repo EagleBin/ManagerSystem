@@ -66,8 +66,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converter\IntToStringConverter.cs" />
+    <Compile Include="Converter\ClassIdConverter.cs" />
+    <Compile Include="Converter\ClassTypeConverter.cs" />
+    <Compile Include="Converter\CourseTypeConverter.cs" />
+    <Compile Include="Converter\GenderConverter.cs" />
+    <Compile Include="Converter\GradeIdConverter.cs" />
+    <Compile Include="Converter\HeadTeacherConverter.cs" />
     <Compile Include="Converter\ObjectToBoolConverter.cs" />
+    <Compile Include="Converter\TeacherTypeConverter.cs" />
     <Compile Include="Global\GlobalDic.cs" />
     <Compile Include="Global\UrlConfig.cs" />
     <Compile Include="Global\UserInfo.cs" />

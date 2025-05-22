@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using ManagerSystem.Entity.Dto;
 using ManagerSystem.Entity.InformationManager;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace CompanyManagerSystem.View.subView.InformationManager
         {
             DataGrid dataGrid = sender as DataGrid;
 
-            Messenger.Default.Send(dataGrid.SelectedItems.Cast<Classes>().ToList(), "SelectedList");
+            Messenger.Default.Send<List<StudentDto>>(dataGrid.SelectedItems.Cast<StudentDto>().ToList(), "SelectedStudentList");
         }
     }
 }

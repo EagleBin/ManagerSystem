@@ -19,6 +19,7 @@ using CompanyManagerSystem.ViewModel.subViewModel.InformationManager;
 using CompanyManagerSystem.ViewModel.subViewModel.SystemManager;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using ManagerSystem.Entity.InformationManager;
 using System.Runtime.InteropServices;
 
 namespace CompanyManagerSystem.ViewModel
@@ -62,10 +63,16 @@ namespace CompanyManagerSystem.ViewModel
             SimpleIoc.Default.Register<RoleViewModel>();
             SimpleIoc.Default.Register<MenuViewModel>();
             SimpleIoc.Default.Register<NoticeViewModel>();
-            SimpleIoc.Default.Register<StudentViewModel>();
-            SimpleIoc.Default.Register<GradeViewModel>();
+            SimpleIoc.Default.Register<TeacherViewModel>();
         }
 
+        public TeacherViewModel Teacher
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<TeacherViewModel>();
+            }
+        }
         public GradeViewModel Grade
         {
             get
@@ -139,7 +146,7 @@ namespace CompanyManagerSystem.ViewModel
             }
         }
 
-        public ClassViewModel Class
+        public ClassViewModel Classes
         {
             get
             {

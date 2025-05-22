@@ -55,5 +55,12 @@ namespace ManagerSystem.Services.InformationManage.Grades
         /// <param name="Name"></param>
         /// <returns></returns>
         public bool ExistName(string Name);
+
+        /// <summary>
+        /// 根据名称查询
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public Entity.InformationManager.Grades GetGradeByName(string Name);
     }
 }

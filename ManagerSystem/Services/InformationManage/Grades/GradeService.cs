@@ -52,5 +52,10 @@ namespace ManagerSystem.Services.InformationManage.Grades
             return MySqlHelper<Entity.InformationManager.Grades>.GetInstance().CurrentDb.GetSingleAsync(g=>g.Name == Name).Result != null ? true : false;
                 
         }
+
+        public Entity.InformationManager.Grades GetGradeByName(string Name)
+        {
+            return MySqlHelper<Entity.InformationManager.Grades>.GetInstance().CurrentDb.GetSingleAsync(g => g.Name == Name).Result;
+        }
     }
 }

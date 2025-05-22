@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace ManagerSystem.Entity.Dto
 {
-    public class TeacheDto : ViewModelBase
+    public class TeacherDto : ViewModelBase
     {
 
-        private Teachers _Teacher;
+        private Teachers _Teacher = new Teachers();
         /// <summary>
         /// 教师类
         /// </summary>

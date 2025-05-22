@@ -11,16 +11,43 @@ namespace ManagerSystem.Entity.Dto
     public class ClassDto : ViewModelBase
     {
 
-        private Classes _Class;
+        private Classes _Classes = new Classes();
         /// <summary>
         /// 班级类
         /// </summary>
-        public Classes Class
+        public Classes Classes
         {
-            get { return _Class; }
+            get { return _Classes; }
             set
             {
-                _Class = value;
+                _Classes = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private Teachers _Teachers = new Teachers();
+        /// <summary>
+        /// 临时教师类
+        /// </summary>
+        public Teachers Teachers
+        {
+            get { return _Teachers; }
+            set { _Teachers = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        private int _StudentTotalCount;
+        /// <summary>
+        /// 班级总人数
+        /// </summary>
+        public int StudentTotalCount
+        {
+            get { return _StudentTotalCount; }
+            set
+            {
+                _StudentTotalCount = value;
                 RaisePropertyChanged();
             }
         }

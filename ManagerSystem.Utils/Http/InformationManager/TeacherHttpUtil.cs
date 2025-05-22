@@ -19,10 +19,10 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// </summary>
         /// <param name="teacher"></param>
         /// <returns></returns>
-        public static bool AddTeacher(Teachers teacher)
+        public static int AddTeacher(Teachers teacher)
         {
             var result = Post<Teachers>(UrlConfig.TEA_ADDTEA, teacher);
-            return int.Parse(result) == 1 ? true : false;
+            return int.Parse(result);
         }
 
         /// <summary>
@@ -79,18 +79,32 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// <param name="teacherName"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public static PageRequest<Teachers> GetTeachers(string Name, string Age, string Phone, string Subject, bool IsHeadTeacher, int pageNum, int perPageSize)
+        public static PageRequest<Teachers> GetTeachers(string Name, string Age, string Phone, string Subject, int IsHeadTeacher, int pageNum, int perPageSize)
         {
             var data = new Dictionary<string, object>();
             data["Name"] = Name;
             data["Age"] = Age;
             data["Phone"] = Phone;
             data["Subject"] = Subject;
-            data["IsHeadTeacher"] = IsHeadTeacher ? 1 : 0;
+            data["IsHeadTeacher"] = IsHeadTeacher;
+            data["PageNum"] = pageNum;
             data["PageSize"] = perPageSize;
-            data["PerPageNum"] = pageNum;
-            var result = Get(UrlConfig.STU_GETSTUS, data);
+
+            var result = Get(UrlConfig.TEA_GETTEAS, data);
             return HttpUtil.StrToObject<PageRequest<Teachers>>(result);
+        }
+
+        /// <summary>
+        /// 根据名称查询教师
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public static Entity.InformationManager.Teachers GetTeacherByName(string Name)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["Name"] = Name;
+            var result = Get(UrlConfig.TEA_GETTEABYNAME, data);
+            return HttpUtil.StrToObject<Teachers>(result);
         }
 
     }

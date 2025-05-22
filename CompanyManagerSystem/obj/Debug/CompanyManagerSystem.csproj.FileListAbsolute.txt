@@ -112,3 +112,11 @@ D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSys
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\CompanyM.84BD574B.Up2Date
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\CompanyManagerSystem.exe
 D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\CompanyManagerSystem.pdb
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\InformationManager\Dialog\ClassesInfoDialog.g.cs
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\InformationManager\Dialog\ClassesInfoDialog.baml
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\InformationManager\TeacherView.g.cs
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\InformationManager\TeacherView.baml
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\InformationManager\Dialog\TeacherInfoDialog.g.cs
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\InformationManager\Dialog\TeacherInfoDialog.baml
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\InformationManager\Dialog\CourseInfoDialog.g.cs
+D:\Visual Studio\WPF项目实战\公司人员管理系统\Test\CompanyManagerSystem\obj\Debug\View\subView\InformationManager\Dialog\CourseInfoDialog.baml

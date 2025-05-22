@@ -14,7 +14,7 @@ namespace ManagerSystem.Controllers
         private readonly ILogger<ClassController> _logger;
         private readonly IClassService _classService;
 
-        public ClassController(Logger<ClassController> logger, IClassService classService)
+        public ClassController(ILogger<ClassController> logger, IClassService classService)
         {
             _logger = logger;
             _classService = classService;
@@ -24,6 +24,12 @@ namespace ManagerSystem.Controllers
         public int AddClass(Classes _class)
         {
             return _classService.AddClass(_class);
+        }
+
+        [HttpPost]
+        public int AddTeachers_Classes(Teachers_Classes tclass)
+        {
+            return _classService.AddTeachers_Classes(tclass);
         }
 
         [HttpDelete]
@@ -39,15 +45,27 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpGet]
-        public Classes GetClass(int classId)
+        public Classes GetClass(int Id)
         {
-            return _classService.GetClass(classId);
+            return _classService.GetClass(Id);
         }
 
         [HttpGet]
-        public  PageRequest<Classes> GetClasses(string Name, string GradeId, int PerPageNum, int PageSize)
+        public Classes GetClassByName(string Name)
         {
-            return _classService.GetClasss(Name, GradeId, PerPageNum, PageSize);
+            return _classService.GetClassByName(Name);
+        }
+
+        [HttpGet]
+        public PageRequest<Classes> GetAllClass()
+        {
+            return _classService.GetAllClass();
+        }
+
+        [HttpGet]
+        public PageRequest<Classes> GetClasses(string? Name, string? GradeId,int ClassType, int PerPageNum, int PageSize)
+        {
+            return _classService.GetClasss(Name, GradeId, ClassType, PerPageNum, PageSize);
         }
     }
 }

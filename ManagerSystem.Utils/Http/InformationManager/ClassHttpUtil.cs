@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ManagerSystem.Utils.Http.InformationManager
 {
@@ -20,21 +21,21 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// </summary>
         /// <param name="class"></param>
         /// <returns></returns>
-        public static bool AddClass(Classes _class)
+        public static int AddClass(Classes _class)
         {
             var result = Post<Classes>(UrlConfig.CLA_ADDCLA, _class);
-            return int.Parse(result) == 1 ? true : false;
+            return int.Parse(result);
         }
 
         /// <summary>
-        /// 添加班级年级
+        /// 添加班级教师
         /// </summary>
-        /// <param name="cgrade"></param>
+        /// <param name="tclass"></param>
         /// <returns></returns>
         public static bool AddTeachers_Classes(Teachers_Classes tclass)
         {
             var result = Post<Teachers_Classes>(UrlConfig.CLA_ADDTEACLA, tclass);
-            return int.Parse(result) == 1 ?true: false;
+            return int.Parse(result) == 1 ? true : false;
         }
 
         /// <summary>
@@ -66,12 +67,25 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Classes GetClass(int id)
+        public static Classes GetClass(int Id)
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
-            data["id"] = id.ToString();
+            data["Id"] = Id.ToString();
             var result = Get(UrlConfig.CLA_GETCLA, data);
             return HttpUtil.StrToObject<Classes>(result); // 反序列化
+        }
+
+        /// <summary>
+        /// 根据名称获取班级
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public static Classes GetClassByName(string Name)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["Name"] = Name;
+            var result = Get(UrlConfig.CLA_GETCLABYNAME, data);
+            return HttpUtil.StrToObject<Classes>(result);
         }
 
         /// <summary>
@@ -104,15 +118,31 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// <param name="className"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public static PageRequest<Classes> GetClasses(string Name, int GradeId, int PerPageNum, int PageSize)
+        public static PageRequest<Classes> GetClasses(string Name, string GradeId, int ClassType, int PerPageNum, int PageSize)
         {
             var data = new Dictionary<string, object>();
             data["Name"] = Name;
             data["GradeId"] = GradeId;
-            data["PageSize"] = PageSize;
+            data["ClassType"] = ClassType;
             data["PerPageNum"] = PerPageNum;
+            data["PageSize"] = PageSize;
             var result = Get(UrlConfig.CLA_GETCLAS, data);
             return HttpUtil.StrToObject<PageRequest<Classes>>(result);
+        }
+
+        /// <summary>
+        /// 删除 教师-班级表
+        /// </summary>
+        /// <param name="TeacherId"></param>
+        /// <param name="ClassId"></param>
+        /// <returns></returns>
+        public static int DeleteTeachers_Classes(int TeacherId, int ClassId)
+        {
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data["TeacherId"] = TeacherId.ToString();
+            data["ClassId"] = ClassId.ToString();
+            var result = Delete(UrlConfig.CLA_ADDTEACLA, data);
+            return int.Parse(result);
         }
 
     }

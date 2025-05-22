@@ -25,11 +25,11 @@ namespace ManagerSystem.Entity.InformationManager
         /// <summary>
         /// 电话
         /// </summary>
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         /// <summary>
         /// 是否为班主任
         /// </summary>
-        public bool IsHeadTeacher { get; set; }
+        public int IsHeadTeacher { get; set; }
         /// <summary>
         /// 用户ID
         /// </summary>

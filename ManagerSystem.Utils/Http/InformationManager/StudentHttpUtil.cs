@@ -23,21 +23,21 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// </summary>
         /// <param name="student"></param>
         /// <returns></returns>
-        public static bool AddStudent(Students student)
+        public static int AddStudent(Students student)
         {
             var result = Post<Students>(UrlConfig.STU_ADDSTU, student);
-            return int.Parse(result) == 1 ? true : false;
+            return int.Parse(result);
         }
         
         /// <summary>
         /// 删除学生
         /// </summary>
-        /// <param name="studentId">学生ID</param>
+        /// <param name="id">学生ID</param>
         /// <returns></returns>
-        public static bool DeleteStudent(int studentId)
+        public static bool DeleteStudent(int id)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
-            data["studentId"] = studentId.ToString();
+            data["id"] = id.ToString();
             var result = Delete(UrlConfig.STU_DELETESTU, data);
             return int.Parse(result) == 1 ? true : false;
         }
@@ -58,10 +58,10 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// </summary>
         /// <param name="studentId"></param>
         /// <returns></returns>
-        public static Students GetStudent(int studentId)
+        public static Students GetStudent(int id)
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
-            data["studentId"] = studentId.ToString();
+            data["id"] = id.ToString();
             var result = Get(UrlConfig.STU_GETSTU, data);
             return HttpUtil.StrToObject<Students>(result); // 反序列化
         }
@@ -83,10 +83,10 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// <param name="studentName"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public static PageRequest<Students> GetStudents(string studentName, string gender,string classId, int PerPageNum, int PageSize)
+        public static PageRequest<Students> GetStudents(string Name, int gender,int classId, int PerPageNum, int PageSize)
         {
             var data = new Dictionary<string, object>();
-            data["Name"] = studentName;
+            data["Name"] = Name;
             data["Gender"] = gender;
             data["ClassId"] = classId;
             data["PageSize"] = PageSize;
@@ -94,6 +94,19 @@ namespace ManagerSystem.Utils.Http.InformationManager
             
             var result = Get(UrlConfig.STU_GETSTUS, data);
             return HttpUtil.StrToObject<PageRequest<Students>>(result);
+        }
+
+        /// <summary>
+        /// 根据名称查询
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public static Students GetStudentByName(string Name)
+        {
+           Dictionary<string, object> data = new Dictionary<string, object>();
+            data["Name"] = Name;
+            var result = Get(UrlConfig.STU_GETSTUBYNAME, data);
+            return HttpUtil.StrToObject<Students>(result);
         }
 
     }

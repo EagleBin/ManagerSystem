@@ -15,9 +15,9 @@ namespace ManagerSystem.Entity.InformationManager
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// 性别
+        /// 性别(男：1，女：2，全部：3)
         /// </summary>
-        public string Gender { get; set; }
+        public int Gender { get; set; }
         /// <summary>
         /// 班级编号
         /// </summary>

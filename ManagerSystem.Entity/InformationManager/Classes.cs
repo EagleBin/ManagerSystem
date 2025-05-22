@@ -10,7 +10,7 @@ namespace ManagerSystem.Entity.InformationManager
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// 班级类型（文科班Art，理科班）
+        /// 班级类型（文科班:1，理科班:0）
         /// </summary>
         public int ClassType { get; set; }
         /// <summary>

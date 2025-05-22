@@ -32,12 +32,12 @@ namespace ManagerSystem.Services.InformationManage.Students
             return result;
         }
 
-        public PageRequest<Entity.InformationManager.Students> GetStudents(string? Name, string? Gender, int ClassId, int PerPageNum, int PageSize)
+        public PageRequest<Entity.InformationManager.Students> GetStudents(string? Name,int Gender, int ClassId, int PerPageNum, int PageSize)
         {
             int totalCount = 0;
             var result = MySqlHelper<Entity.InformationManager.Students>.GetInstance().Db.Queryable<Entity.InformationManager.Students>()
                 .WhereIF(!(string.IsNullOrEmpty(Name)), s => s.Name.Contains(Name ?? ""))
-                .WhereIF(!(string.IsNullOrEmpty(Gender)), s => s.Gender.Contains(Gender ?? ""))
+                .WhereIF(Gender == 1 || Gender == 2, g=>g.Gender == Gender)
                 .WhereIF(ClassId > 0, s => s.ClassId == ClassId)
                 .ToPageList(PerPageNum, PageSize, ref totalCount);
             return new PageRequest<Entity.InformationManager.Students>() { items = result, TotalCount = totalCount };
@@ -47,6 +47,11 @@ namespace ManagerSystem.Services.InformationManage.Students
         {
             var result = MySqlHelper<Entity.InformationManager.Students>.GetInstance().CurrentDb.Update(student);
             return result ? 1 : 0;
+        }
+
+        public Entity.InformationManager.Students GetStudentByName(string Name)
+        {
+            return MySqlHelper<Entity.InformationManager.Students>.GetInstance().CurrentDb.GetSingleAsync(n=>n.Name == Name).Result;
         }
     }
 }

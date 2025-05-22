@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="CompanyManagerSystem.View.subView.InformationManager.Dialog.ClassesInfoDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.InformationManager.Dialog"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:convert="clr-namespace:ManagerSystem.Utils.Converter;assembly=ManagerSystem.Utils"
+             mc:Ignorable="d" 
+             DataContext="{Binding Source={StaticResource Locator},Path=Classes}"
+             d:DesignHeight="500" d:DesignWidth="600">
+    <UserControl.Resources>
+        <convert:ClassTypeConverter x:Key="ClassTypeConverter"/>
+        <convert:GradeIdConverter x:Key="GradeIdConverter"/>
+    </UserControl.Resources>
+    <!--// 关闭窗体触发器 //-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding ClassesInfoDialogUnloadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border Width="600" CornerRadius="3" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="54"/>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="66"/>
+            </Grid.RowDefinitions>
+
+            <!--// 信息提示 //-->
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0 0 0 -25">
+                <StackPanel>
+                    <StackPanel hc:Growl.Token="ClassesInfoSuccessMsg" Panel.ZIndex="1" Margin="0 0 0 5"/>
+                    <StackPanel hc:Growl.Token="ClassesInfoWarningMsg" Panel.ZIndex="1" Margin="0 0 0 5"/>
+                    <StackPanel hc:Growl.Token="ClassesInfoErrorMsg" Panel.ZIndex="1" Margin="0 0 0 5"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--// 标题和关闭按钮 //-->
+            <Grid Margin="20 20 20 10">
+                <TextBlock Text="{Binding DialogTitle}" FontSize="18" Foreground="#303133" VerticalAlignment="Center"/>
+                <Button Style="{StaticResource closeDialogStyle}" Command="hc:ControlCommands.Close" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock Text="&#xeb6a;" FontFamily="/Themes/Style/#iconfont" FontSize="16"/>
+                </Button>
+            </Grid>
+
+            <!--// 内容 //-->
+            <ScrollViewer Grid.Row="1" Margin="20 30">
+                <StackPanel>
+                    <UniformGrid Rows="1">
+                        <!--// 班级名称 //-->
+                        <StackPanel>
+                            <hc:TextBox x:Name="usernameText" Text="{Binding DialogClasses.Classes.Name, Mode=TwoWay}"
+                                        hc:InfoElement.Title="班级名称" hc:InfoElement.Placeholder="请输入班级名称"
+                                        GotFocus="ClassesNameGotFocus" LostFocus="ClassesNameLostFocus"/>
+                            <TextBlock Name="usernameInfo" Text="班级名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <UniformGrid Rows="1" Height="58">
+                        <StackPanel>
+                            <hc:ComboBox ItemsSource="{Binding DialogClassesTypeList}" SelectedValue="{Binding DialogClasses.Classes.ClassType,Converter={StaticResource ClassTypeConverter},Mode=TwoWay}"
+                                         hc:InfoElement.Title="班级类型" hc:InfoElement.Placeholder="请选择班级类型"
+                                         x:Name="classType" GotFocus="classType_GotFocus" LostFocus="classType_LostFocus"/>
+                            <TextBlock Name="classTypeInfo" Text="班级名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <UniformGrid Rows="1" Height="58">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <!--// 年级 //-->
+                            <StackPanel Width="560">
+                                <hc:ComboBox Name="accountText" SelectedValue="{Binding DialogClasses.Classes.GradeId,Converter={StaticResource GradeIdConverter},Mode=TwoWay}" 
+                                             ItemsSource="{Binding DialogGradeNameList}"
+                                            hc:InfoElement.Title="年级" hc:InfoElement.Placeholder="请输入年级" 
+                                            GotFocus="GtadeGotFocus" LostFocus="GradeLostFocus" />
+                                <TextBlock Name="accountInfo" Text="年级不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <!--// 班主任 //-->
+                    <UniformGrid Rows="1" Height="58">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <!--// 班主任 //-->
+                            <hc:TextBox Text="{Binding DialogClasses.Teachers.Name}"
+                                        hc:InfoElement.Title="班主任" hc:InfoElement.Placeholder="请输入班主任" Width="540"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--// 确认与取消 //-->
+            <Grid Grid.Row="2" Margin="20 10 20 20">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Button Content="确认" Command="{Binding SubmitClassesInfoCommand}" Style="{StaticResource ButtonPrimary}" 
+                            Click="Button_Click" Width="74" Height="36" FontSize="14" Cursor="Hand"/>
+                    <Button Content="取 消" Command="hc:ControlCommands.Close" Style="{StaticResource ButtonDefault}"
+                            Width="74" Height="36" Margin="10 0 0 0" FontSize="14" Cursor="Hand"></Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

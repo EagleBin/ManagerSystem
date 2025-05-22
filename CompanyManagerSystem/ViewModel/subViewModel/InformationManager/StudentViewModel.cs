@@ -22,7 +22,31 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
         {
             Messenger.Default.Register<List<StudentDto>>("SelectedStudentList", s => SelectedStudentList = s);
 
+            // 初始化班级列表（搜索）
+            foreach (var item in ClassHttpUtil.GetAllClass().items)
+            {
+                SearchClassNameList.Add(item.Name);
+            }
+            // 初始化性别列表（搜索）
+            SearchStudentGenderList = new List<string>() { "全部", "男", "女" };
+
             PerPageCountList = new List<int>() { 20, 50, 100, 200, 500 };
+
+            // 初始化学生列表（表格）
+            foreach (var item in StudentHttpUtil.GetAllStudent().items)
+            {
+                StudentList.Add(new StudentDto() { Student = item });
+            }
+
+            // 初始化班级列表（窗体）
+            foreach (var item in ClassHttpUtil.GetAllClass().items)
+            {
+                DialogClassList.Add(item.Name);
+            }
+            // 初始化性别列表（窗体）
+            DialogGenderList = new List<string>() { "男", "女" };
+
+
         }
 
         #region 属性
@@ -57,7 +81,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
             }
         }
 
-        private List<StudentDto> _SelectedStudentList;
+        private List<StudentDto> _SelectedStudentList = new List<StudentDto>();
         /// <summary>
         /// 选择的学生列表
         /// </summary>
@@ -125,25 +149,11 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
             }
         }
 
-        private ClassDto _DialogClass;
-        /// <summary>
-        /// 弹窗的班级
-        /// </summary>
-        public ClassDto DialogClass
-        {
-            get { return _DialogClass; }
-            set
-            {
-                _DialogClass = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private List<ClassDto> _DialogClassList;
+        private List<string> _DialogClassList = new List<string>();
         /// <summary>
         /// 窗体的班级列表
         /// </summary>
-        public List<ClassDto> DialogClassList
+        public List<string> DialogClassList
         {
             get { return _DialogClassList; }
             set
@@ -153,31 +163,16 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
             }
         }
 
-
-        private GradeDto _DialogGrade;
+        private List<string> _DialogGenderList = new List<string>();
         /// <summary>
-        /// 弹窗的年级
+        /// 弹窗的性别列表
         /// </summary>
-        public GradeDto DialogGrade
+        public List<string> DialogGenderList
         {
-            get { return _DialogGrade; }
+            get { return _DialogGenderList; }
             set
             {
-                _DialogGrade = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private List<GradeDto> _DialogGradeList;
-        /// <summary>
-        /// 弹窗的年级列表
-        /// </summary>
-        public List<GradeDto> DialogGradeList
-        {
-            get { return _DialogGradeList; }
-            set
-            {
-                _DialogGradeList = value;
+                _DialogGenderList = value;
                 RaisePropertyChanged();
             }
         }
@@ -230,11 +225,26 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
             }
         }
 
-        private string _SearchStudentGender;
+        private List<string> _SearchClassNameList = new List<string>();
+        /// <summary>
+        /// 搜索的班级名称列表
+        /// </summary>
+        public List<string> SearchClassNameList
+        {
+            get { return _SearchClassNameList; }
+            set
+            {
+                _SearchClassNameList = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        private int _SearchStudentGender;
         /// <summary>
         /// 搜索的性别
         /// </summary>
-        public string SearchStudentGender
+        public int SearchStudentGender
         {
             get { return _SearchStudentGender; }
             set
@@ -244,16 +254,16 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
             }
         }
 
-        private string _CourseType;
+        private List<string> _SearchStudentGenderList = new List<string>();
         /// <summary>
-        /// 学科类型
+        /// 搜索 性别列表
         /// </summary>
-        public string CourseType
+        public List<string> SearchStudentGenderList
         {
-            get { return _CourseType; }
+            get { return _SearchStudentGenderList; }
             set
             {
-                _CourseType = value;
+                _SearchStudentGenderList = value;
                 RaisePropertyChanged();
             }
         }
@@ -320,7 +330,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
             }
         }
 
-        private List<int> _PerPageCountList;
+        private List<int> _PerPageCountList = new List<int>();
         /// <summary>
         /// 每页容量列表
         /// </summary>
@@ -391,7 +401,8 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                     if (resultDelete)
                                     {
                                         // 刷新列表
-                                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassName, CurrentPage, PerPageCount);
+                                        int SearchClassId = ClassHttpUtil.GetClassByName(SearchClassName).Id;
+                                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassId, CurrentPage, PerPageCount);
                                         RefreshStudentList(list.items, list.TotalCount);
 
                                         HandyControl.Controls.Growl.Success("删除成功", "StudentSuccessMsg");
@@ -426,7 +437,9 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                         }
                                     }
                                     // 刷新列表
-                                    var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassName, CurrentPage, PerPageCount);
+                                    // 刷新列表
+                                    int SearchClassId = ClassHttpUtil.GetClassByName(SearchClassName).Id;
+                                    var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassId, CurrentPage, PerPageCount);
                                     RefreshStudentList(list.items, list.TotalCount);
 
                                     HandyControl.Controls.Growl.Success($"成功删除{successCount}个, 失败{errorCount}个", "StudentSuccessMsg");
@@ -460,12 +473,20 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                 return _EditStudentCommand ??
                     (_EditStudentCommand = new RelayCommand(() =>
                     {
-                        DialogTitle = "编辑信息";
-                        DialogStudent = SelectedStudent;
-                        DialogStudent.Student = (Students)SelectedStudent.Student.Clone();
-                        DialogClass = new ClassDto() { Class = (Classes)ClassHttpUtil.GetClass(SelectedStudent.Student.ClassId).Clone() };
-                        DialogGrade = new GradeDto() { Grade = (Grades)GradeHttpUtil.GetGrade(SelectedStudent.Student.ClassId).Clone() };
+                        if (SelectedStudent == null || SelectedStudent.Student == null)
+                        {
+                            HandyControl.Controls.Growl.Warning("请选择需要修改的学生", "StudentWarningMsg");
+                            return;
+                        }
+                        else if(SelectedStudentList == null || SelectedStudentList.Count >= 2)
+                        {
+                            HandyControl.Controls.Growl.Warning("请选择单个需要修改的学生", "StudentWarningMsg");
+                            return;
+                        }
 
+                        DialogTitle = "修改学生";
+                        // 将选中的参数赋值到窗体
+                        DialogStudent = new StudentDto() { Student = (Students)SelectedStudent.Student.Clone() }; // 获取选中的学生
                         studentInfoDiaolg = Dialog.Show<StudentInfoDialog>();
                     }));
             }
@@ -484,17 +505,6 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                     {
                         DialogTitle = "添加学生";
                         DialogStudent = new StudentDto();
-                        DialogClass = new ClassDto();
-                        // 获取全部班级列表
-                        foreach (var item in ClassHttpUtil.GetAllClass().items)
-                        {
-                            DialogClassList.Add(new ClassDto() { Class = (Classes)item.Clone() });
-                        }
-                        DialogGrade = new GradeDto();
-                        // 获取全部年级列表
-                        GradeHttpUtil.GetAllGrade().items.ForEach(c => DialogGradeList.Add(new GradeDto() { Grade = (Grades)c.Clone() }));
-
-
                         studentInfoDiaolg = Dialog.Show<StudentInfoDialog>(); // 打开添加窗体
                     }));
             }
@@ -513,33 +523,77 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                     {
                         try
                         {
+                            // 信息校验
+                            if (DialogStudent == null || DialogStudent.Student == null)
+                            {
+                                return;
+                            }
+                            else if (string.IsNullOrEmpty(DialogStudent.Student.Name))
+                            {
+                                HandyControl.Controls.Growl.Warning("请输入学生姓名", "StudentInfoWarningMsg");
+                                return;
+                            }
+                            else if (DialogStudent.Student.ClassId == 0)
+                            {
+                                HandyControl.Controls.Growl.Warning("请选择学生班级", "StudentInfoWarningMsg");
+                                return;
+                            }
+
+                            // 添加
                             if (DialogTitle == "添加学生")
                             {
-                                if (DialogStudent == null || DialogStudent.Student == null)
+                                // 同班同名验证
+                                var result_1 = StudentHttpUtil.GetStudentByName(DialogStudent.Student.Name) != null;
+                                var result_2 = ClassHttpUtil.GetClass(DialogStudent.Student.ClassId) != null;
+                                if (result_1 && result_2)
                                 {
-                                    return;
+                                    var result = HandyControl.Controls.MessageBox.Show($"当前班级已经存在名为【{DialogStudent.Student.Name}】的学生，是否继续添加？", "提示",
+                                       MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                    // 不添加则退出
+                                    if (result == MessageBoxResult.No)
+                                    {
+                                        return;
+                                    }
                                 }
-
+                                DialogStudent.Student.insertTime = DateTime.Now;
                                 var resultAdd = StudentHttpUtil.AddStudent((Students)DialogStudent.Student.Clone());
-                                if (resultAdd)
+                                // 是否插入成功
+                                if (resultAdd > 0)
                                 {
-                                    
+
                                     // 刷新列表
-                                    var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassName, CurrentPage, PerPageCount);
+                                    int SearchClassId = ClassHttpUtil.GetClassByName(SearchClassName).Id;
+                                    var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassId, CurrentPage, PerPageCount);
                                     RefreshStudentList(list.items, list.TotalCount);
                                     HandyControl.Controls.Growl.Success("添加成功", "StudentInfoSuccessMsg");
                                     return;
                                 }
 
+
+
                             }
+                            // 修改
                             else if (DialogTitle == "修改学生")
                             {
-                                DialogStudent.Student.ClassId = DialogClass.Class.Id;
-
+                                // 同班同名校验
+                                if (StudentHttpUtil.GetStudentByName(DialogStudent.Student.Name) != null &&
+                                ClassHttpUtil.GetClass(DialogStudent.Student.ClassId) != null)
+                                {
+                                    var result = HandyControl.Controls.MessageBox.Show($"当前班级已经存在名为【{DialogStudent.Student.Name}】的学生，是否继续添加？", "提示",
+                                       MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                    // 不添加则退出
+                                    if (result == MessageBoxResult.No)
+                                    {
+                                        return;
+                                    }
+                                }
                                 var resultDialog = StudentHttpUtil.UpdateStudent(DialogStudent.Student);
+                                // 是否修改成功
                                 if (resultDialog)
                                 {
-                                    var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassName, CurrentPage, PerPageCount);
+                                    // 刷新列表
+                                    int SearchClassId = ClassHttpUtil.GetClassByName(SearchClassName).Id;
+                                    var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassId, CurrentPage, PerPageCount);
                                     RefreshStudentList(list.items, list.TotalCount);
                                     HandyControl.Controls.Growl.Success("修改成功", "StudentInfoSuccessMsg");
                                     return;
@@ -549,6 +603,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                     HandyControl.Controls.Growl.Warning("修改失败", "StudentInfoWarningMsg");
                                     return;
                                 }
+
                             }
                         }
                         catch (Exception ex)
@@ -577,8 +632,11 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                 return _SearchStudentCommand ??
                     (_SearchStudentCommand = new RelayCommand(() =>
                     {
-                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassName, CurrentPage, PerPageCount);
+                        // 刷新列表
+                        int SearchClassId = ClassHttpUtil.GetClassByName(SearchClassName).Id;
+                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassId, CurrentPage, PerPageCount);
                         RefreshStudentList(list.items, list.TotalCount);
+                        return;
                     }));
             }
         }
@@ -594,15 +652,63 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                 return _ResetSearchCommand ??
                     (_ResetSearchCommand = new RelayCommand(() =>
                     {
-                        SearchStudentName = null;
-                        SearchClassName = null;
-                        SearchStudentGender = null;
+                        SearchStudentName = null; // 学生名称
+                        SearchClassName = null; // 班级名称
+                        SearchStudentGender = 3; // 性别
                         CurrentPage = 1;
-                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassName, CurrentPage, PerPageCount);
+                        // 刷新列表
+                        int SearchClassId = ClassHttpUtil.GetClassByName(SearchClassName).Id;
+                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassId, CurrentPage, PerPageCount);
                         RefreshStudentList(list.items, list.TotalCount);
+                        return;
                     }));
             }
         }
+
+        #endregion
+
+        #region 分页命令
+
+        private ICommand _PageUpdatedCommand;
+        /// <summary>
+        /// 页容量改变
+        /// </summary>
+        public ICommand PageUpdatedCommand
+        {
+            get
+            {
+                return _PageUpdatedCommand ??
+                    (_PageUpdatedCommand = new RelayCommand(() =>
+                    {
+                        CurrentPage = 1;
+                        int SearchClassId = ClassHttpUtil.GetClassByName(SearchClassName).Id;
+                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassId, CurrentPage, PerPageCount);
+                        RefreshStudentList(list.items, list.TotalCount);
+                        return;
+                    }));
+            }
+        }
+
+        private ICommand _PerPageCountChangedCommand;
+        /// <summary>
+        /// 当前页码改变
+        /// </summary>
+        public ICommand PerPageCountChangedCommand
+        {
+            get
+            {
+                return _PerPageCountChangedCommand ??
+                    (_PerPageCountChangedCommand = new RelayCommand(() =>
+                    {
+                        int SearchClassId = ClassHttpUtil.GetClassByName(SearchClassName).Id;
+                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassId, CurrentPage, PerPageCount);
+                        RefreshStudentList(list.items, list.TotalCount);
+                        return;
+                    }));
+            }
+        }
+
+
 
         #endregion
 
@@ -635,8 +741,11 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                 return _RefreshStudentListCommand ??
                     (_RefreshStudentListCommand = new RelayCommand(() =>
                     {
-                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassName, CurrentPage, PerPageCount);
+                        // 刷新列表
+                        int SearchClassId = ClassHttpUtil.GetClassByName(SearchClassName).Id;
+                        var list = StudentHttpUtil.GetStudents(SearchStudentName, SearchStudentGender, SearchClassId, CurrentPage, PerPageCount);
                         RefreshStudentList(list.items, list.TotalCount);
+                        return;
                     }));
             }
         }
@@ -672,7 +781,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
             // 重新获取岗位列表
             foreach (var item in allStudentList)
             {
-                StudentList.Add(new StudentDto() {Student = item });
+                StudentList.Add(new StudentDto() { Student = item });
             }
         }
 

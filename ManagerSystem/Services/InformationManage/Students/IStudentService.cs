@@ -44,10 +44,20 @@ namespace ManagerSystem.Services
         /// <summary>
         /// 分页查询
         /// </summary>
-        /// <param name="title"></param>
-        /// <param name="status"></param>
+        /// <param name="Name">姓名</param>
+        /// <param name="Gender">性别</param>
+        /// <param name="ClassId">班级ID</param>
+        /// <param name="PerPageNum">当前页码</param>
+        /// <param name="PageSize">页容量</param>
         /// <returns></returns>
-        public PageRequest<Students> GetStudents(string? Name, string? Gender,int ClassId, int PageSize, int PerPageNum);
+        public PageRequest<Students> GetStudents(string? Name, int Gender,int ClassId, int PerPageNum, int PageSize);
+
+        /// <summary>
+        /// 根据名称获取学生
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public Students GetStudentByName(string Name);
 
     }
 }

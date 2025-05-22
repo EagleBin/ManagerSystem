@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using ManagerSystem.Entity.Dto;
+using ManagerSystem.Entity.InformationManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,13 @@ namespace CompanyManagerSystem.View.subView.InformationManager
         public CourseView()
         {
             InitializeComponent();
+        }
+
+        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+            // 将 选择的多行数据打包 发送 到数据中心
+            Messenger.Default.Send<List<CourseDto>>(dataGrid.SelectedItems.Cast<CourseDto>().ToList(), "SelectedCourses");
         }
     }
 }

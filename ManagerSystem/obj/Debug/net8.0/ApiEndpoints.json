@@ -27,6 +27,32 @@
   },
   {
     "ContainingType": "ManagerSystem.Controllers.ClassController",
+    "Method": "AddTeachers_Classes",
+    "RelativePath": "api/Class/AddTeachers_Classes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tclass",
+        "Type": "ManagerSystem.Entity.InformationManager.Link.Teachers_Classes",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.ClassController",
     "Method": "DeleteClass",
     "RelativePath": "api/Class/DeleteClass",
     "HttpMethod": "DELETE",
@@ -53,6 +79,26 @@
   },
   {
     "ContainingType": "ManagerSystem.Controllers.ClassController",
+    "Method": "GetAllClass",
+    "RelativePath": "api/Class/GetAllClass",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ManagerSystem.Utils.Helper.PageRequest\u00601[[ManagerSystem.Entity.InformationManager.Classes, ManagerSystem.Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.ClassController",
     "Method": "GetClass",
     "RelativePath": "api/Class/GetClass",
     "HttpMethod": "GET",
@@ -60,8 +106,34 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
+        "Name": "Id",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ManagerSystem.Entity.InformationManager.Classes",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.ClassController",
+    "Method": "GetClassByName",
+    "RelativePath": "api/Class/GetClassByName",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -93,6 +165,11 @@
       {
         "Name": "GradeId",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ClassType",
+        "Type": "System.Int32",
         "IsRequired": false
       },
       {
@@ -129,6 +206,197 @@
       {
         "Name": "_class",
         "Type": "ManagerSystem.Entity.InformationManager.Classes",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.CourseController",
+    "Method": "AddCourse",
+    "RelativePath": "api/Course/AddCourse",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "course",
+        "Type": "ManagerSystem.Entity.InformationManager.Courses",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.CourseController",
+    "Method": "DeleteCourse",
+    "RelativePath": "api/Course/DeleteCourse",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.CourseController",
+    "Method": "GetAllCourse",
+    "RelativePath": "api/Course/GetAllCourse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ManagerSystem.Utils.Helper.PageRequest\u00601[[ManagerSystem.Entity.InformationManager.Courses, ManagerSystem.Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.CourseController",
+    "Method": "GetCourse",
+    "RelativePath": "api/Course/GetCourse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ManagerSystem.Entity.InformationManager.Courses",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.CourseController",
+    "Method": "GetCourseByName",
+    "RelativePath": "api/Course/GetCourseByName",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ManagerSystem.Entity.InformationManager.Courses",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.CourseController",
+    "Method": "GetCourses",
+    "RelativePath": "api/Course/GetCourses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CourseType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PerPageNum",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ManagerSystem.Utils.Helper.PageRequest\u00601[[ManagerSystem.Entity.InformationManager.Courses, ManagerSystem.Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.CourseController",
+    "Method": "UpdateCourse",
+    "RelativePath": "api/Course/UpdateCourse",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "course",
+        "Type": "ManagerSystem.Entity.InformationManager.Courses",
         "IsRequired": true
       }
     ],
@@ -406,8 +674,34 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "gradeId",
+        "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ManagerSystem.Entity.InformationManager.Grades",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.GradeController",
+    "Method": "GetGradeByName",
+    "RelativePath": "api/Grade/GetGradeByName",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -1374,6 +1668,32 @@
   },
   {
     "ContainingType": "ManagerSystem.Controllers.StudentController",
+    "Method": "GetStudentByName",
+    "RelativePath": "api/Student/GetStudentByName",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ManagerSystem.Entity.InformationManager.Students",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.StudentController",
     "Method": "GetStudents",
     "RelativePath": "api/Student/GetStudents",
     "HttpMethod": "GET",
@@ -1381,17 +1701,17 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "studentName",
+        "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "gender",
-        "Type": "System.String",
+        "Name": "Gender",
+        "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "classId",
+        "Name": "ClassId",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -1533,6 +1853,62 @@
     "ReturnTypes": [
       {
         "Type": "ManagerSystem.Entity.InformationManager.Teachers",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ManagerSystem.Controllers.TeacherController",
+    "Method": "GetTeachers",
+    "RelativePath": "api/Teacher/GetTeachers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Age",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Subject",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsHeadTeacher",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNum",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ManagerSystem.Utils.Helper.PageRequest\u00601[[ManagerSystem.Entity.InformationManager.Teachers, ManagerSystem.Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

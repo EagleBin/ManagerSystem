@@ -17,10 +17,10 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// </summary>
         /// <param name="course"></param>
         /// <returns></returns>
-        public static bool AddCourse(Courses course)
+        public static int AddCourse(Courses course)
         {
             var result = Post<Courses>(UrlConfig.COURSE_ADDCOURSE, course);
-            return int.Parse(result) == 1 ? true : false;
+            return int.Parse(result);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// <param name="courseName"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public static PageRequest<Courses> GetCourses(string courseName,int courseType, int PerPageNum, int PageSize)
+        public static PageRequest<Courses> GetCourses(string courseName, int courseType, int PerPageNum, int PageSize)
         {
             var data = new Dictionary<string, object>();
             data["Name"] = courseName;
@@ -101,7 +101,18 @@ namespace ManagerSystem.Utils.Http.InformationManager
             return HttpUtil.StrToObject<PageRequest<Courses>>(result);
         }
 
-
+        /// <summary>
+        /// 根据名称查询
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public static Courses GetCourseByName(string Name)
+        {
+            var data = new Dictionary<String, object>();
+            data["Name"] = Name;
+            var result = Get(UrlConfig.COURSE_GETCOURSEBYNAME, data);
+            return HttpUtil.StrToObject<Courses>(result);
+        }
 
     }
 }

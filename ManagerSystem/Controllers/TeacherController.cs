@@ -49,9 +49,9 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpGet]
-        PageRequest<Teachers> GetTeachers(string Name, string Age, int PerPageNum, int PageSize)
+        public PageRequest<Teachers> GetTeachers(string? Name, string? Age, string? Phone, string? Subject, int IsHeadTeacher, int PageNum, int PageSize)
         {
-            return _teacherService.GetTeachers(Name, Age, PerPageNum, PageSize);
+            return _teacherService.GetTeachers(Name, Age, Phone, Subject, IsHeadTeacher, PageNum, PageSize);
         }
     }
 }

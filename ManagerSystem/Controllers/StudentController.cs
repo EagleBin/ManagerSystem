@@ -13,9 +13,9 @@ namespace ManagerSystem.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private Logger<StudentController> _logger;
+        private ILogger<StudentController> _logger;
         private IStudentService _studentService;
-        public StudentController(Logger<StudentController> logger, IStudentService studentService)
+        public StudentController(ILogger<StudentController> logger, IStudentService studentService)
         {
             _logger = logger;
             _studentService = studentService;
@@ -52,9 +52,15 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpGet]
-        public PageRequest<Students> GetStudents(string? studentName, string? gender, int classId, int PerPageNum, int PageSize)
+        public PageRequest<Students> GetStudents(string? Name, int Gender, int ClassId, int PerPageNum, int PageSize)
         {
-            return _studentService.GetStudents(studentName, gender, classId, PerPageNum, PageSize);
+            return _studentService.GetStudents(Name, Gender, ClassId, PerPageNum, PageSize);
+        }
+
+        [HttpGet]
+        public Students GetStudentByName(string Name)
+        {
+            return _studentService.GetStudentByName(Name);
         }
     }
 }

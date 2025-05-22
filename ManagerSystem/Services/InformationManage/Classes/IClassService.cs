@@ -14,6 +14,12 @@ namespace ManagerSystem.Services.InformationManage.Classes
         /// <returns></returns>
         public int AddClass(Entity.InformationManager.Classes _class);
 
+        /// <summary>
+        /// 添加班级教师
+        /// </summary>
+        /// <param name="tclass"></param>
+        /// <returns></returns>
+        public int AddTeachers_Classes(Teachers_Classes tclass);
 
         /// <summary>
         /// 删除
@@ -41,7 +47,14 @@ namespace ManagerSystem.Services.InformationManage.Classes
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Entity.InformationManager.Classes GetClass(int id);
+        public Entity.InformationManager.Classes GetClass(int Id);
+
+        /// <summary>
+        /// 根据名称查询
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public Entity.InformationManager.Classes GetClassByName(string Name);
 
         /// <summary>
         /// 查询全部
@@ -55,9 +68,15 @@ namespace ManagerSystem.Services.InformationManage.Classes
         /// <param name="title"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        public PageRequest<Entity.InformationManager.Classes> GetClasss(string? Name,string GradeId, int PerPageNum, int  PageSize);
+        public PageRequest<Entity.InformationManager.Classes> GetClasss(string? Name,string GradeId,int ClassType, int PerPageNum, int  PageSize);
 
-
+        /// <summary>
+        /// 删除教师班级-中间表
+        /// </summary>
+        /// <param name="TeacherId"></param>
+        /// <param name="ClassId"></param>
+        /// <returns></returns>
+        public int DeleteTeachers_Classes(int TeacherId, int ClassId);
 
     }
 }

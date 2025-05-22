@@ -49,8 +49,14 @@ namespace ManagerSystem.Services.InformationManage.Teachers
         /// <param name="title"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        public PageRequest<Entity.InformationManager.Teachers> GetTeachers(string? Name, string Age, int PageSize, int PerPageNum);
+        public PageRequest<Entity.InformationManager.Teachers> GetTeachers(string? Name, string? Age, string? Phone, string? Subject, int IsHeadTeacher, int PageNum, int PageSize);
 
+        /// <summary>
+        /// 根据名称查询教师
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public Entity.InformationManager.Teachers GetTeacherByName(string Name);
 
     }
 }

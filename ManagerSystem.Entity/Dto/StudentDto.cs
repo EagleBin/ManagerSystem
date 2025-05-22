@@ -11,7 +11,7 @@ namespace ManagerSystem.Entity.Dto
     public class StudentDto : ViewModelBase
     {
 
-        private Students _Student;
+        private Students _Student = new Students();
         /// <summary>
         /// 学生类
         /// </summary>

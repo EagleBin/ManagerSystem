@@ -10,6 +10,10 @@
              mc:Ignorable="d" 
              DataContext="{Binding Source={StaticResource Locator},Path=Student}"
              d:DesignHeight="450" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <convert:ClassIdConverter x:Key="ClassIdConverter"/>
+        <convert:GenderConverter x:Key="GenderConverter"/>
+    </UserControl.Resources>
     <Grid Margin="20 10 20 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -41,18 +45,17 @@
 
                     <!--// 姓名 //-->
                     <hc:TextBox hc:InfoElement.Title="学生姓名" hc:InfoElement.Placeholder="请输入学生姓名" Width="240" Height="32"
-                                Text="{Binding SearStdentName}" FontWeight="Bold" Margin=" 0 5 0 0"/>
+                                Text="{Binding SearchStudentName}" FontWeight="Bold" Margin=" 0 5 0 0"/>
 
                     <!--// 性别 //-->
                     <hc:ComboBox hc:InfoElement.Title="性别" hc:InfoElement.Placeholder="请选择性别" Width="240" Height="32"
-                                 Margin="20 5 0 0" FontWeight="Bold" SelectedValue="{Binding SearchStudentGender}">
-                        <ComboBoxItem Content="男"/>
-                        <ComboBoxItem Content="女"/>
+                                 Margin="20 5 0 0" FontWeight="Bold" SelectedIndex="0" ItemsSource="{Binding SearchStudentGenderList}"
+                                 SelectedValue="{Binding SearchStudentGender, Converter={StaticResource GenderConverter}}" >
                     </hc:ComboBox>
 
                     <!--// 班级列表 //-->
                     <hc:ComboBox hc:InfoElement.Title="班级" hc:InfoElement.Placeholder="请选择班级" Width="240" Height="32"
-                                 Margin="20 5 0 0" FontWeight="Bold" SelectedValue="{Binding SearchClass}" ItemsSource="{Binding ClassList}"/>
+                                 Margin="20 5 0 0" FontWeight="Bold" SelectedValue="{Binding SearchClassName}" ItemsSource="{Binding SearchClassNameList}"/>
 
                     <!--// 搜索与重置 //-->
 
@@ -133,7 +136,7 @@
                         </Grid.RowDefinitions>
 
                         <DataGrid AutoGenerateColumns="False" VerticalScrollBarVisibility="Hidden" HeadersVisibility="All" ItemsSource="{Binding StudentList}"
-                                  SelectedItem="{Binding SeltectedStudent}" RowHeaderWidth="60" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                  SelectedItem="{Binding SelectedStudent}" RowHeaderWidth="60" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
                                   RowStyle="{StaticResource DataGridRowStyle}" CellStyle="{StaticResource DataGridTextCenterColumnStyle}"
                                   IsReadOnly="True" SelectedCellsChanged="DataGrid_SelectedCellsChanged" SelectionUnit="FullRow" HorizontalAlignment="Left">
                             <DataGrid.RowHeaderTemplate>
@@ -147,14 +150,14 @@
 
                                 <DataGridTextColumn Header="姓名" Width="150" Binding="{Binding Student.Name}"/>
 
-                                <DataGridTextColumn Header="性别" Width="150" Binding="{Binding Student.Gender}"/>
+                                <DataGridTextColumn Header="性别" Width="150" Binding="{Binding Student.Gender,Converter={StaticResource GenderConverter}}"/>
 
-                                <DataGridTextColumn Header="班级" Width="150" Binding="{Binding Student.ClassId,Converter={StaticResource IntToStringConverter}}"/>
+                                <DataGridTextColumn Header="班级" Width="150" Binding="{Binding Student.ClassId, Converter= {StaticResource ClassIdConverter}}"/>
 
                                 <DataGridTemplateColumn Header="操作" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid>
+                                            <Grid DataContext="{Binding Student, Source={StaticResource Locator}}">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition/>
                                                     <ColumnDefinition/>
