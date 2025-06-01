@@ -30,10 +30,10 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// </summary>
         /// <param name="id">年级ID</param>
         /// <returns></returns>
-        public static bool DeleteGrade(int id)
+        public static bool DeleteGrade(int Id)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
-            data["id"] = id.ToString();
+            data["Id"] = Id.ToString();
             var result = Delete(UrlConfig.GRA_DELETEGRA, data);
             return int.Parse(result) == 1 ? true : false;
         }
@@ -54,10 +54,10 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Grades GetGrade(int id)
+        public static Grades GetGrade(int Id)
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
-            data["id"] = id.ToString();
+            data["Id"] = Id.ToString();
             var result = Get(UrlConfig.GRA_GETGRA, data);
             return HttpUtil.StrToObject<Grades>(result); // 反序列化
         }

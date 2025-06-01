@@ -19,7 +19,11 @@ namespace ManagerSystem.Utils.Converter
             int teacherId = (int)value;
             string teacherName = string.Empty;
             var teacher = TeacherHttpUtil.GetTeacher(teacherId);
-            if (teacher == null) return null;
+            if (teacher == null)
+            {
+                teacherName = "无";
+                return teacherName;
+            }
             teacherName = teacher.Name;
             return teacherName;
         }

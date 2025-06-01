@@ -11,7 +11,7 @@ namespace ManagerSystem.Entity.Dto
     public class GradeDto : ViewModelBase
     {
 
-        private Grades _Grade;
+        private Grades _Grade = new Grades();
         /// <summary>
         /// 年级
         /// </summary>

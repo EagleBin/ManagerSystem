@@ -69,8 +69,9 @@
                     <!--// 教师类别 //-->
                     <hc:ComboBox hc:InfoElement.Title="教师类别" hc:InfoElement.Placeholder="请输入教师类别" 
                                 FontWeight="Bold" Margin="0 5 0 0" Width="240" Height="32" 
-                                 ItemsSource="{Binding SearchTeacherTypeList}"
-                                SelectedValue="{Binding SearchTeacherType, Mode=TwoWay,Converter={StaticResource TeacherTypeConverter}}" Cursor="Hand">
+                                 ItemsSource="{Binding SearchTeacherTypeList}" 
+                                SelectedValue="{Binding SearchTeacherType, Mode=TwoWay,Converter={StaticResource TeacherTypeConverter}}" 
+                                 SelectedIndex="0" Cursor="Hand">
                     </hc:ComboBox>
 
                     <Button Command="{Binding SearchTeacherCommand}" Style="{StaticResource ButtonPrimary}" Width="73" Height="28"

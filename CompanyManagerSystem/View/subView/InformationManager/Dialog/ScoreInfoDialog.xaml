@@ -1,0 +1,192 @@
+﻿<UserControl x:Class="CompanyManagerSystem.View.subView.InformationManager.Dialog.ScoreInfoDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.InformationManager.Dialog"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:converter="clr-namespace:ManagerSystem.Utils.Converter;assembly=ManagerSystem.Utils"
+             mc:Ignorable="d" 
+             DataContext="{Binding Source={StaticResource Locator},Path=Score}"
+             d:DesignHeight="600" d:DesignWidth="600" Cursor="">
+    <UserControl.Resources>
+        <converter:GenderConverter x:Key="GenderConverter"/>
+        <converter:ClassIdConverter x:Key="ClassIdConverter"/>
+        <converter:StudentConverter x:Key="StudentConverter"/>
+        <converter:CourseConverter x:Key="CourseConverter"/>
+    </UserControl.Resources>
+    <!--// 关闭窗体触发器 //-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding ScoreInfoDialogUnloadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border Width="600" CornerRadius="3" Background="White" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="54"/>
+                <RowDefinition Height="500"/>
+                <RowDefinition Height="66"/>
+            </Grid.RowDefinitions>
+
+            <!--// 信息提示 //-->
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0 0 0 -25">
+                <StackPanel>
+                    <StackPanel hc:Growl.Token="ScoreInfoSuccessMsg" Panel.ZIndex="1" Margin="0 0 0 5"/>
+                    <StackPanel hc:Growl.Token="ScoreInfoWarningMsg" Panel.ZIndex="1" Margin="0 0 0 5"/>
+                    <StackPanel hc:Growl.Token="ScoreInfoErrorMsg" Panel.ZIndex="1" Margin="0 0 0 5"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--// 标题和关闭按钮 //-->
+            <Grid Margin="20 20 20 10">
+                <TextBlock Text="{Binding DialogTitle}" FontSize="18" Foreground="#303133" VerticalAlignment="Center"/>
+                <Button Style="{StaticResource closeDialogStyle}" Command="hc:ControlCommands.Close" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock Text="&#xeb6a;" FontFamily="/Themes/Style/#iconfont" FontSize="16"/>
+                </Button>
+            </Grid>
+
+            <!--// 内容 //-->
+            <ScrollViewer Grid.Row="1" Margin="20 30">
+                <StackPanel>
+
+                    <!--// 考次 //-->
+                    <UniformGrid Rows="1" Height="58">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <StackPanel Width="560" Cursor="">
+                                <hc:ComboBox Name="Examination" 
+                                             SelectedValue="{Binding DialogExaminationName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                             ItemsSource="{Binding DialogExaminationNameList}" 
+                                             hc:InfoElement.Title="考次" hc:InfoElement.Placeholder="请输入考次" 
+                                             GotFocus="Examination_GotFocus" LostFocus="Examination_LostFocus"
+                                             Cursor="Hand"
+                                             IsEnabled="{Binding DialogIsEnabled, Mode=TwoWay}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding DialogGradeChangedCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </hc:ComboBox>
+                                <TextBlock Name="ExaminationInfo" Text="考次不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <!--// 年级 //-->
+                    <UniformGrid Rows="1" Height="58">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <StackPanel Width="560" Cursor="">
+                                <hc:ComboBox Name="Grade" 
+                                             SelectedValue="{Binding DialogGradeName}" 
+                                             ItemsSource="{Binding DialogGradeNameList}" 
+                                             hc:InfoElement.Title="年级" hc:InfoElement.Placeholder="请输入年级" 
+                                             GotFocus="Grade_GotFocus" LostFocus="Grade_LostFocus"
+                                             IsEnabled="{Binding DialogIsEnabled, Mode=TwoWay}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding DialogGradeChangedCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </hc:ComboBox>
+                                <TextBlock Name="GradeInfo" Text="班级不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <!--// 班级 //-->
+                    <UniformGrid Rows="1" Height="58">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <StackPanel Width="560">
+                                <hc:ComboBox Name="Classes" 
+                                             SelectedValue="{Binding DialogClassName,Mode=TwoWay}" 
+                                             ItemsSource="{Binding DialogClassNameList}" 
+                                             hc:InfoElement.Title="班级" hc:InfoElement.Placeholder="请输入班级" 
+                                             GotFocus="Classes_GotFocus" LostFocus="Classes_LostFocus"
+                                             IsEnabled="{Binding DialogIsEnabled, Mode=TwoWay}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding DialogClassChangedCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </hc:ComboBox>
+                                <TextBlock Name="ClassesInfo" Text="班级不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <UniformGrid Rows="1">
+                        <!--// 学生名称 //-->
+                        <StackPanel>
+                            <hc:ComboBox x:Name="StudentName" 
+                                         SelectedValue="{Binding DialogStudentName, Mode=TwoWay}"
+                                         ItemsSource="{Binding DialogStudentNameList, Mode=TwoWay}"
+                                         hc:InfoElement.Title="学生名称" hc:InfoElement.Placeholder="请输入学生名称"
+                                         GotFocus="StudentName_GotFocus" LostFocus="StudentName_LostFocus"
+                                         IsEnabled="{Binding DialogIsEnabled, Mode=TwoWay}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding DialogStudentChangedCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </hc:ComboBox>
+                            <TextBlock Name="StudentNameInfo" Text="学生名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        </StackPanel>
+                    </UniformGrid>
+
+
+                    <UniformGrid Rows="1">
+                        <!--// 学生学号 //-->
+                        <StackPanel>
+                            <hc:TextBox x:Name="StudentId" Text="{Binding DialogStudentId, Mode=TwoWay}"
+                                        hc:InfoElement.Title="学生学号" hc:InfoElement.Placeholder="请输入学生名称"
+                                        IsEnabled="False"/>
+                            <TextBlock Name="InfoElementInfo" Text="学生名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        </StackPanel>
+                    </UniformGrid>
+                    
+                    <!--// 科目 //-->
+                    <UniformGrid Rows="1" Height="58">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <StackPanel Width="560">
+                                <hc:ComboBox Name="Course" 
+                                             SelectedValue="{Binding DialogCourseName,Mode=TwoWay}" 
+                                             ItemsSource="{Binding DialogCourseNameList}" 
+                                             hc:InfoElement.Title="科目" hc:InfoElement.Placeholder="请输入科目" 
+                                             GotFocus="Course_GotFocus" LostFocus="Course_LostFocus"
+                                             IsEnabled="{Binding DialogIsEnabled, Mode=TwoWay}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding DialogCourseChangedCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </hc:ComboBox>
+                                <TextBlock Name="CourseInfo" Text="科目不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <UniformGrid Rows="1">
+                        <!--// 成绩 //-->
+                        <StackPanel>
+                            <hc:TextBox x:Name="ScoreNumber" Text="{Binding DialogScoreNumber, Mode=TwoWay}"
+                                        hc:InfoElement.Title="成绩" hc:InfoElement.Placeholder="请输入学生成绩"
+                                        GotFocus="ScoreNumber_GotFocus" LostFocus="ScoreNumber_LostFocus"/>
+                            <TextBlock Name="ScoreNumberInfo" Text="学生名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--// 确认与取消 //-->
+            <Grid Grid.Row="2" Margin="20 10 20 20">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Button Content="确认" Command="{Binding SubmitScoreInfoCommand}" Style="{StaticResource ButtonPrimary}" 
+                            Width="74" Height="36" FontSize="14" Cursor="Hand"/>
+                    <Button Content="取 消" Command="hc:ControlCommands.Close" Style="{StaticResource ButtonDefault}"
+                            Width="74" Height="36" Margin="10 0 0 0" FontSize="14" Cursor="Hand"></Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

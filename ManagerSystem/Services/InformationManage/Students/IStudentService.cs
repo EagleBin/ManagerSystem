@@ -59,5 +59,21 @@ namespace ManagerSystem.Services
         /// <returns></returns>
         public Students GetStudentByName(string Name);
 
+        /// <summary>
+        /// 根据班级获取学生
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public PageRequest<Students> GetStudentByClass(int Id);
+
+        /// <summary>
+        /// 获取同班同名学生的个数
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="ClassId"></param>
+        /// <returns></returns>
+
+        public int GetClassExistStudentName(string Name, int ClassId);
+
     }
 }

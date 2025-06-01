@@ -108,7 +108,7 @@ namespace CompanyManagerSystem.ViewModel
             }
         }
 
-        private Visibility _LoadingButtonVisibility = Visibility.Hidden;
+        private Visibility _LoadingButtonVisibility = Visibility.Collapsed;
         /// <summary>
         /// 登陆中按钮显示
         /// </summary>
@@ -149,6 +149,8 @@ namespace CompanyManagerSystem.ViewModel
                 RaisePropertyChanged();
             }
         }
+
+
 
         #endregion
 
@@ -207,7 +209,7 @@ namespace CompanyManagerSystem.ViewModel
 
                     if (Code_Login.ToUpper().Trim() == CodeImage)
                     {
-                        LoginButtonVisibility = Visibility.Hidden; // 隐藏登录按钮
+                        LoginButtonVisibility = Visibility.Collapsed; // 隐藏登录按钮
                         LoadingButtonVisibility = Visibility.Visible; // 显示加载按钮
 
                         DelayLogin(loginWindow); // 登录
@@ -255,7 +257,7 @@ namespace CompanyManagerSystem.ViewModel
                 // Dispatcher负责管理线程的消息队列
                 Application.Current.Dispatcher.Invoke((Action)delegate
                 {
-                    LoginButtonVisibility = Visibility.Hidden;
+                    LoginButtonVisibility = Visibility.Collapsed;
                     LoadingButtonVisibility = Visibility.Visible; // 显示登录中
 
                     //根据从前端获取的账号和密码 获取当前登录对象
@@ -269,7 +271,7 @@ namespace CompanyManagerSystem.ViewModel
                         UserInfo.Instance.CurrentUser = loginUser; // 获取当前登录用户
                         UserInfo.Instance.CurrentUser.Password = ""; // 密码清空
                         UserInfo.Instance.CurrentRoles = UserHttpUtil.GetUserRole(loginUser.Id).items; // 获取用户权限列表
-                        
+
                         Dictionary<string, Menu> menuDic = new Dictionary<string, Menu>();
                         if (UserInfo.Instance.CurrentRoles != null && UserInfo.Instance.CurrentRoles.Count > 0)
                         {
@@ -286,7 +288,7 @@ namespace CompanyManagerSystem.ViewModel
                             // 添加用户所拥有的菜单
                             foreach (var item in menuDic)
                             {
-                                UserInfo.Instance.CurrentMenus.Add(item.Value); 
+                                UserInfo.Instance.CurrentMenus.Add(item.Value);
                             }
 
                         }

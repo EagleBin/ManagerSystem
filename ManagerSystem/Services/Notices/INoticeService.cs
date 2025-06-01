@@ -51,5 +51,11 @@ namespace ManagerSystem.Services.Notices
         /// <returns></returns>
         public PageRequest<Notice> GetNotices(string? noticeTitle, string? noticeStatus, string? startDate, string? endDate, int pageNum, int pageSize);
 
+        /// <summary>
+        /// 获取最新公告
+        /// </summary>
+        /// <returns></returns>
+        public Notice GetLatestNotice();
+
     }
 }

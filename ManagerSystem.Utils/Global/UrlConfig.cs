@@ -127,11 +127,14 @@ namespace ManagerSystem.Utils.Global
 
         public static string NoTICE_GETALLNOTICE = "api/Notice/GetAllNotice";
 
+        public static string NoTICE_GETLASNOTICE = "api/Notice/GetLatestNotice";
+
         public static string NOTICE_ADDNOTICE = "api/Notice/AddNotice";
 
         public static string NoTICE_UPDATENOTICE = "api/Notice/UpdateNotice";
 
         public static string NoTICE_DELETENOTICE = "api/Notice/DeleteNotice";
+
 
 
         #endregion
@@ -153,6 +156,10 @@ namespace ManagerSystem.Utils.Global
 
         public static string STU_GETSTUBYNAME = "api/Student/GetStudentByName";
 
+        public static string STU_GETSTUBYCLA = "api/Student/GetStudentByClass";
+
+        public static string STU_GETSTUNAMECOUNT = "api/Student/GetClassExistStudentName";
+
 
         #endregion
 
@@ -165,13 +172,21 @@ namespace ManagerSystem.Utils.Global
 
         public static string TEA_ADDTEA = "api/Teacher/AddTeacher";
 
+        public static string TEA_ADDCOU_TEA = "api/Teacher/AddCourses_Teachers";
+
         public static string TEA_UPDATETEA = "api/Teacher/UpdateTeacher";
 
         public static string TEA_DELETETEA = "api/Teacher/DeleteTeacher";
 
+        public static string TEA_DELETECOU_TEA = "api/Teacher/DeleteCourses_Teachers";
+
         public static string TEA_GETTEA = "api/Teacher/GetTeacher";
 
         public static string TEA_GETTEABYNAME = "api/Teacher/GetTeacherByName";
+
+        public static string TEA_GETTEA_COURBYCOU = "api/Teacher/GetTeacher_CourseByCourse";
+
+        public static string TEA_GETTEABYCOU = "api/Teacher/GetTeacherByCourse";
 
         #endregion
 
@@ -196,6 +211,13 @@ namespace ManagerSystem.Utils.Global
 
         public static string CLA_GETCLABYNAME = "api/Class/GetClassByName";
 
+        public static string CLA_GETCLABYGRA = "api/Class/GetClassByGrade";
+
+        public static string CLA_GETCLABYTEA = "api/Class/GetClassByHeadTeacher";
+
+        public static string CLA_GETTEACLABYCLA = "api/Class/GetTeachers_ClassesByClass";
+
+
 
 
         #endregion
@@ -215,11 +237,30 @@ namespace ManagerSystem.Utils.Global
 
         public static string GRA_GETGRA = "api/Grade/GetGrade";
 
-        public static string GRA_GETGRACLA = "api/Grade/GetGradeClass";
-
         public static string GRA_ExistName = "api/Grade/ExistName";
 
         public static string GRA_GETGRABYNAME = "api/Grade/GetGradeByName";
+
+        #endregion
+
+        // 考次
+        #region 考次
+
+        public static string EXAM_GETAllEXAM = "api/Examination/GetAllExamination";
+
+        public static string EXAM_GETEXAMS = "api/Examination/GetExaminations";
+                            
+        public static string EXAM_ADDEXAM = "api/Examination/AddExamination";
+                        
+        public static string EXAM_UPDATEEXAM = "api/Examination/UpdateExamination";
+                        
+        public static string EXAM_DELETEEXAM = "api/Examination/DeleteExamination";
+                         
+        public static string EXAM_GETEXAM = "api/Examination/GetExamination";
+                          
+        //public static string EXAM_ExistName = "api/Examination/ExistName";
+                         
+        public static string EXAM_GETEXAMBYNAME = "api/Examination/GetExaminationByName";
 
         #endregion
 
@@ -242,6 +283,10 @@ namespace ManagerSystem.Utils.Global
 
         public static string COURSE_GETCOURSEBYNAME = "api/Course/GetCourseByName";
 
+        public static string COURSE_GETCOURSEBYCLASSTYPE = "api/Course/GetCourseByClassType";
+
+        public static string COURSE_GETCOURSEBYType = "api/Course/GetCourseByType";
+
 
         #endregion
 
@@ -252,6 +297,10 @@ namespace ManagerSystem.Utils.Global
 
         public static string SCO_GETSCOS = "api/Score/GetScores";
 
+        public static string SCO_GETSCOSALL = "api/Score/GetScoresAll";
+
+        public static string SCO_GETSCOSSINGLE = "api/Score/GetScoresSingle";
+
         public static string SCO_ADDSCO = "api/Score/AddScore";
 
         public static string SCO_ADDCOUSCO = "api/Score/AddCOUScore";
@@ -260,7 +309,19 @@ namespace ManagerSystem.Utils.Global
 
         public static string SCO_DELETESCO = "api/Score/DeleteScore";
 
+        public static string SCO_DELETESCOBYSTU = "api/Score/DeleteAllScoreByStudent";
+
         public static string SCO_GETSCO = "api/Score/GetScore";
+
+        public static string SCO_GETSCOBYSTU = "api/Score/GetScoreByStudent";
+
+        public static string SCO_GETSCOBYCOU = "api/Score/GetScoreByCourse";
+
+        public static string SCO_GETSCOBYTEA = "api/Score/GetScoreByTeacher";
+
+        public static string SCO_GETSCOBYSTUANDCOUR = "api/Score/GetScoreByStuAndCourse";
+
+
 
 
         #endregion

@@ -5,19 +5,14 @@ using GalaSoft.MvvmLight.Messaging;
 using HandyControl.Controls;
 using ManagerSystem.Entity.Dto;
 using ManagerSystem.Entity.InformationManager;
-using ManagerSystem.Entity.SystemManager;
 using ManagerSystem.Utils.Http.InformationManager;
-using ManagerSystem.Utils.Http.SystemManager;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Input.StylusPlugIns;
 
 namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 {
@@ -26,16 +21,25 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 
         public GradeViewModel()
         {
+            // 获取多行数据
             Messenger.Default.Register<List<GradeDto>>(this, "SelectedGrades", gs => SelectedGrades = gs);
+            Messenger.Default.Register<List<Grades>>(this, "GradeChanged", gc => GradeChanged(gc)); // 年级更新的同时，更新搜索列表
+            // 刷新列表
             var gradeList = GradeHttpUtil.GetGrades(SearchName, CurrentPage, PerPageCount);
             RefreshGradeList(gradeList.items, gradeList.TotalCount);
 
+            // 清空搜索栏年级列表
             SearchGradeList.Clear();
             foreach (var item in gradeList.items)
             {
                 SearchGradeList.Add(new GradeDto() { Grade = item });
             }
+
+            // 初始化 弹窗年级级别
+            DialogGradeLevelNameList = new List<int> { 1, 2, 3 };
         }
+
+
         #region 属性
 
         #region 年级属性
@@ -101,7 +105,9 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
         }
 
         private GradeDto _SearchdGrade;
-
+        /// <summary>
+        /// 搜索的年级
+        /// </summary>
         public GradeDto SearchdGrade
         {
             get { return _SearchdGrade; }
@@ -165,6 +171,36 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                 RaisePropertyChanged();
             }
         }
+
+        private int _DialogGradeLevelName;
+        /// <summary>
+        /// 弹窗中的级别
+        /// </summary>
+        public int DialogGradeLevelName
+        {
+            get { return _DialogGradeLevelName; }
+            set
+            {
+                _DialogGradeLevelName = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private List<int> _DialogGradeLevelNameList = new List<int>();  
+        /// <summary>
+        /// 弹窗中的级别列表
+        /// </summary>
+        public List<int> DialogGradeLevelNameList
+        {
+            get { return _DialogGradeLevelNameList; }
+            set
+            {
+                _DialogGradeLevelNameList = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
 
         private string _DialogTitle;
         /// <summary>
@@ -258,16 +294,16 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 
         #region 其他属性
 
-        private Visibility _SearchPanelVis = Visibility.Visible;
+        private Visibility _SearchPanelVisibility = Visibility.Visible;
         /// <summary>
         /// 搜索框的可见性(默认可见)
         /// </summary>
-        public Visibility SearchPanelVis
+        public Visibility SearchPanelVisibility
         {
-            get { return _SearchPanelVis; }
+            get { return _SearchPanelVisibility; }
             set
             {
-                _SearchPanelVis = value;
+                _SearchPanelVisibility = value;
                 RaisePropertyChanged();
             }
         }
@@ -316,6 +352,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                         // 刷新列表
                                         var gradeList = GradeHttpUtil.GetGrades(SearchName, CurrentPage, PerPageCount);
                                         RefreshGradeList(gradeList.items, gradeList.TotalCount);
+                                        Messenger.Default.Send(gradeList.items, "GradeChanged");
                                         return;
                                     }
                                     else
@@ -353,6 +390,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                     // 刷新列表
                                     var gradeList = GradeHttpUtil.GetGrades(SearchName, CurrentPage, PerPageCount);
                                     RefreshGradeList(gradeList.items, gradeList.TotalCount);
+                                    Messenger.Default.Send(gradeList.items, "GradeChanged");
                                     return;
                                 }
                             }
@@ -405,9 +443,10 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                     (_ResetConditionalSearchGradeCommand = new RelayCommand(() =>
                     {
                         SearchName = null;
+                        SearchdGrade = new GradeDto();
                         CurrentPage = 1;
                         // 刷新列表
-                        var gradeList = GradeHttpUtil.GetGrades(SearchName, CurrentPage, PerPageCount);
+                        var gradeList = GradeHttpUtil.GetGrades(SearchdGrade.Grade.Name, CurrentPage, PerPageCount);
                         RefreshGradeList(gradeList.items, gradeList.TotalCount);
                         return;
                     }));
@@ -447,6 +486,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                     (_GradeInfoDialogLoadedCommand = new RelayCommand(() =>
                     {
                         DialogTitle = ""; // 清空标题
+                        
                         DialogGrade = new GradeDto(); // 重新 赋值 年级实例
                     }));
             }
@@ -491,7 +531,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                         // 使用直接赋值，会指向同一个对象实例
                         // 使用使用Clone()创建副本，形成两个独立的对象，修改对话框中的数据不会影响原始数据。
                         DialogGrade.Grade = (Grades)SelectedGrade.Grade.Clone();
-                        string name = DialogGrade.Grade.Name;
+                        DialogGradeLevelName = DialogGrade.Grade.Level;
                         // 打开窗体
                         gradeInfoDialog = HandyControl.Controls.Dialog.Show<GradeInfoDialog>();
                     }));
@@ -529,7 +569,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                     HandyControl.Controls.Growl.Warning("年级名称已经存在！", "GradeInfoWarningMsg");
                                     return;
                                 }
-
+                                DialogGrade.Grade.Level = DialogGradeLevelName; // 获取级别
                                 DialogGrade.Grade.insertTime = DateTime.Now; // 获取时间
                                 var id = GradeHttpUtil.AddGrade(DialogGrade.Grade); // 添加年级
                                 // 是否添加成功
@@ -541,6 +581,10 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                     var gradeList = GradeHttpUtil.GetGrades(SearchName, CurrentPage, PerPageCount);
                                     RefreshGradeList(gradeList.items, gradeList.TotalCount);
                                     HandyControl.Controls.Growl.Success($"年级添加成功！", "GradeSuccessMsg");
+
+                                    // 向 信息中心 发送 信息 ，说明改变年级发生改变
+                                    Messenger.Default.Send(gradeList.items, "GradeChanged"); 
+
                                     return;
                                 }
                                 else
@@ -552,6 +596,12 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                             // 修改年级
                             else if (DialogTitle == "修改年级")
                             {
+                                if (GradeHttpUtil.ExistName(DialogGrade.Grade.Name))
+                                {
+                                    HandyControl.Controls.Growl.Warning("年级名称已经存在！", "GradeInfoWarningMsg");
+                                    return;
+                                }
+                                DialogGrade.Grade.Level = DialogGradeLevelName; // 获取级别
                                 var resultEdit = GradeHttpUtil.UpdateGrade(DialogGrade.Grade);
 
                                 if (resultEdit)
@@ -561,6 +611,10 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                     gradeInfoDialog.Close();
 
                                     HandyControl.Controls.Growl.Success($"修改成功！", "GradeSuccessMsg");
+
+                                    // 向 信息中心 发送 信息 ，说明改变年级发生改变
+                                    Messenger.Default.Send(gradeList.items, "GradeChanged");
+
                                     return;
                                 }
                                 else
@@ -639,7 +693,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                 return _ChangeSearchPanelVisCommand ??
                     (_ChangeSearchPanelVisCommand = new RelayCommand(() =>
                     {
-                        SearchPanelVis = (SearchPanelVis == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible);
+                        SearchPanelVisibility = (SearchPanelVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible);
                     }));
             }
         }
@@ -674,24 +728,31 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 
             GradeList.Clear();
 
-            //var allStudent = StudentHttpUtil.GetAllStudent();
-            //var allClass = ClassHttpUtil.GetAllClass();
-            //allGradeList.ForEach(g =>
-            //{
-            //    var classList = allClass.items.Where(c => c.GradeId == g.Id);
-            //    List<Students> studentList = new List<Students>();
-            //    foreach (var item in classList)
-            //    {
-            //        studentList = allStudent.items.Where(s => s.ClassId == item.Id).ToList();
-            //    }
-
-            //    GradeList.Add(new GradeDto() { Grade = g,GradePersonCount = studentList.Count });
-            //});
-
-            allGradeList.ForEach(g =>
+            // 获取学生总数
+            
+            foreach (var grade in allGradeList)
             {
-                GradeList.Add(new GradeDto() { Grade = g, GradePersonCount = 0 });
-            });
+                int studentCount = 0;
+                foreach (var classes in ClassHttpUtil.GetClassByGrade(grade.Id).items)
+                {
+                    studentCount += StudentHttpUtil.GetStudentByClass(classes.Id).TotalCount; // 获取学生总数
+                }
+                GradeList.Add(new GradeDto() { Grade = grade, GradePersonCount = studentCount }); // 添加到列表中
+            }
+        }
+
+        /// <summary>
+        /// 年级改变时
+        /// </summary>
+        /// <param name="gc"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        private void GradeChanged(List<Grades> gc)
+        {
+            foreach (var item in gc)
+            {
+                SearchGradeList.Add(new GradeDto() { Grade =  item });
+            }
         }
 
         #endregion

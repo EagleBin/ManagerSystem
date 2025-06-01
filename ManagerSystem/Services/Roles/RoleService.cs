@@ -8,12 +8,12 @@ namespace ManagerSystem.Services.Roles
     {
         public int AddRole(Role role)
         {
-            return MySqlHelper<Role>.GetInstance().CurrentDb.Insert(role) ? 1 : 0;
+            return MySqlHelper<Role>.GetInstance().CurrentDb.AsInsertable(role).ExecuteReturnIdentity();
         }
 
         public int AddRoleMenu(RoleMenu roleMenu)
         {
-            return MySqlHelper<RoleMenu>.GetInstance().CurrentDb.Insert(roleMenu) ? 1 : 0;
+            return MySqlHelper<RoleMenu>.GetInstance().CurrentDb.AsInsertable(roleMenu).ExecuteReturnIdentity();
         }
 
         public int DeleteRole(int id)

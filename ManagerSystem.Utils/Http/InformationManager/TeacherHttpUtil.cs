@@ -1,4 +1,6 @@
-﻿using ManagerSystem.Entity.InformationManager;
+﻿using HandyControl.Controls;
+using ManagerSystem.Entity.InformationManager;
+using ManagerSystem.Entity.InformationManager.Link;
 using ManagerSystem.Utils.Global;
 using ManagerSystem.Utils.Helper;
 using System;
@@ -6,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ManagerSystem.Utils.Http.InformationManager
 {
@@ -26,6 +29,17 @@ namespace ManagerSystem.Utils.Http.InformationManager
         }
 
         /// <summary>
+        /// 添加 课程_教师表
+        /// </summary>
+        /// <param name="courses_Teachers"></param>
+        /// <returns></returns>
+        public static int AddCourses_Teachers(Courses_Teachers courses_Teachers)
+        {
+            var result = Post<Courses_Teachers>(UrlConfig.TEA_ADDCOU_TEA, courses_Teachers);
+            return int.Parse(result);
+        }
+
+        /// <summary>
         /// 删除教师
         /// </summary>
         /// <param name="teacherId">教师ID</param>
@@ -33,8 +47,23 @@ namespace ManagerSystem.Utils.Http.InformationManager
         public static bool DeleteTeacher(int teacherId)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
-            data["teacherId"] = teacherId.ToString();
+            data["Id"] = teacherId.ToString();
             var result = Delete(UrlConfig.TEA_DELETETEA, data);
+            return int.Parse(result) == 1 ? true : false;
+        }
+
+        /// <summary>
+        /// 删除 课程_教师 中间表
+        /// </summary>
+        /// <param name="CourseId"></param>
+        /// <param name="TeacherId"></param>
+        /// <returns></returns>
+        public static bool DeleteCourses_Teachers(int CourseId, int TeacherId)
+        {
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data["CourseId"] = CourseId.ToString();
+            data["TeacherId"] = TeacherId.ToString();
+            var result = Delete(UrlConfig.TEA_DELETECOU_TEA, data);
             return int.Parse(result) == 1 ? true : false;
         }
 
@@ -52,12 +81,12 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// <summary>
         /// 查询单个教师信息
         /// </summary>
-        /// <param name="teacherId"></param>
+        /// <param name="teacherId">教师Id</param>
         /// <returns></returns>
         public static Teachers GetTeacher(int teacherId)
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
-            data["teacherId"] = teacherId.ToString();
+            data["Id"] = teacherId.ToString();
             var result = Get(UrlConfig.TEA_GETTEA, data);
             return HttpUtil.StrToObject<Teachers>(result); // 反序列化
         }
@@ -105,6 +134,32 @@ namespace ManagerSystem.Utils.Http.InformationManager
             data["Name"] = Name;
             var result = Get(UrlConfig.TEA_GETTEABYNAME, data);
             return HttpUtil.StrToObject<Teachers>(result);
+        }
+
+        /// <summary>
+        /// 根据 课程Id 查询 课程_教师表
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public static Courses_Teachers GetTeacher_CourseByCourse(int Id)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["Id"] = Id;
+            var result = Get(UrlConfig.TEA_GETTEA_COURBYCOU, data);
+            return HttpUtil.StrToObject<Courses_Teachers>(result);
+        }
+
+        /// <summary>
+        /// 根据课程名称获取教师列表
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public static PageRequest<Entity.InformationManager.Teachers> GetTeacherByCourse(string Name)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["Name"] = Name;
+            var result = Get(UrlConfig.TEA_GETTEABYCOU, data);
+            return HttpUtil.StrToObject<PageRequest<Entity.InformationManager.Teachers>>(result);
         }
 
     }

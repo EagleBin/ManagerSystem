@@ -1,4 +1,5 @@
 ﻿using ManagerSystem.Entity.InformationManager;
+using ManagerSystem.Entity.InformationManager.Link;
 using ManagerSystem.Services.InformationManage.Teachers;
 using ManagerSystem.Utils.Helper;
 using Microsoft.AspNetCore.Http;
@@ -24,10 +25,22 @@ namespace ManagerSystem.Controllers
             return _teacherService.AddTeacher(teacher);
         }
 
-        [HttpDelete]
-        public int DeleteTeacher(int teacherId)
+        [HttpPost]
+        public int AddCourses_Teachers(Courses_Teachers courses_Teachers)
         {
-            return _teacherService.DeleteTeacher(teacherId);
+            return _teacherService.AddCourses_Teachers(courses_Teachers);
+        }
+
+        [HttpDelete]
+        public int DeleteTeacher(int Id)
+        {
+            return _teacherService.DeleteTeacher(Id);
+        }
+
+        [HttpDelete]
+        public int DeleteCourses_Teachers(int CourseId, int TeacherId)
+        {
+            return _teacherService.DeleteCourses_Teachers(CourseId, TeacherId);
         }
 
         [HttpPut]
@@ -37,9 +50,15 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpGet]
-        public Teachers GetTeacher(int teacherId)
+        public Teachers GetTeacher(int Id)
         {
-            return _teacherService.GetTeacher(teacherId);
+            return _teacherService.GetTeacher(Id);
+        }
+
+        [HttpGet]
+        public Teachers GetTeacherByName(string? Name)
+        {
+            return _teacherService.GetTeacherByName(Name);
         }
 
         [HttpGet]
@@ -52,6 +71,18 @@ namespace ManagerSystem.Controllers
         public PageRequest<Teachers> GetTeachers(string? Name, string? Age, string? Phone, string? Subject, int IsHeadTeacher, int PageNum, int PageSize)
         {
             return _teacherService.GetTeachers(Name, Age, Phone, Subject, IsHeadTeacher, PageNum, PageSize);
+        }
+
+        [HttpGet]
+        public Courses_Teachers GetTeacher_CourseByCourse(int Id)
+        {
+            return _teacherService.GetTeacher_CourseByCourse(Id);
+        }
+
+        [HttpGet]
+        public PageRequest<Teachers> GetTeacherByCourse(string? Name)
+        {
+           return _teacherService.GetTeacherByCourse(Name);
         }
     }
 }

@@ -24,5 +24,31 @@ namespace CompanyManagerSystem.View.subView.InformationManager
         {
             InitializeComponent();
         }
+
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var dataGrid = sender as DataGrid;
+            if (dataGrid != null)
+            {
+                // 调用上述调整列宽的方法
+                AdjustColumnWidths(dataGrid);
+            }
+        }
+
+        private void AdjustColumnWidths(DataGrid dataGrid)
+        {
+            if (dataGrid == null || dataGrid.Columns.Count == 0) return;
+            double totalWidth = dataGrid.ActualWidth - dataGrid.RowHeaderWidth;
+            double columnWidth = totalWidth / dataGrid.Columns.Count;
+            foreach (var column in dataGrid.Columns)
+            {
+                column.Width = new DataGridLength(columnWidth);
+            }
+        }
     }
 }

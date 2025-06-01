@@ -3,7 +3,9 @@ using ManagerSystem.Services;
 using ManagerSystem.Services.Departments;
 using ManagerSystem.Services.InformationManage.Classes;
 using ManagerSystem.Services.InformationManage.Courses;
+using ManagerSystem.Services.InformationManage.ExaminationServices;
 using ManagerSystem.Services.InformationManage.Grades;
+using ManagerSystem.Services.InformationManage.Scores;
 using ManagerSystem.Services.InformationManage.Students;
 using ManagerSystem.Services.InformationManage.Teachers;
 using ManagerSystem.Services.Menus;
@@ -42,6 +44,8 @@ namespace ManagerSystem
             builder.Services.AddScoped<ITeacherService, TeacherService>();
             builder.Services.AddScoped<IStudentService, StudentService>();
             builder.Services.AddScoped<ICourseService, CourseService>();
+            builder.Services.AddScoped<IScoreService, ScoreService>();
+            builder.Services.AddScoped<IExaminationService, ExaminationService>();
 
 
 

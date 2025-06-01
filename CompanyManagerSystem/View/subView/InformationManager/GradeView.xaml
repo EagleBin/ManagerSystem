@@ -71,8 +71,7 @@
                             </Button>
 
                             <!--// 修改 //-->
-                            <Button Command="{Binding EditGradeInfoCommand}" Style="{StaticResource EditButtonStyle}" Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand"
-                                    IsEnabled="{Binding SelectedRoles, Converter={StaticResource ObjectToBoolConverter},ConverterParameter=EditBtnEnabled}">
+                            <Button Command="{Binding EditGradeInfoCommand}" Style="{StaticResource EditButtonStyle}" Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand">
                                 <StackPanel Orientation="Horizontal" >
                                     <TextBlock Margin="-5 0 5 0" FontSize="14" Text="&#xe8cf;" FontFamily="/Themes/Style/#iconfont"
                                                VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -82,8 +81,7 @@
 
                             <!--// 删除 //-->
                             <Button Command="{Binding DeleteGradeInfoCommand}" CommandParameter="DeleteNotOnlyOneGrade"
-                                    Style="{StaticResource DelButtonStyle}" Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand" 
-                                    IsEnabled="{Binding SelectedRole, Converter={StaticResource Object2BooleanConverter}}">
+                                    Style="{StaticResource DelButtonStyle}" Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand" >
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Margin="-5 0 5 0" FontSize="14" Text="&#xe62d;" FontFamily="/Themes/Style/#iconfont"
                                                VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -135,7 +133,7 @@
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="年级名称" Width="200" Binding="{Binding Grade.Name}"/>
-                                <DataGridTextColumn Header="年级总人数" Width="200" Binding="{Binding Grade.GradePersonCount}"/>
+                                <DataGridTextColumn Header="年级总人数" Width="200" Binding="{Binding GradePersonCount}"/>
                                 
                                 <DataGridTemplateColumn Header="操作" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -148,7 +146,7 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <!--// 详情 //-->
-                                                <Button Grid.Column="0" Command="{Binding ShowGradeInfoCommand}" Style="{StaticResource OperateButtonStyle}" 
+                                                <Button Grid.Column="0"  Style="{StaticResource OperateButtonStyle}" 
                                                         Margin="5 0" Width="39" Height="28" Cursor="Hand">
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Margin="-5 0 2 0" FontSize="12" Text="&#xe8cf;" FontFamily="/Themes/Style/#iconfont" 

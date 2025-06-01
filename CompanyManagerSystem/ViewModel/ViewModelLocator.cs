@@ -64,6 +64,15 @@ namespace CompanyManagerSystem.ViewModel
             SimpleIoc.Default.Register<MenuViewModel>();
             SimpleIoc.Default.Register<NoticeViewModel>();
             SimpleIoc.Default.Register<TeacherViewModel>();
+            SimpleIoc.Default.Register<ScoreViewModel>();
+        }
+
+        public ScoreViewModel Score
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ScoreViewModel>();
+            }
         }
 
         public TeacherViewModel Teacher

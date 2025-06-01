@@ -11,7 +11,7 @@ namespace ManagerSystem.Services.InformationManage.Grades
     {
         public int AddGrade(Entity.InformationManager.Grades grade)
         {
-            return MySqlHelper<Entity.InformationManager.Grades>.GetInstance().CurrentDb.Insert(grade) ? 1 : 0;
+            return MySqlHelper<Entity.InformationManager.Grades>.GetInstance().CurrentDb.AsInsertable(grade).ExecuteReturnIdentity();
         }
 
         public int DeleteGrade(int id)

@@ -11,7 +11,7 @@ namespace ManagerSystem.Services.Menus
     {
         public int AddMenu(Menu menu)
         {
-            return MySqlHelper<Menu>.GetInstance().CurrentDb.Insert(menu) ? 1 : 0;
+            return MySqlHelper<Menu>.GetInstance().CurrentDb.AsInsertable(menu).ExecuteReturnIdentity();
         }
 
         public int DeleteMenu(int id)

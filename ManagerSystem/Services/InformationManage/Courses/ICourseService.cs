@@ -56,5 +56,20 @@ namespace ManagerSystem.Services.InformationManage.Courses
         /// <param name="Name"></param>
         /// <returns></returns>
         public Entity.InformationManager.Courses GetCourseByName(string Name);
+
+        /// <summary>
+        /// 获取某学科类型班级
+        /// </summary>
+        /// <param name="ClassType"></param>
+        /// <returns></returns>
+        public PageRequest<Entity.InformationManager.Courses> GetCourseByClassType(int ClassType);
+
+        /// <summary>
+        /// 获取某类学科
+        /// </summary>
+        /// <param name="ClassType"></param>
+        /// <returns></returns>
+        public List<Entity.InformationManager.Courses> GetCourseByType(int CourseType);
+
     }
 }

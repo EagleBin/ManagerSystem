@@ -30,9 +30,9 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpDelete]
-        public int DeleteGrade(int gradeId)
+        public int DeleteGrade(int Id)
         {
-            return _gradeService.DeleteGrade(gradeId);
+            return _gradeService.DeleteGrade(Id);
         }
 
         [HttpPut]
@@ -42,9 +42,9 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpGet]
-        public Grades GetGrade(int id)
+        public Grades GetGrade(int Id)
         {
-            return _gradeService.GetGrade(id);
+            return _gradeService.GetGrade(Id);
         }
 
         [HttpGet]

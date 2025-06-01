@@ -14,6 +14,7 @@ using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using HandyControl.Controls;
 using CompanyManagerSystem.View.subView.InformationManager.Dialog;
+using ManagerSystem.Entity.InformationManager.Link;
 
 namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 {
@@ -28,8 +29,8 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
             SearchCourseTypeList = new List<string>() { "全部学科", "普通学科", "理科", "文科" };
             DialogCourseTypeList = new List<string>() {"普通学科", "理科", "文科" };
 
-            // 遍历获取所有课程
-            foreach (var item in CourseHttpUtil.GetAllCourse().items)
+            // 遍历分页获取所有课程
+            foreach (var item in CourseHttpUtil.GetCourses(null,4,1,20).items)
             {
                 CourseList.Add(new CourseDto() { Course = item });
             }
@@ -308,15 +309,32 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                             // 删除单个课程
                             if (para == "DeleteOnlyOneCourse")
                             {
-                                var deleteCourse = SelectedCourse;
-                                var resultDialog = HandyControl.Controls.MessageBox.Show($"是否删除名为[{deleteCourse.Course.Name}]的课程?", "提示",
+                                var resultDialog = HandyControl.Controls.MessageBox.Show($"删除名为[{SelectedCourse.Course.Name}]的课程, 同时将会删除相关学生的所有成绩以及教师教学科目,是否继续? ", "提示",
                                     MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                // 确认删除
                                 if (resultDialog == MessageBoxResult.Yes)
                                 {
-                                    var resultDelete = CourseHttpUtil.DeleteCourse(deleteCourse.Course.Id);
+                                    var resultDelete = CourseHttpUtil.DeleteCourse(SelectedCourse.Course.Id); // 删除课程
+                                    // 删除成功
                                     if (resultDelete)
                                     {
-                                        HandyControl.Controls.Growl.Success($"成功删除名为[{deleteCourse.Course.Name}]的课程！", "CourseSuccessMsg");
+                                        // 删除相关的表数据 (成绩表数据)
+                                        foreach (var item in ScoreHttpUtil.GetScoreByCourse(SelectedCourse.Course.Name).items) // 获取当前课程的全部成绩
+                                        {
+                                            ScoreHttpUtil.DeleteScore(item.Id); // 删除 相关课程的全部成绩数据
+                                        }
+
+                                        // 修改相关教师数据 (将教师的课程修改为NULL)
+                                        foreach (var item in TeacherHttpUtil.GetTeacherByCourse(DialogCourse.Course.Name).items)
+                                        {
+                                            item.Subject = "NULL";
+                                            TeacherHttpUtil.UpdateTeacher(item);
+                                            // 删除教师_课程中间表
+                                            TeacherHttpUtil.DeleteCourses_Teachers(DialogCourse.Course.Id, item.Id);
+                                            // 添加教师_课程中间表
+                                            TeacherHttpUtil.AddCourses_Teachers(new Courses_Teachers() { CourseId = 14, TeacherId = item.Id, insertTime = DateTime.Now });
+                                        }
+                                        HandyControl.Controls.Growl.Success($"成功删除名为[{SelectedCourse.Course.Name}]的课程！", "CourseSuccessMsg");
                                         // 刷新列表
                                         var courseList = CourseHttpUtil.GetCourses(SearchCourseName, SearchdCourseType, CurrentPage, PerPageCount);
                                         RefreshCourseList(courseList.items, courseList.TotalCount);
@@ -351,6 +369,23 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                         else
                                         {
                                             successCount++;
+
+                                            // 删除相关的表数据 (成绩表数据)
+                                            foreach (var item in ScoreHttpUtil.GetScoreByCourse(courseDto.Course.Name).items) // 获取当前课程的全部成绩
+                                            {
+                                                ScoreHttpUtil.DeleteScore(item.Id); // 删除 相关课程的全部成绩数据
+                                            }
+
+                                            // 修改相关教师数据 (将教师的课程修改为NULL)
+                                            foreach (var item in TeacherHttpUtil.GetTeacherByCourse(courseDto.Course.Name).items)
+                                            {
+                                                item.Subject = "NULL";
+                                                TeacherHttpUtil.UpdateTeacher(item);
+                                                // 删除教师_课程中间表
+                                                TeacherHttpUtil.DeleteCourses_Teachers(courseDto.Course.Id, item.Id);
+                                                // 添加教师_课程中间表
+                                                TeacherHttpUtil.AddCourses_Teachers(new Courses_Teachers() { CourseId = 14, TeacherId = item.Id, insertTime = DateTime.Now });
+                                            }
                                         }
                                     }
                                     HandyControl.Controls.Growl.Success($"成功删除{successCount}个课程,失败删除{errorCount}个课程");

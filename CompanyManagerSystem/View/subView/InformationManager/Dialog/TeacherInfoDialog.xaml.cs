@@ -69,31 +69,112 @@ namespace CompanyManagerSystem.View.subView.InformationManager.Dialog
             }
         }
 
+        private void teacherType_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void teacherType_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (teacherType.Text == "")
+            {
+                accountText.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f56c6c"));
+                teacherTypeInfo.Visibility = System.Windows.Visibility.Visible;
+            }
+            if (accountText.Text != "")
+            {
+                teacherType.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E0E0E0"));
+                teacherTypeInfo.Visibility = System.Windows.Visibility.Hidden;
+            }
+        }
+
+        private void classNameList_1_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (className_1.Text == "")
+            {
+                className_1.Text = "";
+            }
+        }
+
+        private void classNameList_1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (className_1.Visibility == Visibility.Visible)
+            {
+                if (className_1.Text == "")
+                {
+                    className_1.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f56c6c"));
+                    classNameInfo_1.Visibility = System.Windows.Visibility.Visible;
+                }
+                if (className_1.Text != "")
+                {
+                    className_1.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E0E0E0"));
+                    classNameInfo_1.Visibility = System.Windows.Visibility.Hidden;
+                }
+            }
+        }
+
+        private void classNameList_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (className_2.Text == "")
+            {
+                className_2.Text = "";
+            }
+        }
+
+        private void classNameList_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (className_2.Visibility == Visibility.Visible)
+            {
+                if (className_2.Text == "")
+                {
+                    className_2.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f56c6c"));
+                    classNameInfo_2.Visibility = System.Windows.Visibility.Visible;
+                }
+                if (className_2.Text != "")
+                {
+                    className_2.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E0E0E0"));
+                    classNameInfo_2.Visibility = System.Windows.Visibility.Hidden;
+                }
+            }
+        }
+
+        private void hasClassName_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+            if (hasClassName.Text == "")
+            {
+                hasClassName.Text = "";
+            }
+        }
+
+        private void hasClassName_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+            if (hasClassName.Visibility == Visibility.Visible)
+            {
+                if (hasClassName.Text == "")
+                {
+                    hasClassName.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f56c6c"));
+                    hasClassNameInfo.Visibility = System.Windows.Visibility.Visible;
+                }
+                if (hasClassName.Text != "")
+                {
+                    hasClassName.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E0E0E0"));
+                    hasClassNameInfo.Visibility = System.Windows.Visibility.Hidden;
+                }
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             TeacherNameGotFocus(sender, e);
             GradeLostFocus(sender, e);
             TeacherNameLostFocus(sender, e);
-            classType_LostFocus(sender, e);
+            teacherType_LostFocus(sender, e);
+            classNameList_LostFocus(sender, e);
+            hasClassName_LostFocus(sender, e);
         }
 
-        private void classType_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void classType_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (classType.Text == "")
-            {
-                accountText.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f56c6c"));
-                classTypeInfo.Visibility = System.Windows.Visibility.Visible;
-            }
-            if (accountText.Text != "")
-            {
-                classType.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E0E0E0"));
-                classTypeInfo.Visibility = System.Windows.Visibility.Hidden;
-            }
-        }
+        
     }
 }

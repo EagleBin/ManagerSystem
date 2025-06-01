@@ -4,6 +4,7 @@ using MySqlConnector;
 using ManagerSystem.Data;
 using System.Drawing.Printing;
 using ManagerSystem.Entity.InformationManager.Link;
+using SqlSugar;
 
 namespace ManagerSystem.Services.InformationManage.Students
 {
@@ -11,7 +12,7 @@ namespace ManagerSystem.Services.InformationManage.Students
     {
         public int AddStudent(Entity.InformationManager.Students student)
         {
-            return MySqlHelper<Entity.InformationManager.Students>.GetInstance().CurrentDb.Insert(student) ? 1 : 0;
+            return MySqlHelper<Entity.InformationManager.Students>.GetInstance().CurrentDb.AsInsertable(student).ExecuteReturnIdentity();
         }
      
         public int DeleteStudent(int id)
@@ -52,6 +53,18 @@ namespace ManagerSystem.Services.InformationManage.Students
         public Entity.InformationManager.Students GetStudentByName(string Name)
         {
             return MySqlHelper<Entity.InformationManager.Students>.GetInstance().CurrentDb.GetSingleAsync(n=>n.Name == Name).Result;
+        }
+
+        public PageRequest<Entity.InformationManager.Students> GetStudentByClass(int Id)
+        {
+            var studentList = MySqlHelper<Entity.InformationManager.Students>.GetInstance().CurrentDb.GetListAsync(c=>c.ClassId == Id).Result;
+            return new PageRequest<Entity.InformationManager.Students> { items = studentList, TotalCount = studentList.Count };
+        }
+
+        public int GetClassExistStudentName(string Name, int ClassId)
+        {
+            var studentList = MySqlHelper<Entity.InformationManager.Students>.GetInstance().CurrentDb.GetListAsync(s=>s.Name == Name && s.ClassId == ClassId).Result;
+            return studentList.Count;
         }
     }
 }

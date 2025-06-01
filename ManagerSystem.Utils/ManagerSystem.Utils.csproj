@@ -66,19 +66,24 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\AddOrEditClassConverter.cs" />
     <Compile Include="Converter\ClassIdConverter.cs" />
     <Compile Include="Converter\ClassTypeConverter.cs" />
+    <Compile Include="Converter\CourseConverter.cs" />
     <Compile Include="Converter\CourseTypeConverter.cs" />
     <Compile Include="Converter\GenderConverter.cs" />
     <Compile Include="Converter\GradeIdConverter.cs" />
     <Compile Include="Converter\HeadTeacherConverter.cs" />
     <Compile Include="Converter\ObjectToBoolConverter.cs" />
+    <Compile Include="Converter\SingleAndAllConverter.cs" />
+    <Compile Include="Converter\StudentConverter.cs" />
     <Compile Include="Converter\TeacherTypeConverter.cs" />
     <Compile Include="Global\GlobalDic.cs" />
     <Compile Include="Global\UrlConfig.cs" />
     <Compile Include="Global\UserInfo.cs" />
     <Compile Include="Helper\CheckComboBoxHelper.cs" />
     <Compile Include="Helper\ImageFormatConvertHelper.cs" />
+    <Compile Include="Helper\NumberValidator.cs" />
     <Compile Include="Helper\PageRequest.cs" />
     <Compile Include="Helper\PasswordBoxHelper.cs" />
     <Compile Include="Helper\TreeListHelper.cs" />
@@ -86,6 +91,7 @@
     <Compile Include="HttpUtil.cs" />
     <Compile Include="Http\InformationManager\ClassHttpUtil.cs" />
     <Compile Include="Http\InformationManager\CourseHttpUtil.cs" />
+    <Compile Include="Http\InformationManager\ExaminationHttpUtil.cs" />
     <Compile Include="Http\InformationManager\GradeHttpUtil.cs" />
     <Compile Include="Http\InformationManager\ScoreHttpUtil.cs" />
     <Compile Include="Http\InformationManager\StudentHttpUtil.cs" />

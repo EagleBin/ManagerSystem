@@ -61,5 +61,17 @@ namespace ManagerSystem.Controllers
         {
             return _courseService.GetAllCourse();
         }
+
+        [HttpGet]
+        public PageRequest<Entity.InformationManager.Courses> GetCourseByClassType(int ClassType)
+        {
+            return _courseService.GetCourseByClassType(ClassType);
+        }
+
+        [HttpGet]
+        public List<Entity.InformationManager.Courses> GetCourseByType(int CourseType)
+        {
+            return _courseService.GetCourseByType(CourseType);
+        }
     }
 }

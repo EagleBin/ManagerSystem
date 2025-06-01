@@ -20,7 +20,7 @@ namespace ManagerSystem.Services.Notices
         public int AddNotice(Notice notice)
         {
             notice.insertTime = DateTime.Now;
-            return MySqlHelper<Notice>.GetInstance().CurrentDb.Insert(notice) ? 1 : 0;
+            return MySqlHelper<Notice>.GetInstance().CurrentDb.AsInsertable(notice).ExecuteReturnIdentity();
         }
 
         /// <summary>
@@ -93,6 +93,18 @@ namespace ManagerSystem.Services.Notices
         public int UpdateNotice(Notice notice)
         {
             return MySqlHelper<Notice>.GetInstance().CurrentDb.Update(notice) ? 1 : 0;
+        }
+
+        /// <summary>
+        /// 获取最新公告
+        /// </summary>
+        /// <returns></returns>
+        public Notice GetLatestNotice()
+        {
+            return MySqlHelper<Notice>.GetInstance().Db.Queryable<Notice>()
+                .Where(c=>c.NoticeStatus == true && c.insertTime < DateTime.Now)
+                .OrderByDescending(c=>c.insertTime)
+                .FirstAsync().Result;
         }
     }
 }

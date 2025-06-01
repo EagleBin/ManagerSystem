@@ -88,5 +88,16 @@ namespace ManagerSystem.Controllers
         {
             return _noticeService.GetNotices(noticeTitle, noticeStatus, starDate, endDate, PageNum, PageSize);
         }
+
+        /// <summary>
+        /// 获取最新公告
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public Notice GetLatestNotice()
+        {
+            return _noticeService.GetLatestNotice();
+        }
+
     }
 }

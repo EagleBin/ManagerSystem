@@ -82,8 +82,8 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                             <StackPanel Width="560">
                                 <hc:ComboBox Name="Classes" 
-                                             SelectedValue="{Binding DialogStudent.Student.ClassId,Mode=TwoWay,Converter={StaticResource ClassIdConverter}}" 
-                                             ItemsSource="{Binding DialogClassList}" 
+                                             SelectedValue="{Binding DialogClassName,Mode=TwoWay}" 
+                                             ItemsSource="{Binding DialogClassNameList}" 
                                              hc:InfoElement.Title="班级" hc:InfoElement.Placeholder="请输入班级" 
                                              GotFocus="Classes_GotFocus" LostFocus="Classes_LostFocus"/>
                                 <TextBlock Name="ClassesInfo" Text="班级不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>

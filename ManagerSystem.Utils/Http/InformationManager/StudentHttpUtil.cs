@@ -58,12 +58,20 @@ namespace ManagerSystem.Utils.Http.InformationManager
         /// </summary>
         /// <param name="studentId"></param>
         /// <returns></returns>
-        public static Students GetStudent(int id)
+        public static Students GetStudent(int Id)
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
-            data["id"] = id.ToString();
+            data["Id"] = Id.ToString();
             var result = Get(UrlConfig.STU_GETSTU, data);
             return HttpUtil.StrToObject<Students>(result); // 反序列化
+        }
+
+        public static PageRequest<Students> GetStudentByClass(int Id)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["Id"] = Id.ToString();
+            var result = Get(UrlConfig.STU_GETSTUBYCLA, data);
+            return HttpUtil.StrToObject<PageRequest<Students>>(result); // 反序列化
         }
 
         /// <summary>
@@ -107,6 +115,20 @@ namespace ManagerSystem.Utils.Http.InformationManager
             data["Name"] = Name;
             var result = Get(UrlConfig.STU_GETSTUBYNAME, data);
             return HttpUtil.StrToObject<Students>(result);
+        }
+
+        /// <summary>
+        /// 获取同名学生数量
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public static int GetClassExistStudentName(string Name, int ClassId)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["Name"] = Name;
+            data["ClassId"] = ClassId;
+            var result = Get(UrlConfig.STU_GETSTUNAMECOUNT, data);
+            return int.Parse(result);
         }
 
     }

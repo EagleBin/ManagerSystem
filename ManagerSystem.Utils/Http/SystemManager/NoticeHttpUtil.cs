@@ -30,10 +30,10 @@ namespace ManagerSystem.Utils.Http.SystemManager
         /// </summary>
         /// <param name="noticeId"></param>
         /// <returns></returns>
-        public static bool DeleteNotice(int noticeId)
+        public static bool DeleteNotice(int NoticeId)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
-            data["Id"] = noticeId.ToString();
+            data["Id"] = NoticeId.ToString();
             var result = HttpUtil.Delete(UrlConfig.NoTICE_DELETENOTICE, data);
             return int.Parse(result) != 0;
         }
@@ -54,10 +54,10 @@ namespace ManagerSystem.Utils.Http.SystemManager
         /// </summary>
         /// <param name="noticeId"></param>
         /// <returns></returns>
-        public static Notice GetNotice(int noticeId)
+        public static Notice GetNotice(int NoticeId)
         {
             var data = new Dictionary<string, object>();
-            data["Id"] = noticeId;
+            data["Id"] = NoticeId;
             var resultStr = HttpUtil.Get(UrlConfig.NoTICE_GETNOTICE, data);
             var resultObj = HttpUtil.StrToObject<Notice>(resultStr);
             return resultObj;
@@ -73,7 +73,7 @@ namespace ManagerSystem.Utils.Http.SystemManager
         /// <param name="pageNum"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public static PageRequest<Notice> GetNotices(string noticeTitle,string noticeStatus, string startDate, string endDate, int pageNum, int pageSize)
+        public static PageRequest<Notice> GetNotices(string noticeTitle, string noticeStatus, string startDate, string endDate, int pageNum, int pageSize)
         {
             var data = new Dictionary<string, object>();
             data["NoticeTitle"] = noticeTitle;
@@ -99,6 +99,17 @@ namespace ManagerSystem.Utils.Http.SystemManager
             var resultStr = HttpUtil.Get(UrlConfig.NoTICE_GETALLNOTICE, data);
             var resultObj = HttpUtil.StrToObject<PageRequest<Notice>>(resultStr);
             return resultObj;
+        }
+
+        /// <summary>
+        /// 获取最新公告
+        /// </summary>
+        /// <returns></returns>
+        public static Notice GetLatestNotice()
+        {
+            var date = new Dictionary<string, object>();
+            var result = HttpUtil.Get(UrlConfig.NoTICE_GETLASNOTICE, date);
+            return HttpUtil.StrToObject<Notice>(result);
         }
 
     }

@@ -12,7 +12,7 @@ namespace ManagerSystem.Services.Users
     {
         public int AddUser(User user)
         {
-            return MySqlHelper<User>.GetInstance().CurrentDb.Insert(user) ? 1 : 0;
+            return MySqlHelper<User>.GetInstance().CurrentDb.AsInsertable(user).ExecuteReturnIdentity();
         }
 
         public int AddUserPost(UserPost userPost)

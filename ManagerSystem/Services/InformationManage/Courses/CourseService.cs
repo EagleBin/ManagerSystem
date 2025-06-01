@@ -1,4 +1,5 @@
 ﻿using ManagerSystem.Data;
+using ManagerSystem.Entity.InformationManager;
 using ManagerSystem.Utils.Helper;
 using ManagerSystem.Utils.Http.InformationManager;
 using SqlSugar;
@@ -9,7 +10,7 @@ namespace ManagerSystem.Services.InformationManage.Courses
     {
         public int AddCourse(Entity.InformationManager.Courses courses)
         {
-            return MySqlHelper<Entity.InformationManager.Courses>.GetInstance().CurrentDb.Insert(courses) ? 1 : 0;
+            return MySqlHelper<Entity.InformationManager.Courses>.GetInstance().CurrentDb.AsInsertable(courses).ExecuteReturnIdentity();
         }
 
         public int DeleteCourse(int id)
@@ -46,6 +47,18 @@ namespace ManagerSystem.Services.InformationManage.Courses
         public int UpdateCourse(Entity.InformationManager.Courses course)
         {
             return MySqlHelper<Entity.InformationManager.Courses>.GetInstance().CurrentDb.Update(course) ? 1 : 0;
+        }
+
+        public PageRequest<Entity.InformationManager.Courses> GetCourseByClassType(int ClassType)
+        {
+            var courseList = MySqlHelper<Entity.InformationManager.Courses>.GetInstance().CurrentDb.GetListAsync().Result;
+            return new PageRequest<Entity.InformationManager.Courses>() { items = courseList, TotalCount = courseList.Count };
+        }
+
+        public List<Entity.InformationManager.Courses> GetCourseByType(int CourseType)
+        {
+            return MySqlHelper<Entity.InformationManager.Courses>.GetInstance().CurrentDb.GetListAsync(c=>c.CourseType == CourseType || c.CourseType == 2).Result;
+
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ManagerSystem.Services.Posts
     {
         public int AddPost(Post post)
         {
-            return MySqlHelper<Post>.GetInstance().CurrentDb.Insert(post)?1:0;
+            return MySqlHelper<Post>.GetInstance().CurrentDb.AsInsertable(post).ExecuteReturnIdentity();
         }
 
         public int DeletePost(int id)

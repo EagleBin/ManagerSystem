@@ -16,35 +16,28 @@ using ManagerSystem.Utils.Http.InformationManager;
 using CompanyManagerSystem.View.subView.InformationManager.Dialog;
 using System.Security;
 using ManagerSystem.Entity.InformationManager.Link;
+using ManagerSystem.Utils.Helper;
 
 namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 {
     public class ClassViewModel : ViewModelBase
     {
-
-
         public ClassViewModel()
         {
-            Messenger.Default.Register<List<ClassDto>>(this, "SelectedClasses", cl => SelectedClassList = cl);
-            SearchClassesTypeList = new List<string>() { "全部班级", "理科班级", "文科班级" }; // 初始化班级类型
-            PerPageCountList = new List<int>() { 20, 50, 100, 200, 500 }; // 初始化每页容量
-            // 年级列表
-            foreach (var item in GradeHttpUtil.GetAllGrade().items)
-            {
-                SearchGradeList.Add(new GradeDto() { Grade = item });
-            };
-            // 班级列表
-            var classList = ClassHttpUtil.GetClasses(null, null, 2, CurrentPage, PerPageCount);
-            RefreshClassesList(classList.items, classList.TotalCount);
+            Messenger.Default.Register<List<ClassDto>>(this, "SelectedClasses", cl => SelectedClassList = cl); // 接收表格多行数据信息
+            Messenger.Default.Register<List<Grades>>(this, "GradeChanged", gc => GradeChanged(gc)); // 接收年级更改信息
+            //Messenger.Default.Register<List<ClassDto>>(this, "ClassChanged", cc => ClassChanged(cc)); // 接收班级更改信息
 
-            // 初始化 窗体年级列表
-            foreach (var grade in GradeHttpUtil.GetAllGrade().items)
-            {
-                DialogGradeNameList.Add(grade.Name);
-            }
-            // 初始化 窗体班级类型
-            DialogClassesTypeList = new List<string>() { "理科班级", "文科班级" }; // 班级类型
-            return;
+            SearchClassesTypeList = new List<string>() { "全部班级", "理科班级", "文科班级" }; // 初始化班级类型
+            DialogClassesTypeList = new List<string>() { "理科班级", "文科班级" }; // 初始化 窗体班级类型
+            PerPageCountList = new List<int>() { 20, 50, 100, 200, 500 }; // 初始化每页容量
+
+            // 初始化 搜索框和窗体的年级列表
+            GradeChanged(GradeHttpUtil.GetAllGrade().items);
+
+            // 班级列表
+            var classList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Name, SearchClassesType, 1, 20);
+            RefreshClassesList(classList.items, classList.TotalCount);
         }
 
         #region 属性
@@ -178,7 +171,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
         /// <summary>
         /// 弹窗（用于增加/修改班级）
         /// </summary>
-        private Dialog gradeInfoDialog;
+        private Dialog classInfoDialog;
 
         private ClassDto _DialogClasses = new ClassDto();
         /// <summary>
@@ -239,7 +232,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 
         private TeacherDto _DialogHeadTeacher = new TeacherDto();
         /// <summary>
-        /// 窗体 班主任
+        /// 窗体 班主任（用来保存旧值）
         /// </summary>
         public TeacherDto DialogHeadTeacher
         {
@@ -330,16 +323,16 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 
         #region 其他属性
 
-        private Visibility _SearchPanelVis = Visibility.Visible;
+        private Visibility _SearchPanelVisibility = Visibility.Visible;
         /// <summary>
         /// 搜索框的可见性(默认可见)
         /// </summary>
-        public Visibility SearchPanelVis
+        public Visibility SearchPanelVisibility
         {
-            get { return _SearchPanelVis; }
+            get { return _SearchPanelVisibility; }
             set
             {
-                _SearchPanelVis = value;
+                _SearchPanelVisibility = value;
                 RaisePropertyChanged();
             }
         }
@@ -384,15 +377,19 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                     var resultDelete = ClassHttpUtil.DeleteClass(deleteClasses.Classes.Id);
                                     if (resultDelete)
                                     {
+                                        // 删除中间表
+                                        var result = ClassHttpUtil.DeleteTeachers_Classes(deleteClasses.Classes.Id, deleteClasses.Classes.HeadTeacher_Id);
+
                                         HandyControl.Controls.Growl.Success($"成功删除名为[{deleteClasses.Classes.Name}]的班级！", "ClassesSuccessMsg");
                                         // 刷新列表
-                                        var gradeList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
-                                        RefreshClassesList(gradeList.items, gradeList.TotalCount);
+                                        var classList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
+                                        RefreshClassesList(classList.items, classList.TotalCount);
+                                        Messenger.Default.Send(classList.items, "ClassChanged"); // 发送更新的数据消息到信息中心
                                         return;
                                     }
                                     else
                                     {
-                                        HandyControl.Controls.Growl.Success("删除失败，请刷新列表后重试！", "ClassesWarningMsg");
+                                        HandyControl.Controls.Growl.Warning("删除失败，请刷新列表后重试！", "ClassesWarningMsg");
                                         return;
                                     }
                                 }
@@ -407,24 +404,27 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                     int errorCount = 0; // 失败计数
                                     int successCount = 0; // 成功计数
                                     // 遍历删除
-                                    foreach (var gradeDto in SelectedClassList)
+                                    foreach (var classesDto in SelectedClassList)
                                     {
-                                        var resultDelete = ClassHttpUtil.DeleteClass(gradeDto.Classes.Id);
+                                        var resultDelete = ClassHttpUtil.DeleteClass(classesDto.Classes.Id);
                                         // 统计数量
                                         if (resultDelete == false)
                                         {
-                                            HandyControl.Controls.Growl.Success($"删除{gradeDto.Classes.Name}失败，请刷新列表后重试！", "ClassesWarningMsg");
+                                            HandyControl.Controls.Growl.Success($"删除{classesDto.Classes.Name}失败，请刷新列表后重试！", "ClassesWarningMsg");
                                             errorCount++;
                                         }
                                         else
                                         {
                                             successCount++;
+                                            // 删除中间表
+                                            ClassHttpUtil.DeleteTeachers_Classes(classesDto.Classes.HeadTeacher_Id, classesDto.Classes.Id);
                                         }
                                     }
                                     HandyControl.Controls.Growl.Success($"成功删除{successCount}个班级,失败删除{errorCount}个班级");
                                     // 刷新列表
-                                    var gradeList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
-                                    RefreshClassesList(gradeList.items, gradeList.TotalCount);
+                                    var classList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
+                                    RefreshClassesList(classList.items, classList.TotalCount);
+                                    Messenger.Default.Send(classList.items, "ClassChanged"); // 发送更新的数据消息到信息中心
                                     return;
                                 }
                             }
@@ -440,7 +440,6 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
         }
 
         #endregion
-
 
         #region 搜索命令
 
@@ -458,8 +457,8 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 
                         CurrentPage = 1; // 设置当前页面为第一页
                         // 根据 搜索条件 搜索，刷新列表
-                        var gradeList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
-                        RefreshClassesList(gradeList.items, gradeList.TotalCount);
+                        var classList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
+                        RefreshClassesList(classList.items, classList.TotalCount);
                         return;
                     }));
             }
@@ -481,8 +480,8 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                         SearchClassesType = 2;
                         CurrentPage = 1;
                         // 刷新列表
-                        var gradeList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
-                        RefreshClassesList(gradeList.items, gradeList.TotalCount);
+                        var classList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
+                        RefreshClassesList(classList.items, classList.TotalCount);
                         return;
                     }));
             }
@@ -540,10 +539,9 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                     {
                         DialogTitle = "添加班级"; // 窗体标题
                         DialogClasses = new ClassDto(); // 窗体班级
-
                         DialogHeadTeacher = new TeacherDto();
                         // 打开窗体
-                        gradeInfoDialog = HandyControl.Controls.Dialog.Show<ClassesInfoDialog>();
+                        classInfoDialog = HandyControl.Controls.Dialog.Show<ClassesInfoDialog>();
                     }));
             }
         }
@@ -572,11 +570,11 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                         DialogTitle = "修改班级";
                         // 使用直接赋值，会指向同一个对象实例
                         // 使用使用Clone()创建副本，形成两个独立的对象，修改对话框中的数据不会影响原始数据。
-                        DialogClasses.Classes = (Classes)SelectedClasses.Classes.Clone();
-                        DialogClasses.Teachers = (Teachers)TeacherHttpUtil.GetTeacher(DialogClasses.Classes.HeadTeacher_Id).Clone();
-                        DialogHeadTeacher = new TeacherDto() { Teacher = (Teachers)DialogClasses.Teachers.Clone() };
+                        DialogClasses.Classes = (Classes)SelectedClasses.Classes.Clone(); // 获取算选的班级
+                        DialogClasses.Teachers = (Teachers)TeacherHttpUtil.GetTeacher(DialogClasses.Classes.HeadTeacher_Id).Clone(); // 获取算选的班级的教师（用来保存新值，与前端输入一致）
+                        DialogHeadTeacher = new TeacherDto() { Teacher = (Teachers)DialogClasses.Teachers.Clone() }; // 获取算选的班级（用来保存旧值）
                         // 打开窗体
-                        gradeInfoDialog = HandyControl.Controls.Dialog.Show<ClassesInfoDialog>();
+                        classInfoDialog = HandyControl.Controls.Dialog.Show<ClassesInfoDialog>();
                     }));
             }
         }
@@ -613,7 +611,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                             if (DialogTitle == "添加班级")
                             {
                                 Teachers headTeacher = null;
-                                if (ClassHttpUtil.GetClasses(DialogClasses.Classes.Name, "", 2, 1, 1).items.Count > 0) // 查看班级是否存在
+                                if (ClassHttpUtil.GetClassByName(DialogClasses.Classes.Name) != null) // 查看班级是否存在
                                 {
                                     HandyControl.Controls.Growl.Warning("班级名称已经存在！", "ClassesInfoWarningMsg");
                                     return;
@@ -634,13 +632,14 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                 }
 
                                 DialogClasses.Classes.insertTime = DateTime.Now; // 获取时间
-                                var id = ClassHttpUtil.AddClass(DialogClasses.Classes); // 添加班级
+                                DialogClasses.Classes.HeadTeacher_Id = headTeacher.Id; // 获取教师Id(班主任Id)
+                                var id = ClassHttpUtil.AddClass(DialogClasses.Classes); // 添加班级,并且获取所添加的ID
                                 // 是否添加成功
                                 if (id > 0)
                                 {
                                     if (headTeacher != null) // 添加中间表
                                     {
-                                        Teachers_Classes teachers_Classes = new Teachers_Classes() { ClassId = id, TeacherId = headTeacher.Id };
+                                        Teachers_Classes teachers_Classes = new Teachers_Classes() { ClassId = id, TeacherId = headTeacher.Id, insertTime = DateTime.Now };
                                         var result_add = ClassHttpUtil.AddTeachers_Classes(teachers_Classes);
                                         if (result_add || headTeacher.IsHeadTeacher == 0)
                                         {
@@ -648,11 +647,11 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                             TeacherHttpUtil.UpdateTeacher(headTeacher);
                                         }
                                     }
-                                    // 关闭窗体
-                                    gradeInfoDialog.Close();
                                     // 刷新
-                                    var gradeList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
-                                    RefreshClassesList(gradeList.items, gradeList.TotalCount);
+                                    var classList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
+                                    RefreshClassesList(classList.items, classList.TotalCount);
+                                    classInfoDialog.Close(); // 关闭窗口
+                                    Messenger.Default.Send(classList.items, "ClassChanged"); // 发送更新的数据消息到信息中心
                                     HandyControl.Controls.Growl.Success($"班级添加成功！", "ClassesSuccessMsg");
                                     return;
                                 }
@@ -666,7 +665,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                             else if (DialogTitle == "修改班级")
                             {
                                 Teachers headTeacher = null;
-                                if (DialogHeadTeacher.Teacher.Name != DialogClasses.Teachers.Name) // 是否修改了教师
+                                if (DialogHeadTeacher.Teacher.Name != DialogClasses.Teachers.Name) // 是否修改了教师(DialogHeadTeacher:旧教师)
                                 {
                                     if (!string.IsNullOrEmpty(DialogClasses.Teachers.Name)) // 查看教师是否存在
                                     {
@@ -680,26 +679,31 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                                         {
                                             // 教师存在
                                             headTeacher = teacher;
+                                            DialogClasses.Classes.HeadTeacher_Id = headTeacher.Id;
                                         }
                                     }
                                 }
-
+                                // 未修改教师
+                                else
+                                {
+                                    DialogClasses.Classes.HeadTeacher_Id = DialogHeadTeacher.Teacher.Id;
+                                }
+                                // 修改
                                 var resultEdit = ClassHttpUtil.UpdateClass(DialogClasses.Classes);
-
                                 if (resultEdit)
                                 {
                                     if (headTeacher != null) // 删除并添加中间表
                                     {
-                                        // 删除中间表
+                                        // 删除 旧的中间表
                                         ClassHttpUtil.DeleteTeachers_Classes(DialogHeadTeacher.Teacher.Id, DialogClasses.Classes.Id);
-
-                                        Teachers_Classes teachers_Classes = new Teachers_Classes() { ClassId = DialogClasses.Classes.Id, TeacherId = headTeacher.Id };
+                                        // 添加中间表
+                                        Teachers_Classes teachers_Classes = new Teachers_Classes() { ClassId = DialogClasses.Classes.Id, TeacherId = headTeacher.Id, insertTime = DateTime.Now };
                                         ClassHttpUtil.AddTeachers_Classes(teachers_Classes);
                                     }
-                                    var gradeList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
-                                    RefreshClassesList(gradeList.items, gradeList.TotalCount);
-                                    gradeInfoDialog.Close();
-
+                                    var classList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
+                                    RefreshClassesList(classList.items, classList.TotalCount);
+                                    classInfoDialog.Close(); // 关闭窗口
+                                    Messenger.Default.Send(classList.items, "ClassChanged"); // 发送更新的数据消息到信息中心
                                     HandyControl.Controls.Growl.Success($"修改成功！", "ClassesSuccessMsg");
                                     return;
                                 }
@@ -737,8 +741,8 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                     (_PerPageCountChangedCommand = new RelayCommand(() =>
                     {
                         CurrentPage = 1;
-                        var gradeList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
-                        RefreshClassesList(gradeList.items, gradeList.TotalCount);
+                        var classList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
+                        RefreshClassesList(classList.items, classList.TotalCount);
                         return;
                     }));
             }
@@ -755,14 +759,12 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                 return _PageUpdatedCommand ??
                     (_PageUpdatedCommand = new RelayCommand(() =>
                     {
-                        var gradeList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
-                        RefreshClassesList(gradeList.items, gradeList.TotalCount);
+                        var classList = ClassHttpUtil.GetClasses(SearchClassesName, SearchGrade.Grade.Id.ToString(), SearchClassesType, CurrentPage, PerPageCount);
+                        RefreshClassesList(classList.items, classList.TotalCount);
                         return;
                     }));
             }
         }
-
-
 
         #endregion
 
@@ -779,7 +781,7 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
                 return _SearchPanelVisCommand ??
                     (_SearchPanelVisCommand = new RelayCommand(() =>
                     {
-                        SearchPanelVis = (SearchPanelVis == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible);
+                        SearchPanelVisibility = (SearchPanelVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible);
                     }));
             }
         }
@@ -814,31 +816,26 @@ namespace CompanyManagerSystem.ViewModel.subViewModel.InformationManager
 
             ClassesList.Clear();
 
-            //var allStudent = StudentHttpUtil.GetAllStudent();
-            //var allClass = ClassHttpUtil.GetAllClass();
-            //allClassesList.ForEach(g =>
-            //{
-            //    var classList = allClass.items.Where(c => c.ClassesId == g.Id);
-            //    List<Students> studentList = new List<Students>();
-            //    foreach (var item in classList)
-            //    {
-            //        studentList = allStudent.items.Where(s => s.ClassId == item.Id).ToList();
-            //    }
-
-            //    ClassesList.Add(new ClassDto() { Classes = g,ClassesPersonCount = studentList.Count });
-            //});
-
-            allClassesList.ForEach(g =>
+            // 获取每个班级人数
+            foreach (var item in allClassesList)
             {
-                ClassesList.Add(new ClassDto() { Classes = g, StudentTotalCount = 0 });
-            });
+                int studentCount = StudentHttpUtil.GetStudentByClass(item.Id).items.Count();
+                ClassesList.Add(new ClassDto() { Classes = item, StudentTotalCount = studentCount });
+            }
         }
 
+        /// <summary>
+        /// 年级发生改变，获取最新年级
+        /// </summary>
+        /// <param name="gl"></param>
+        private void GradeChanged(List<Grades> gl)
+        {
+            foreach (var grade in gl)
+            {
+                DialogGradeNameList.Add(grade.Name);
+                SearchGradeList.Add(new GradeDto() { Grade = grade });
+            }
+        }
         #endregion
-
-
-
-        
-
     }
 }

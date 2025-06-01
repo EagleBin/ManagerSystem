@@ -56,7 +56,35 @@ namespace ManagerSystem.Services.InformationManage.Teachers
         /// </summary>
         /// <param name="Name"></param>
         /// <returns></returns>
-        public Entity.InformationManager.Teachers GetTeacherByName(string Name);
+        public Entity.InformationManager.Teachers GetTeacherByName(string? Name);
 
+        /// <summary>
+        /// 根据课程Id查询教师
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public Courses_Teachers GetTeacher_CourseByCourse(int Id);
+
+        /// <summary>
+        /// 删除 课程_教师中间表
+        /// </summary>
+        /// <param name="CourseId"></param>
+        /// <param name="TeacherId"></param>
+        /// <returns></returns>
+        public int DeleteCourses_Teachers(int CourseId, int TeacherId);
+
+        /// <summary>
+        /// 添加 课程_教师表
+        /// </summary>
+        /// <param name="courses_Teachers"></param>
+        /// <returns></returns>
+        public int AddCourses_Teachers(Courses_Teachers courses_Teachers);
+
+        /// <summary>
+        /// 根据课程获取相应的教师列表
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public PageRequest<Entity.InformationManager.Teachers> GetTeacherByCourse(string? Name);
     }
 }

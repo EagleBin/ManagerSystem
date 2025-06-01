@@ -4,6 +4,7 @@ using ManagerSystem.Services.InformationManage.Classes;
 using ManagerSystem.Utils.Helper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SQLitePCL;
 
 namespace ManagerSystem.Controllers
 {
@@ -33,9 +34,9 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpDelete]
-        public int DeleteClass(int classId)
+        public int DeleteClass(int Id)
         {
-            return _classService.DeleteClass(classId);
+            return _classService.DeleteClass(Id);
         }
 
         [HttpPut]
@@ -51,10 +52,24 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpGet]
+        public PageRequest<Classes> GetClassByGrade(int Id)
+        {
+            return _classService.GetClassByGrade(Id);
+        }
+
+        [HttpGet]
         public Classes GetClassByName(string Name)
         {
             return _classService.GetClassByName(Name);
         }
+
+
+        [HttpGet]
+        public PageRequest<Classes> GetClassByHeadTeacher(int Id)
+        {
+            return _classService.GetClassByHeadTeacher(Id);
+        }
+
 
         [HttpGet]
         public PageRequest<Classes> GetAllClass()
@@ -66,6 +81,18 @@ namespace ManagerSystem.Controllers
         public PageRequest<Classes> GetClasses(string? Name, string? GradeId,int ClassType, int PerPageNum, int PageSize)
         {
             return _classService.GetClasss(Name, GradeId, ClassType, PerPageNum, PageSize);
+        }
+
+        [HttpDelete]
+        public int DeleteTeachers_Classes(int TeacherId, int ClassId)
+        {
+            return _classService.DeleteTeachers_Classes(TeacherId, ClassId);
+        }
+
+        [HttpGet]
+        public Teachers_Classes GetTeachers_ClassesByClass(int ClassId)
+        {
+            return _classService.GetTeachers_ClassesByClass(ClassId);
         }
     }
 }

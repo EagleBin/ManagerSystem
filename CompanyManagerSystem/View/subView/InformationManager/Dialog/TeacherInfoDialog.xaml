@@ -7,11 +7,13 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converter="clr-namespace:ManagerSystem.Utils.Converter;assembly=ManagerSystem.Utils"
+             xmlns:ns="clr-namespace:CompanyManagerSystem.ViewModel.subViewModel.InformationManager"
              mc:Ignorable="d" 
              DataContext="{Binding Source={StaticResource Locator},Path=Teacher}"
              d:DesignHeight="600" d:DesignWidth="600" Cursor="">
     <UserControl.Resources>
         <converter:TeacherTypeConverter x:Key="TeacherTypeConverter"/>
+        <converter:AddOrEditClassConverter x:Key="AddOrEditClassConverter"/>
     </UserControl.Resources>
     <!--// 关闭窗体触发器 //-->
     <i:Interaction.Triggers>
@@ -23,7 +25,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="54"/>
-                <RowDefinition Height="400"/>
+                <RowDefinition Height="410"/>
                 <RowDefinition Height="66"/>
             </Grid.RowDefinitions>
 
@@ -58,15 +60,68 @@
                     </UniformGrid>
 
                     <!--// 教师类型 //-->
-                    <UniformGrid Rows="1" Height="58">
+                    <UniformGrid Rows="1" Height="48">
                         <StackPanel>
                             <hc:ComboBox ItemsSource="{Binding DialogTeacherTypeList}" 
-                                         SelectedValue="{Binding DialogTeacher.Teacher.IsHeadTeacher,Mode=TwoWay, Converter={StaticResource TeacherTypeConverter}}"
-                                         hc:InfoElement.Title="教师类型" hc:InfoElement.Placeholder="请选择教师类型"
-                                         x:Name="classType" GotFocus="classType_GotFocus" LostFocus="classType_LostFocus"/>
-                            <TextBlock Name="classTypeInfo" Text="教师类型不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                                         SelectedValue="{Binding DialogTeacher.Teacher.IsHeadTeacher,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TeacherTypeConverter}}"
+                                         hc:InfoElement.Title="教师类型" hc:InfoElement.Placeholder="请选择教师类型" 
+                                         x:Name="teacherType" GotFocus="teacherType_GotFocus" LostFocus="teacherType_LostFocus">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding DialogClassVisibilityCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </hc:ComboBox>
+                            <TextBlock Name="teacherTypeInfo" Text="教师类型不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
                         </StackPanel>
                     </UniformGrid>
+
+                    <!--// 该教师正在的指导的班级列表 //-->
+                    <UniformGrid Rows="1" Height="30" >
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton GroupName="AddOrEdit" Margin="60 2 0 5" Style="{StaticResource RadioButtonBaseStyle}" Width="100" Content="添加指导班级" 
+                                         IsChecked="{Binding CurrentOperation, Mode=TwoWay,Converter={StaticResource AddOrEditClassConverter}, ConverterParameter={x:Static ns:OperationType.Add}}"
+                                         IsEnabled="{Binding IsAddEnable}"/>
+                            <RadioButton GroupName="AddOrEdit" Margin="60 2 0 5" Style="{StaticResource RadioButtonBaseStyle}" Width="100" Content="修改指导班级" 
+                                         IsChecked="{Binding CurrentOperation, Mode=TwoWay,Converter={StaticResource AddOrEditClassConverter}, ConverterParameter={x:Static ns:OperationType.Edit}}"
+                                         IsEnabled="{Binding IsEditEnable}">
+                            </RadioButton>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <!--// 指导的班级 //-->
+                    <UniformGrid Rows="1" Height="58" Visibility="{Binding AddClassVisibility }">
+                        <StackPanel>
+                            <hc:ComboBox ItemsSource="{Binding DialogClassNameAddList}" 
+                                         SelectedValue="{Binding DialogClassNameAdd,Mode=TwoWay}"
+                                         hc:InfoElement.Title="指导班级" hc:InfoElement.Placeholder="请选择班级"
+                                         x:Name="className_1" GotFocus="classNameList_1_GotFocus" LostFocus="classNameList_1_LostFocus"/>
+                            <TextBlock Name="classNameInfo_1" Text="指导班级不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        </StackPanel>
+                    </UniformGrid>
+                    
+                    <!--// 该教师正在的指导的班级列表 //-->
+                    <UniformGrid Rows="1" Height="58" Visibility="{Binding EditClassVisibility}">
+                        <StackPanel >
+                            <hc:ComboBox ItemsSource="{Binding DialogHoldClassNameList}" 
+                                         SelectedValue="{Binding DialogHoldClassName,Mode=TwoWay}"
+                                         hc:InfoElement.Title="正在指导" hc:InfoElement.Placeholder="请选择班级"
+                                         x:Name="hasClassName" GotFocus="hasClassName_GotFocus" LostFocus="hasClassName_LostFocus"/>
+                            <TextBlock Name="hasClassNameInfo" Text="选择修改的指导班级不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        </StackPanel>
+
+                        <!--// 指导班级列表 //-->
+                        <StackPanel>
+                            <hc:ComboBox ItemsSource="{Binding DialogClassNameEditList}" 
+                                         SelectedValue="{Binding DialogClassNameEdit,Mode=TwoWay}"
+                                         hc:InfoElement.Title="指导班级" hc:InfoElement.Placeholder="请选择班级"
+                                         x:Name="className_2" GotFocus="classNameList_GotFocus" LostFocus="classNameList_LostFocus"/>
+                            <TextBlock Name="classNameInfo_2" Text="指导班级不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        </StackPanel>
+                    </UniformGrid>
+
+
+
 
                     <!--// 年龄 //-->
                     <UniformGrid Rows="1" Height="58">

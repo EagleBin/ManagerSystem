@@ -28,9 +28,9 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpDelete]
-        public int DeleteStudent(int studentId)
+        public int DeleteStudent(int Id)
         {
-            return _studentService.DeleteStudent(studentId);
+            return _studentService.DeleteStudent(Id);
         }
 
         [HttpPut]
@@ -40,9 +40,9 @@ namespace ManagerSystem.Controllers
         }
 
         [HttpGet]
-        public Students GetStudent(int studentId)
+        public Students GetStudent(int Id)
         {
-            return _studentService.GetStudent(studentId);
+            return _studentService.GetStudent(Id);
         }
 
         [HttpGet]
@@ -62,5 +62,18 @@ namespace ManagerSystem.Controllers
         {
             return _studentService.GetStudentByName(Name);
         }
+
+        [HttpGet]
+        public PageRequest<Students> GetStudentByClass(int Id)
+        {
+            return _studentService.GetStudentByClass(Id);
+        }
+
+        [HttpGet]
+        public int GetClassExistStudentName(string Name, int ClassId)
+        {
+            return _studentService.GetClassExistStudentName(Name, ClassId);
+        }
+
     }
 }

@@ -46,13 +46,28 @@
             <!--// 内容 //-->
             <Grid Grid.Row="1" Margin="20 30">
 
-                <!--// 岗位名称 //-->
-                <StackPanel VerticalAlignment="Center">
-                    <hc:TextBox x:Name="gradenameText" Text="{Binding DialogGrade.Grade.Name}" hc:InfoElement.Placeholder="请输入年级名称"
+                <StackPanel>
+                    <!--// 名称 //-->
+                    <StackPanel VerticalAlignment="Center">
+                        <hc:TextBox x:Name="gradenameText" Text="{Binding DialogGrade.Grade.Name}" hc:InfoElement.Placeholder="请输入年级名称"
                                 hc:InfoElement.Title="年级名称" hc:InfoElement.TitlePlacement="Left"
                                  GotFocus="PostNameGotFocus" LostFocus="PostNameLostFocus"/>
-                    <TextBlock Name="gradenameInfo" Text="年级名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                        <TextBlock Name="gradenameInfo" Text="年级名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                    </StackPanel>
+
+                    <!--// 级别 //-->
+                    <StackPanel VerticalAlignment="Center">
+                        <hc:ComboBox x:Name="LevelText" 
+                                     ItemsSource="{Binding DialogGradeLevelNameList}" 
+                                     SelectedValue="{Binding DialogGradeLevelName}"
+                                     hc:InfoElement.Placeholder="请输入年级名称"
+                                     hc:InfoElement.Title="年级级别"
+                                     hc:InfoElement.TitlePlacement="Left"
+                                     GotFocus="PostNameGotFocus" LostFocus="PostNameLostFocus"/>
+                        <TextBlock Name="LevelInfo" Text="年级名称不能为空" Foreground="#f56c6c" Margin="90 2 0 5" Visibility="Hidden"/>
+                    </StackPanel>
                 </StackPanel>
+
             </Grid>
 
             <Grid Grid.Row="2" Margin="20 10 20 20">

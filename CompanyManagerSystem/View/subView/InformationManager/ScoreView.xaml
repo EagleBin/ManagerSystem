@@ -4,9 +4,316 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CompanyManagerSystem.View.subView.InformationManager"
+            xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:convert="clr-namespace:ManagerSystem.Utils.Converter;assembly=ManagerSystem.Utils"
+             xmlns:ns="clr-namespace:CompanyManagerSystem.ViewModel.subViewModel.InformationManager"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             DataContext="{Binding Source={StaticResource Locator}, Path=Score}"
+             d:DesignHeight="600" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <convert:StudentConverter x:Key="StudentConverter"/>
+        <convert:ClassIdConverter x:Key="ClassIdConverter"/>
+        <convert:CourseConverter x:Key="CourseConverter"/>
+        <convert:SingleAndAllConverter x:Key="SingleAndAllConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="20 10 20 20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--// 信息提示 //-->
+        <ScrollViewer Grid.RowSpan="2" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" HorizontalAlignment="Center"
+                      MaxHeight="165" Panel.ZIndex="1">
+            <StackPanel VerticalAlignment="Top" >
+                <StackPanel hc:Growl.Token="ScoreSuccessMsg" VerticalAlignment="Top" Margin="0 5"/>
+                <StackPanel hc:Growl.Token="ScoreWarningMsg" VerticalAlignment="Top" Margin="0 5"/>
+                <StackPanel hc:Growl.Token="ScoreErrorMsg" VerticalAlignment="Top" Margin="0 5"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--// 顶部导航 //-->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="White">
+            <TextBlock Text="首页" FontSize="14" FontWeight="Bold" Foreground="#97A8BE" Margin="0 0 10 0" VerticalAlignment="Center"/>
+            <TextBlock FontSize="14" Foreground="#c0c4cc" Text="&#xe65f;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="成绩管理" FontSize="14" FontWeight="Bold" Margin="0 0 10 0" />
+        </StackPanel>
+
+        <!--// 内容 //-->
+        <Grid Margin="0 20" Grid.Row="1">
+            <DockPanel Margin="0 5">
+                <!--// 搜索栏 //-->
+                <WrapPanel Orientation="Horizontal" Visibility="{Binding SearchPanelVisibility}" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="0 0 0 10">
+
+                    <!--// 考次列表 //-->
+                    <hc:ComboBox hc:InfoElement.Title="考次列表" hc:InfoElement.Placeholder="请输入考次" 
+                                 FontWeight="Bold" Margin="0 5 0 0" Width="240" Height="32" 
+                                 ItemsSource="{Binding SearchExamNameList}"
+                                 SelectedValue="{Binding SearchExamName, Mode=TwoWay}"
+                                 SelectedIndex="0"
+                                 Cursor="Hand">
+                    </hc:ComboBox>
+
+                    <!--// 年级列表 //-->
+                    <hc:ComboBox hc:InfoElement.Title="年级列表" hc:InfoElement.Placeholder="请输入年级" 
+                                 FontWeight="Bold" Margin="0 5 0 0" Width="240" Height="32" 
+                                 ItemsSource="{Binding SearchGradeNameList}"
+                                 SelectedValue="{Binding SearchGradeName, Mode=TwoWay}"
+                                 SelectedIndex="0"
+                                 Cursor="Hand">
+                        <!--// 年级选项改变时 //-->
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SearchGradeChangedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </hc:ComboBox>
+
+                    <!--// 班级列表 //-->
+                    <hc:ComboBox hc:InfoElement.Title="班级列表" hc:InfoElement.Placeholder="请输入班级" 
+                                FontWeight="Bold" Margin="0 5 0 0" Width="240" Height="32" 
+                                 ItemsSource="{Binding SearchClassNameList,Mode=TwoWay}"
+                                SelectedValue="{Binding SearchClassName, Mode=TwoWay}" Cursor="Hand">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SearchClassChangedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </hc:ComboBox>
+
+
+                    <!--// 科目列表 //-->
+                    <hc:ComboBox hc:InfoElement.Title="科目列表" hc:InfoElement.Placeholder="请输入科目" 
+                                FontWeight="Bold" Margin="0 5 0 0" Width="240" Height="32" 
+                                 ItemsSource="{Binding SearchCourseNameList}"
+                                SelectedValue="{Binding SearchCourseName, Mode=TwoWay}" Cursor="Hand">
+                    </hc:ComboBox>
+
+
+                    <!--// 学生姓名 //-->
+                    <hc:TextBox hc:InfoElement.Title="学生姓名" hc:InfoElement.Placeholder="请输入学生姓名" 
+                                FontWeight="Bold" Margin="0 5 0 0" Width="240" Height="32" 
+                               Text="{Binding SearchStudentName, Mode=TwoWay}" Cursor="Hand">
+                    </hc:TextBox>
+
+                    <!--// 分数 //-->
+                    <hc:TextBox hc:InfoElement.Title="分数" hc:InfoElement.Placeholder="请输入分数" 
+                                FontWeight="Bold" Margin="0 5 0 0" Width="240" Height="32" 
+                               Text="{Binding SearchScoreNumber, Mode=TwoWay}" Cursor="Hand">
+                    </hc:TextBox>
+
+                    <Button Command="{Binding SearchScoreCommand}" Style="{StaticResource ButtonPrimary}" Width="73" Height="28"
+                            Content="搜索" Margin="50 5 0 0" hc:IconElement.Geometry="{StaticResource SearchGeometry}" Cursor="Hand"/>
+                    <Button Content="重置" Command="{Binding ResetSearchCommand}" Margin="10,5,0,0" Width="73" Height="28" 
+                            hc:IconElement.Geometry="{StaticResource RotateRightGeometry}" Cursor="Hand"/>
+                </WrapPanel>
+
+                <Grid Margin="0 5" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--// 操作栏 //-->
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+
+                            <!--// 新增 //-->
+                            <Button Command="{Binding AddScoreInfoCommand}" Style="{StaticResource AddButtonStyle}"
+                                    Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand">
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Margin="-5 0 5 0" FontSize="14" Text="&#xe622;" FontFamily="/Themes/Style/#iconfont" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="新增" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!--// 修改 //-->
+                            <Button Command="{Binding EditScoreInfoCommand}" Style="{StaticResource EditButtonStyle}" Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand">
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Margin="-5 0 5 0" FontSize="14" Text="&#xe8cf;" FontFamily="/Themes/Style/#iconfont"
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="修改" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!--// 删除 //-->
+                            <Button Command="{Binding DeleteScoreInfoCommand}" CommandParameter="DeleteNotOnlyOneScore"
+                                    Style="{StaticResource DelButtonStyle}" Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand" >
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="-5 0 5 0" FontSize="14" Text="&#xe62d;" FontFamily="/Themes/Style/#iconfont"
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="删除" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!--// 导出（未实现）//-->
+                            <Button Style="{StaticResource ExportButtonStyle}" Margin="10,0,0,0" Width="73" Height="28" Cursor="Hand">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="-5 0 5 0" FontSize="12" Text="&#xe666;" FontFamily="/Themes/Style/#iconfont" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="导出" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton GroupName="AddOrEdit" Margin="60 2 0 5" Style="{StaticResource RadioButtonBaseStyle}" Width="100" Content="单科成绩" 
+                                         IsChecked="{Binding CurrentScoreType, Mode=TwoWay,Converter={StaticResource SingleAndAllConverter}, ConverterParameter={x:Static ns:ScoreType.Single}}"/>
+                                <RadioButton GroupName="AddOrEdit" Margin="60 2 0 5" Style="{StaticResource RadioButtonBaseStyle}" Width="100" Content="全科成绩" 
+                                         IsChecked="{Binding CurrentScoreType, Mode=TwoWay,Converter={StaticResource SingleAndAllConverter}, ConverterParameter={x:Static ns:ScoreType.All}}">
+                                </RadioButton>
+                            </StackPanel>
+
+
+                        </StackPanel>
+
+                        <!--// 隐藏搜索与刷新 //-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
+                            <!--// 隐藏搜索 //-->
+                            <Button Command="{Binding SearchPanelVisCommand}" Style="{StaticResource CornerRadiusButtonStyle}"
+                                    Margin="10,0,0,0" Cursor="Hand" hc:Poptip.Content="隐藏搜索栏" hc:Poptip.HitMode="Hover" hc:Poptip.Placement="Top">
+                                <TextBlock Text="&#xe651;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button>
+
+                            <!--// 刷新 //-->
+                            <Button Style="{StaticResource CornerRadiusButtonStyle}" Margin="10,0,0,0" Cursor="Hand" hc:Poptip.Content="刷新" hc:Poptip.HitMode="Hover" hc:Poptip.Placement="Top">
+                                <TextBlock Text="&#xe6a7;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="0 5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="9*"/>
+                            <RowDefinition Height="1.5*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--// 单科表格 //-->
+                        <DataGrid ItemsSource="{Binding ScoreList}" AutoGenerateColumns="False" RowHeaderWidth="60" HeadersVisibility="All"
+                                  SelectedItem="{Binding SelectedScore}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                  RowStyle="{StaticResource DataGridRowStyle}" CellStyle="{StaticResource DataGridTextCenterColumnStyle}"
+                                  HorizontalAlignment="Left" IsReadOnly="True" SelectionUnit="FullRow"
+                                  Visibility="{Binding SingleStatus}">
+                                  <!--Visibility="{Binding SingleStatus,Mode=TwoWay}">-->
+                            <DataGrid.RowHeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+                                </DataTemplate>
+                            </DataGrid.RowHeaderTemplate>
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="学号" Width="150" Binding="{Binding Score.StudentId}"/>
+                                <DataGridTextColumn Header="学生名称" Width="150" Binding="{Binding Score.StudentId, Converter={StaticResource StudentConverter}}"/>
+                                <DataGridTextColumn Header="科目" Width="150" Binding="{Binding Score.CourseId,Converter={StaticResource CourseConverter}}"/>
+                                <DataGridTextColumn Header="成绩" Width="150" Binding="{Binding Score.Number}"/>
+                                <DataGridTextColumn Header="班级" Width="150" Binding="{Binding Score.ClassId,Converter={StaticResource ClassIdConverter}}"/>
+
+                                <DataGridTemplateColumn Header="操作" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid DataContext="{Binding Score, Source={StaticResource Locator}}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!--// 详情(未实现) //-->
+                                                <Button Grid.Column="0" Style="{StaticResource OperateButtonStyle}" 
+                                                        Margin="5 0" Width="39" Height="28" Cursor="Hand">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Margin="-5 0 2 0" FontSize="12" Text="&#xe8cf;" FontFamily="/Themes/Style/#iconfont" 
+                                                                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="详情" VerticalAlignment="Center" />
+                                                    </StackPanel>
+                                                </Button>
+
+                                                <!--// 修改 //-->
+                                                <Button Grid.Column="1" Command="{Binding EditScoreInfoCommand}" Style="{StaticResource OperateButtonStyle}" 
+                                                        Margin="5 0" Width="39" Height="28" Cursor="Hand">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Margin="-5 0 2 0" FontSize="12" Text="&#xe8cf;" FontFamily="/Themes/Style/#iconfont" 
+                                                                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="修改" VerticalAlignment="Center" />
+                                                    </StackPanel>
+                                                </Button>
+
+                                                <!--// 删除 //-->
+                                                <Button Grid.Column="2" Command="{Binding DeleteScoreInfoCommand}" CommandParameter="DeleteOnlyOneScore" 
+                                                        Style="{StaticResource OperateButtonStyle}" Margin="5 0" Width="39" Height="28" Cursor="Hand">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Margin="-5 0 2 0" FontSize="12" Text="&#xe62d;" FontFamily="/Themes/Style/#iconfont" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                                        <TextBlock Text="删除" VerticalAlignment="Center"></TextBlock>
+                                                    </StackPanel>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!--// 全科表格 //-->
+                        <DataGrid ItemsSource="{Binding ScoreTable}" AutoGenerateColumns="True" RowHeaderWidth="60" HeadersVisibility="All"
+                                  SelectedItem="{Binding SelectedScore}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                                  RowStyle="{StaticResource DataGridRowStyle}" CellStyle="{StaticResource DataGridTextCenterColumnStyle}"
+                                  HorizontalAlignment="Left" IsReadOnly="True" SelectionUnit="FullRow"  Width="1180" Visibility="{Binding AllStatus}"
+                                  SizeChanged="DataGrid_SizeChanged">
+                            <!--<i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Loaded">
+                                    <i:InvokeCommandAction Command="{Binding DataGridLoadCommand}" CommandParameter="{Binding SetDataGrid, RelativeSource={RelativeSource Mode=Self}}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>-->
+                            <DataGrid.RowHeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+                                </DataTemplate>
+                            </DataGrid.RowHeaderTemplate>
+
+                            <DataGrid.Columns >
+                                
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!--// 分页 //-->
+                        <Grid Grid.Row="1">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 10">
+                                <TextBlock Text="共" FontSize="14" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding TotalCount}" FontSize="14" VerticalAlignment="Center" Margin="5 0" />
+                                <TextBlock Text="条" FontSize="14" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                                <TextBlock Text="每页" FontSize="14" VerticalAlignment="Center" />
+
+                                <!--// 每页容量 //-->
+                                <ComboBox ItemsSource="{Binding PerPageCountList}" SelectedValue="{Binding PerPageCount}"
+                                          VerticalAlignment="Center" Margin="5 0" SelectedItem="0" Cursor="Hand">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding PerPageCountChangedCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
+                                <TextBlock Text="条" FontSize="14" VerticalAlignment="Center" Margin="10 0 10 0"/>
+
+                                <!--// 页面跳转 //-->
+                                <hc:Pagination MaxPageCount="{Binding TotalPageCount}" PageIndex="{Binding CurrentPage,Mode=TwoWay}"
+                                               DataCountPerPage="{Binding PerPageCount}" IsJumpEnabled="True" Cursor="Hand">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PageUpdated">
+                                            <i:InvokeCommandAction Command="{Binding PageUpdatedCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </hc:Pagination>
+                            </StackPanel>
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+
+            </DockPanel>
+
+
+
+        </Grid>
     </Grid>
 </UserControl>

@@ -53,6 +53,12 @@
     <Reference Include="HandyControl, Version=3.4.0.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
       <HintPath>..\ManagerSystem\packages\HandyControl.3.4.0\lib\net48\HandyControl.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\ManagerSystem\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\ManagerSystem\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\ManagerSystem\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.135\lib\net462\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
@@ -94,6 +100,7 @@
     <Compile Include="ViewModel\subViewModel\InformationManager\ClassViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\InformationManager\CourseViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\InformationManager\GradeViewModel.cs" />
+    <Compile Include="ViewModel\subViewModel\InformationManager\ScoreViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\InformationManager\StudentViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\InformationManager\TeacherViewModel.cs" />
     <Compile Include="ViewModel\subViewModel\PersonalViewModel.cs" />
@@ -152,6 +159,9 @@
     </Compile>
     <Compile Include="View\subView\InformationManager\Dialog\GradeInfoDialog.xaml.cs">
       <DependentUpon>GradeInfoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\subView\InformationManager\Dialog\ScoreInfoDialog.xaml.cs">
+      <DependentUpon>ScoreInfoDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\subView\InformationManager\Dialog\StudentInfoDialog.xaml.cs">
       <DependentUpon>StudentInfoDialog.xaml</DependentUpon>
@@ -323,6 +333,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\subView\InformationManager\Dialog\GradeInfoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\subView\InformationManager\Dialog\ScoreInfoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

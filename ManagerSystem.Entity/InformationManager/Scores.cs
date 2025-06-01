@@ -22,7 +22,17 @@ namespace ManagerSystem.Entity.InformationManager
         /// 教师ID
         /// </summary>
         public int TeacherId { get; set; }
-
-
+        /// <summary>
+        /// 班级ID
+        /// </summary>
+        public int ClassId { get; set; }
+        /// <summary>
+        /// 年级ID
+        /// </summary>
+        public int GradeId { get; set; }
+        /// <summary>
+        /// 考试名称
+        /// </summary>
+        public int ExamId { get; set; }
     }
 }
