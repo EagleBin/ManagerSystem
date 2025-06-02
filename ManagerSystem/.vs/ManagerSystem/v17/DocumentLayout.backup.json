@@ -1,12 +1,228 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\services\\menus\\menuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:services\\menus\\menuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\services\\menus\\imenuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:services\\menus\\imenuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\controllers\\scorecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:controllers\\scorecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\managersystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:managersystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8259E3D5-9F73-4B30-B7DE-AA5DE2A28A29}|..\\ManagerSystem.Utils\\ManagerSystem.Utils.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem.utils\\http\\systemmanager\\rolehttputil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8259E3D5-9F73-4B30-B7DE-AA5DE2A28A29}|..\\ManagerSystem.Utils\\ManagerSystem.Utils.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem.utils\\httputil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\managersystem.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:managersystem.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\managersystem\\managersystem.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{4B1AFA35-1EF7-40B5-82EC-EB29F8AC6DF4}|ManagerSystem.csproj|solutionrelative:managersystem.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\view\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
+        {
+          "DockedHeight": 758,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IMenuService.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Services\\Menus\\IMenuService.cs",
+              "RelativeDocumentMoniker": "Services\\Menus\\IMenuService.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Services\\Menus\\IMenuService.cs",
+              "RelativeToolTip": "Services\\Menus\\IMenuService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T13:18:35.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MenuService.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Services\\Menus\\MenuService.cs",
+              "RelativeDocumentMoniker": "Services\\Menus\\MenuService.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Services\\Menus\\MenuService.cs",
+              "RelativeToolTip": "Services\\Menus\\MenuService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T13:18:35.089Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ScoreController.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Controllers\\ScoreController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ScoreController.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Controllers\\ScoreController.cs",
+              "RelativeToolTip": "Controllers\\ScoreController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T13:18:23.335Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RoleHttpUtil.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem.Utils\\Http\\SystemManager\\RoleHttpUtil.cs",
+              "RelativeDocumentMoniker": "..\\ManagerSystem.Utils\\Http\\SystemManager\\RoleHttpUtil.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem.Utils\\Http\\SystemManager\\RoleHttpUtil.cs",
+              "RelativeToolTip": "..\\ManagerSystem.Utils\\Http\\SystemManager\\RoleHttpUtil.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T13:18:06.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ManagerSystem.http",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\ManagerSystem.http",
+              "RelativeDocumentMoniker": "ManagerSystem.http",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\ManagerSystem.http",
+              "RelativeToolTip": "ManagerSystem.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-06-01T13:01:50.539Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-01T13:01:47.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ManagerSystem",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\ManagerSystem.csproj",
+              "RelativeDocumentMoniker": "ManagerSystem.csproj",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\ManagerSystem.csproj",
+              "RelativeToolTip": "ManagerSystem.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-01T13:01:34.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HttpUtil.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem.Utils\\HttpUtil.cs",
+              "RelativeDocumentMoniker": "..\\ManagerSystem.Utils\\HttpUtil.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem.Utils\\HttpUtil.cs",
+              "RelativeToolTip": "..\\ManagerSystem.Utils\\HttpUtil.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACMAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T13:01:00.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "WeatherForecast.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\WeatherForecast.cs",
+              "RelativeToolTip": "WeatherForecast.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T12:57:22.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA1wCYAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T12:57:19.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ManagerSystem.csproj",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\ManagerSystem.csproj",
+              "RelativeDocumentMoniker": "ManagerSystem.csproj",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\ManagerSystem.csproj",
+              "RelativeToolTip": "ManagerSystem.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-01T12:52:40.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\ViewModel\\LoginViewModel.cs",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\LoginViewModel.cs",
+              "RelativeToolTip": "..\\CompanyManagerSystem\\ViewModel\\LoginViewModel.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAwwJcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T11:58:07.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LoginWindow.xaml",
+              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\LoginWindow.xaml",
+              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\View\\LoginWindow.xaml",
+              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\LoginWindow.xaml",
+              "RelativeToolTip": "..\\CompanyManagerSystem\\View\\LoginWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-01T11:57:27.428Z"
+            }
+          ]
+        },
         {
           "DockedHeight": 148,
           "SelectedChildIndex": -1,

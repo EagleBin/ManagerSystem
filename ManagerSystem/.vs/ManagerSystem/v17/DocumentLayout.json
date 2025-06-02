@@ -1,50 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\ManagerSystem\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\view\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{68878EF2-458E-4737-B293-00776B216911}|..\\CompanyManagerSystem\\CompanyManagerSystem.csproj|d:\\visual studio\\wpf\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\test\\companymanagersystem\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
-        {
-          "DockedHeight": 758,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LoginViewModel.cs",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\LoginViewModel.cs",
-              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\ViewModel\\LoginViewModel.cs",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\ViewModel\\LoginViewModel.cs",
-              "RelativeToolTip": "..\\CompanyManagerSystem\\ViewModel\\LoginViewModel.cs",
-              "ViewState": "AgIAAIYAAAAAAAAAAAAAwJcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T11:58:07.346Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LoginWindow.xaml",
-              "DocumentMoniker": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\LoginWindow.xaml",
-              "RelativeDocumentMoniker": "..\\CompanyManagerSystem\\View\\LoginWindow.xaml",
-              "ToolTip": "D:\\Visual Studio\\WPF\u9879\u76EE\u5B9E\u6218\\\u516C\u53F8\u4EBA\u5458\u7BA1\u7406\u7CFB\u7EDF\\Test\\CompanyManagerSystem\\View\\LoginWindow.xaml",
-              "RelativeToolTip": "..\\CompanyManagerSystem\\View\\LoginWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-01T11:57:27.428Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
         {
           "DockedHeight": 148,
           "SelectedChildIndex": -1,
